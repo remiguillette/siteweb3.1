@@ -60,8 +60,8 @@ export default function Home() {
   const divisions = [
     {
       icon: Shield,
-      titleFirst: 'Sécurité',
-      titleRest: ' Publique Conseil',
+      titleFirst: 'Cabinet-conseil',
+      titleRest: ' en sécurité publique',
       data: t.divisions.publicSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
@@ -78,8 +78,8 @@ export default function Home() {
     },
     {
       icon: HardHat,
-      titleFirst: 'Santé',
-      titleRest: ' et Sécurité au Travail (SST)',
+      titleFirst: 'Services',
+      titleRest: ' en santé et Sécurité au Travail (SST)',
       data: t.divisions.healthSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-blue-500',
@@ -136,21 +136,22 @@ export default function Home() {
               </p>
               {/* Divisions Title and Cards */}
               <div className="mt-12">
-                <h2 className="text-3xl font-bold text-orange-500 text-center mb-8">Divisions</h2>
+                <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>Divisions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
                     return (
                       <div
                         key={index}
-                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 border-orange-500 text-center"
+                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center"
+                        style={{ borderColor: '#f89422' }}
                       >
                         <div className="flex items-center justify-center mx-auto mb-4">
-                          <Icon className="w-12 h-12 text-orange-500" />
+                          <Icon className="w-12 h-12" style={{ color: '#f89422' }} />
                         </div>
                         <h3 className="text-lg font-bold">
-                          <span className="text-blue-500">{division.titleFirst}</span>
-                          <span className="text-orange-500">{division.titleRest}</span>
+                          <span style={{ color: '#0d6efd' }}>{division.titleFirst}</span>
+                          <span style={{ color: '#f89422' }}>{division.titleRest}</span>
                         </h3>
                       </div>
                     );
