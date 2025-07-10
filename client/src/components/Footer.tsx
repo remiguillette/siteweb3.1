@@ -63,15 +63,17 @@ export const Footer = () => {
             <div className="mt-6 border-t border-[#f89422] pt-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-left text-[#f89422]">
-                  <p className="mb-2">{t.footer.registration.ontario}</p>
-                  <p className="mb-4">{language === 'en' ? 'Ontario Registration' : 'Enregistrement Ontario'}</p>
-                  <p className="mb-2">{t.footer.registration.canada}</p>
-                  <p>{language === 'en' ? 'Canada Registration' : 'Enregistrement Canada'}</p>
+                  <p className="mb-2">Enregistrement Ontario</p>
+                  <p className="mb-2">Ontario Registration</p>
+                  <p className="mb-2">Enregistrement Canada</p>
+                  <p>Canada Registration</p>
                 </div>
-                <div className="text-center flex flex-col justify-center text-[#f89422]">
-                  <p className="mb-2 mx-auto">{t.footer.registration.ontarioNumber}</p>
-                  <p className="mb-4 mx-auto">{t.footer.registration.ontarioNumber2}</p>
-                  <p className="mx-auto">{t.footer.registration.canadaNumber}</p>
+                <div className="text-right text-[#f89422] flex flex-col">
+                  <p className="mb-2">{t.footer.registration.ontarioNumber}</p>
+                  <p className="mb-2">{t.footer.registration.ontarioNumber2}</p>
+                  <div className="flex-1 flex items-center justify-end">
+                    <p>{t.footer.registration.canadaNumber}</p>
+                  </div>
                 </div>
               </div>
             </div>
