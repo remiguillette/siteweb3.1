@@ -1,13 +1,38 @@
 import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { Languages } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 export const Header = () => {
   const { language, changeLanguage, t } = useTranslation();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleLanguage = () => {
     changeLanguage(language === 'fr' ? 'en' : 'fr');
   };
+
+  useEffect(() => {
+    if (!buttonRef.current) return;
+
+    let angle = 0;
+    let animationFrameId: number;
+
+    const rotateGradient = () => {
+      angle = (angle + 1) % 360;
+      if (buttonRef.current) {
+        buttonRef.current.style.setProperty("--gradient-angle", `${angle}deg`);
+      }
+      animationFrameId = requestAnimationFrame(rotateGradient);
+    };
+
+    rotateGradient();
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
 
   return (
     <header className="bg-black w-full py-4 px-6 shadow-md">
@@ -27,13 +52,12 @@ export const Header = () => {
         {/* Language Toggle */}
         <div className="flex items-center">
           <button
+            ref={buttonRef}
             onClick={toggleLanguage}
-            className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+            className="border-gradient-button flex items-center justify-center text-white px-6 py-3 font-medium text-sm"
           >
-            <Languages className="w-4 h-4" />
-            <span className="text-sm font-medium">
-              {language === 'fr' ? 'FR' : 'EN'}
-            </span>
+            <Languages className="w-4 h-4 mr-2" />
+            {language === 'fr' ? 'FR' : 'EN'}
           </button>
         </div>
       </div>
