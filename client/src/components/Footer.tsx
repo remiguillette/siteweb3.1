@@ -15,12 +15,19 @@ export const Footer = () => {
 
           {/* Middle column - main content */}
           <div className="flex flex-col items-center max-w-[300px] mx-auto">
-            <img 
-              src={beaverLogo} 
-              alt="Logo Beaver" 
-              className="h-32 w-32 mb-6"
-              style={{ objectFit: "contain" }}
-            />
+            <a 
+              href="https://beaver-os-2-remiguillette.replit.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img 
+                src={beaverLogo} 
+                alt="Logo Beaver" 
+                className="h-32 w-32 mb-6"
+                style={{ objectFit: "contain" }}
+              />
+            </a>
             <h3 className="font-bold text-2xl mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               <span className="text-[#0d6efd]">Rémi</span>{" "}
               <span className="text-[#f89422]">Guillette</span>
