@@ -1,10 +1,45 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from "compression";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+// Enable compression for all responses
+app.use(compression());
+
+// Production optimizations
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // Trust first proxy
+  app.use(express.static("public", {
+    maxAge: "1y", // Cache static assets for 1 year
+    etag: true,
+    lastModified: true
+  }));
+}
+
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: false, limit: "10mb" }));
+
+// Security headers
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  
+  // CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+    return;
+  }
+  
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -43,8 +78,28 @@ app.use((req, res, next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    res.status(status).json({ message });
-    throw err;
+    // Log error details in development, sanitize in production
+    if (app.get("env") === "development") {
+      console.error("Error:", err);
+      res.status(status).json({ 
+        message, 
+        stack: err.stack,
+        details: err 
+      });
+    } else {
+      // Production error handling - don't leak sensitive information
+      console.error("Production error:", {
+        message: err.message,
+        status,
+        url: _req.url,
+        method: _req.method,
+        timestamp: new Date().toISOString()
+      });
+      
+      res.status(status).json({ 
+        message: status === 500 ? "Internal Server Error" : message 
+      });
+    }
   });
 
   // importantly only setup vite in development and after
