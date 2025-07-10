@@ -1,5 +1,5 @@
 import { Shield, User, HardHat, PawPrint } from 'lucide-react';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../contexts/TranslationContext';
 
 export default function Home() {
   const { t, language } = useTranslation();

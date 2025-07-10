@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../contexts/TranslationContext';
 import { Languages } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import beaverLogo from '../assets/beaver.png';

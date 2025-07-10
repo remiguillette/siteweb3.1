@@ -1,5 +1,5 @@
 import { Phone, Mail } from 'lucide-react';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../contexts/TranslationContext';
 import beaverLogo from '../assets/beaver.png';
 
 export const Footer = () => {

@@ -1,13 +1,30 @@
-import { useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language, TranslationData, getTranslation } from '../lib/i18n';
 
+interface TranslationContextType {
+  language: Language;
+  translations: TranslationData;
+  changeLanguage: (newLanguage: Language) => void;
+  t: TranslationData;
+}
+
+const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
+
 export const useTranslation = () => {
+  const context = useContext(TranslationContext);
+  if (!context) {
+    throw new Error('useTranslation must be used within a TranslationProvider');
+  }
+  return context;
+};
+
+export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('fr');
   const [translations, setTranslations] = useState<TranslationData>(getTranslation('fr'));
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('rg-language') as Language;
-    console.log('🔄 useTranslation initialization:', {
+    console.log('🔄 TranslationProvider initialization:', {
       savedLanguage,
       defaultLanguage: 'fr',
       isValidLanguage: savedLanguage && (savedLanguage === 'fr' || savedLanguage === 'en')
@@ -52,10 +69,16 @@ export const useTranslation = () => {
     });
   };
 
-  return {
+  const value = {
     language,
     translations,
     changeLanguage,
     t: translations,
   };
+
+  return (
+    <TranslationContext.Provider value={value}>
+      {children}
+    </TranslationContext.Provider>
+  );
 };

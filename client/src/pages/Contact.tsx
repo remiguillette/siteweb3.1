@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
 
 export default function Contact() {

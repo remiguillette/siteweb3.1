@@ -1,5 +1,5 @@
 import { Target, ClipboardList, Shield, CheckCircle } from 'lucide-react';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../contexts/TranslationContext';
 
 export default function Services() {
   const { t } = useTranslation();
