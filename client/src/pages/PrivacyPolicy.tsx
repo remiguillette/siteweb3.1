@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Introduction */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#f89422]">
               <Shield className="w-6 h-6" />
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Company Information */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <span className="text-[#3b82f6]">{t.privacy.companyInfo.title.split(' ')[0]}</span>{' '}
@@ -58,7 +58,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Data Collection */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="w-6 h-6 text-[#f89422]" />
@@ -104,7 +104,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Purpose */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertCircle className="w-6 h-6 text-[#f89422]" />
@@ -128,7 +128,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Consent */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <UserCheck className="w-6 h-6 text-[#f89422]" />
@@ -152,7 +152,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Sharing */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Globe className="w-6 h-6 text-[#f89422]" />
@@ -176,7 +176,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* International Transfers */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Globe className="w-6 h-6 text-[#f89422]" />
@@ -195,7 +195,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Data Protection */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="w-6 h-6 text-[#f89422]" />
@@ -219,7 +219,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Cookies */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="w-6 h-6 text-[#f89422]" />
@@ -238,7 +238,7 @@ export default function PrivacyPolicy() {
         </Card>
 
         {/* Your Rights */}
-        <Card className="mb-8 bg-black/50 border-[#f89422]">
+        <Card className="mb-8 bg-black border-[#f89422]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <UserCheck className="w-6 h-6 text-[#f89422]" />
@@ -263,7 +263,7 @@ export default function PrivacyPolicy() {
 
         {/* Contact & Changes */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="bg-black/50 border-[#f89422]">
+          <Card className="bg-black border-[#f89422]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Phone className="w-6 h-6 text-[#f89422]" />
@@ -281,7 +281,7 @@ export default function PrivacyPolicy() {
             </CardContent>
           </Card>
 
-          <Card className="bg-black/50 border-[#f89422]">
+          <Card className="bg-black border-[#f89422]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertCircle className="w-6 h-6 text-[#f89422]" />
