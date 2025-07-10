@@ -84,13 +84,13 @@
   }
   
   .border-gradient-button {
-    --c: var(--rg-black);
+    --c: #1a1625;
     --p: 10%;
     background: linear-gradient(var(--c), var(--c)) padding-box,
       conic-gradient(
           from var(--gradient-angle, 0deg),
           transparent,
-          var(--rg-orange) var(--p),
+          #f89422 var(--p),
           transparent calc(var(--p) * 2)
         )
         border-box;
@@ -111,7 +111,7 @@
   
   .border-gradient-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 4px 12px rgba(248, 148, 34, 0.3);
   }
   
   .border-gradient-button:active {
