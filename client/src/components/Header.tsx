@@ -59,7 +59,7 @@ export const Header = () => {
           <img 
             src={beaverLogo} 
             alt="Logo Beaver" 
-            className={`h-16 w-16 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
+            className={`h-50 w-60 mr-5 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
             style={{ objectFit: "contain" }}
           />
           <div className="flex flex-col">
