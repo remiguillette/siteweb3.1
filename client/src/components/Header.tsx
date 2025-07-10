@@ -1,3 +1,4 @@
+import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { Languages } from 'lucide-react';
 
@@ -12,7 +13,7 @@ export const Header = () => {
     <header className="bg-black w-full py-4 px-6 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
               <span className="text-[#0d6efd] text-4xl font-bold">Rémi</span>
@@ -21,7 +22,7 @@ export const Header = () => {
             <p className="text-[#f89422] text-2xl font-semibold whitespace-nowrap">Groupe</p>
             <p className="text-[#f89422] text-xl font-semibold whitespace-nowrap">Group</p>
           </div>
-        </div>
+        </Link>
 
         {/* Language Toggle */}
         <div className="flex items-center">
