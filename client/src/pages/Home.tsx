@@ -115,21 +115,18 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section id="accueil" className="pb-16 min-h-screen flex items-center">
+      <section id="accueil" className="bg-black pb-16 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center">
             {/* Hero Content */}
-            <div>
+            <div className="max-w-4xl mx-auto">
               <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-                {t.hero.title}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-blue-500">
-                  {t.hero.titleHighlight}
-                </span>
+                Solutions <span className="text-[#0d6efd]">innovantes</span> pour votre <span className="text-[#f89422]">entreprise</span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                {t.hero.description}
+              <p className="text-xl text-gray-300 mb-8 leading-relaxed text-center max-w-3xl mx-auto">
+                Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => scrollToSection('divisions')}
                   className="bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105"
@@ -143,16 +140,6 @@ export default function Home() {
                   {t.hero.contactUs}
                 </button>
               </div>
-            </div>
-
-            {/* Hero Visual */}
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional consultation meeting"
-                className="rounded-2xl shadow-2xl w-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent rounded-2xl"></div>
             </div>
           </div>
         </div>
