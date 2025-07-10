@@ -2,7 +2,7 @@ import { Link } from 'wouter';
 import { useTranslation } from '../hooks/useTranslation';
 import { Languages } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import beaverLogo from '../assets/beaver.svg';
+import beaverLogo from '../assets/beaver.png';
 
 export const Header = () => {
   const { language, changeLanguage, t } = useTranslation();

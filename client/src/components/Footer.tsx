@@ -1,6 +1,6 @@
 import { Phone, Mail } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
-import beaverLogo from '../assets/beaver.svg';
+import beaverLogo from '../assets/beaver.png';
 
 export const Footer = () => {
   const { t, language } = useTranslation();
