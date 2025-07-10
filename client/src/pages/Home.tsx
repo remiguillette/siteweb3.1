@@ -120,10 +120,10 @@ export default function Home() {
           <div className="text-center">
             {/* Hero Content */}
             <div className="max-w-4xl mx-auto">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-                Solutions <span className="text-[#0d6efd]">innovantes</span> pour votre <span className="text-[#f89422]">entreprise</span>
+              <h1 className="text-4xl lg:text-6xl font-bold text-[#f89422] mb-6">
+                <span className="text-[#0d6efd]">Solutions</span> innovantes pour votre entreprise
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed text-center max-w-3xl mx-auto">
+              <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center max-w-3xl mx-auto">
                 Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
