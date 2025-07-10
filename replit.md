@@ -128,5 +128,10 @@ Preferred communication style: Simple, everyday language.
 - **Language Toggle Fix**: Fixed toggle button to show target language instead of current language
 - **Hero Section Localization**: Implemented conditional rendering to maintain French content integrity while providing English translations
 - **State Synchronization**: Resolved language switching issues across all components using shared TranslationProvider context
-- **Public Safety Consulting Page**: Added dedicated page at `/public-safety` route with detailed services and bilingual content
-- **Interactive Hero Cards**: Made Public Safety division card clickable with routing to dedicated page
+- **Division Pages Enhancement**: Created dedicated pages for all four divisions:
+  - Public Safety Consulting (`/public-safety`)
+  - Francophone Community Services (`/francophone-services`)
+  - Occupational Health & Safety (`/health-safety`)
+  - Animal First Aid Services (`/animal-first-aid`)
+- **Interactive Hero Cards**: Made all division cards in hero section clickable with routing to dedicated pages
+- **Consistent Design Pattern**: All division pages follow same design structure with service grids and bilingual content

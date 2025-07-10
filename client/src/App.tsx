@@ -11,6 +11,9 @@ import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import PublicSafety from "./pages/PublicSafety";
+import FrancophoneServices from "./pages/FrancophoneServices";
+import HealthSafety from "./pages/HealthSafety";
+import AnimalFirstAid from "./pages/AnimalFirstAid";
 import NotFound from "@/pages/not-found";
 import { useState } from "react";
 
@@ -23,6 +26,9 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />
+        <Route path="/francophone-services" component={FrancophoneServices} />
+        <Route path="/health-safety" component={HealthSafety} />
+        <Route path="/animal-first-aid" component={AnimalFirstAid} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

@@ -12,7 +12,8 @@ export default function Home() {
       titleEn: { first: 'Public', rest: ' Safety Consulting' },
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
-      tagColor: 'bg-orange-500/20 text-orange-400'
+      tagColor: 'bg-orange-500/20 text-orange-400',
+      href: '/public-safety'
     },
     {
       icon: User,
@@ -20,7 +21,8 @@ export default function Home() {
       titleEn: { first: 'Francophone', rest: ' Community Services' },
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-blue-400',
-      tagColor: 'bg-blue-500/20 text-blue-400'
+      tagColor: 'bg-blue-500/20 text-blue-400',
+      href: '/francophone-services'
     },
     {
       icon: HardHat,
@@ -28,7 +30,8 @@ export default function Home() {
       titleEn: { first: 'Occupational', rest: ' Health & Safety' },
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-blue-500',
-      tagColor: 'bg-orange-500/20 text-orange-400'
+      tagColor: 'bg-orange-500/20 text-orange-400',
+      href: '/health-safety'
     },
     {
       icon: PawPrint,
@@ -36,7 +39,8 @@ export default function Home() {
       titleEn: { first: 'Animal', rest: ' First Aid Services' },
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-orange-500',
-      tagColor: 'bg-blue-500/20 text-blue-400'
+      tagColor: 'bg-blue-500/20 text-blue-400',
+      href: '/animal-first-aid'
     }
   ];
 
@@ -93,19 +97,11 @@ export default function Home() {
                       </div>
                     );
 
-                    // Make the first card (Public Safety) clickable
-                    if (index === 0) {
-                      return (
-                        <Link key={index} href="/public-safety">
-                          {cardContent}
-                        </Link>
-                      );
-                    }
-
+                    // Make all cards clickable
                     return (
-                      <div key={index}>
+                      <Link key={index} href={division.href}>
                         {cardContent}
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>
