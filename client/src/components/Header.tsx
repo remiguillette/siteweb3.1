@@ -64,11 +64,10 @@ export const Header = () => {
           />
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
-              <span className={`text-[#0d6efd] text-4xl font-bold transition-all duration-700 ${isLoaded ? 'header-logo-remi' : 'opacity-0 translate-x-[-20px]'}`}>Rémi</span>
-              <span className={`text-[#f89422] text-4xl font-bold transition-all duration-700 delay-200 ${isLoaded ? 'header-logo-guillette' : 'opacity-0 translate-x-[20px]'}`}>Guillette</span>
+              <span className={`text-[#0d6efd] text-4xl font-bold transition-all duration-700 ${isLoaded ? 'header-logo-remi' : 'opacity-0 translate-x-[-20px]'}`}>{t.brand.company.split(' ')[0]}</span>
+              <span className={`text-[#f89422] text-4xl font-bold transition-all duration-700 delay-200 ${isLoaded ? 'header-logo-guillette' : 'opacity-0 translate-x-[20px]'}`}>{t.brand.company.split(' ')[1]}</span>
             </div>
-            <p className={`text-[#f89422] text-2xl font-semibold whitespace-nowrap transition-all duration-700 delay-400 ${isLoaded ? 'header-logo-groupe' : 'opacity-0 translate-y-[10px]'}`}>Groupe</p>
-            <p className={`text-[#f89422] text-xl font-semibold whitespace-nowrap transition-all duration-700 delay-600 ${isLoaded ? 'header-logo-group' : 'opacity-0 translate-y-[10px]'}`}>Group</p>
+            <p className={`text-[#f89422] text-2xl font-semibold whitespace-nowrap transition-all duration-700 delay-400 ${isLoaded ? 'header-logo-groupe' : 'opacity-0 translate-y-[10px]'}`}>{t.brand.groupe}</p>
           </div>
         </Link>
 
