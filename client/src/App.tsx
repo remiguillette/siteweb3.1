@@ -14,6 +14,7 @@ import PublicSafety from "./pages/PublicSafety";
 import FrancophoneServices from "./pages/FrancophoneServices";
 import HealthSafety from "./pages/HealthSafety";
 import AnimalFirstAid from "./pages/AnimalFirstAid";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
 import { useState } from "react";
 
@@ -29,6 +30,8 @@ function Router() {
         <Route path="/francophone-services" component={FrancophoneServices} />
         <Route path="/health-safety" component={HealthSafety} />
         <Route path="/animal-first-aid" component={AnimalFirstAid} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/politique-confidentialite" component={PrivacyPolicy} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

@@ -1,4 +1,5 @@
 import { Phone, Mail } from 'lucide-react';
+import { Link } from 'wouter';
 import { useTranslation } from '../contexts/TranslationContext';
 import beaverLogo from '../assets/beaver.png';
 
@@ -31,27 +32,27 @@ export const Footer = () => {
               Group
             </h3>
             <div className="flex flex-col items-center gap-2 mt-6">
-              <a 
-                href={language === 'fr' ? '/politique-confidentialite' : '/privacy-policy'}
+              <Link 
+                to={language === 'fr' ? '/politique-confidentialite' : '/privacy-policy'}
                 className="text-[#f89422] text-sm hover:text-white transition-colors"
               >
                 {t.footer.privacy}
-              </a>
+              </Link>
               {language === 'fr' && (
-                <a 
-                  href="/eng/privacy-policy" 
+                <Link 
+                  to="/privacy-policy" 
                   className="text-[#f89422] text-sm hover:text-white transition-colors"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               )}
               {language === 'en' && (
-                <a 
-                  href="/politique-confidentialite" 
+                <Link 
+                  to="/politique-confidentialite" 
                   className="text-[#f89422] text-sm hover:text-white transition-colors"
                 >
                   Politique de confidentialité
-                </a>
+                </Link>
               )}
             </div>
           </div>

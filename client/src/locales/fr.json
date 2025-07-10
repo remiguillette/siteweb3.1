@@ -115,5 +115,121 @@
       "ontarioNumber2": "1001174693",
       "canadaNumber": "725808273"
     }
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour : 10 juillet 2025",
+    "introduction": "Rémi Guillette Groupe (\"nous\", \"notre\", \"nos\") s'engage à protéger la vie privée et les renseignements personnels de nos clients et utilisateurs de notre site web. Cette politique de confidentialité décrit comment nous collectons, utilisons, divulguons et protégeons vos renseignements personnels conformément à la Loi sur la protection des renseignements personnels et les documents électroniques (LPRPDE) du Canada.",
+    "companyInfo": {
+      "title": "Informations sur la Société",
+      "legalName": "Rémi Guillette RG Groupe",
+      "operatingName": "Rémi Guillette Groupe",
+      "website": "https://remiguillette.replit.app",
+      "email": "remiguillette@gmail.com"
+    },
+    "dataCollection": {
+      "title": "Quelles données collectons-nous ?",
+      "description": "Nous collectons les renseignements personnels suivants lorsque vous utilisez nos services :",
+      "personalInfo": {
+        "title": "Renseignements personnels fournis directement",
+        "items": [
+          "Nom complet (prénom et nom de famille)",
+          "Adresse courriel",
+          "Numéro de téléphone",
+          "Adresse postale",
+          "Informations sur votre entreprise ou organisation",
+          "Messages et communications que vous nous envoyez",
+          "Informations sur les services demandés"
+        ]
+      },
+      "automaticData": {
+        "title": "Données collectées automatiquement",
+        "items": [
+          "Adresse IP",
+          "Type de navigateur et version",
+          "Système d'exploitation",
+          "Pages visitées sur notre site web",
+          "Date et heure de la visite",
+          "Durée de la session",
+          "Données de cookies et technologies similaires"
+        ]
+      }
+    },
+    "purpose": {
+      "title": "Pourquoi collectons-nous ces informations ?",
+      "description": "Nous utilisons vos renseignements personnels aux fins suivantes :",
+      "reasons": [
+        "Fournir nos services de consultation professionnelle",
+        "Communiquer avec vous concernant nos services",
+        "Traiter vos demandes et répondre à vos questions",
+        "Améliorer notre site web et nos services",
+        "Respecter nos obligations légales et réglementaires",
+        "Maintenir la sécurité de nos systèmes",
+        "Analyser l'utilisation de notre site web pour l'amélioration"
+      ]
+    },
+    "consent": {
+      "title": "Comment obtenons-nous votre consentement ?",
+      "description": "Nous obtenons votre consentement de plusieurs façons :",
+      "methods": [
+        "Consentement explicite lors de la soumission de formulaires",
+        "Consentement implicite lors de l'utilisation de nos services",
+        "Consentement par l'acceptation des conditions d'utilisation",
+        "Consentement pour les cookies via notre bannière de cookies"
+      ]
+    },
+    "sharing": {
+      "title": "Avec qui partageons-nous ces informations ?",
+      "description": "Nous ne vendons pas vos renseignements personnels. Nous pouvons les partager avec :",
+      "parties": [
+        "Fournisseurs de services tiers qui nous aident à exploiter notre site web (Replit)",
+        "Professionnels juridiques ou comptables selon les besoins",
+        "Autorités gouvernementales lorsque requis par la loi",
+        "Partenaires commerciaux avec votre consentement explicite"
+      ]
+    },
+    "internationalTransfers": {
+      "title": "Transferts internationaux",
+      "description": "Notre site web est hébergé par Replit, une société américaine. Vos données peuvent être transférées et stockées aux États-Unis.",
+      "replitInfo": "Replit applique des mesures de sécurité appropriées pour protéger vos données conformément aux normes internationales de protection des données."
+    },
+    "dataProtection": {
+      "title": "Comment protégeons-nous vos données ?",
+      "description": "Nous mettons en œuvre diverses mesures de sécurité :",
+      "measures": [
+        "Chiffrement des données en transit (SSL/TLS)",
+        "Accès limité aux renseignements personnels",
+        "Surveillance régulière de la sécurité",
+        "Formation du personnel sur la protection des données",
+        "Mise à jour régulière des systèmes de sécurité",
+        "Sauvegarde sécurisée des données"
+      ]
+    },
+    "cookies": {
+      "title": "Cookies et technologies similaires",
+      "description": "Nous utilisons des cookies pour améliorer votre expérience sur notre site web. Ces cookies peuvent inclure des cookies de session, des cookies persistants et des cookies analytiques.",
+      "replitCookies": "Replit utilise également des cookies pour le fonctionnement de la plateforme. Consultez la politique de confidentialité de Replit pour plus d'informations sur leur utilisation des cookies."
+    },
+    "contact": {
+      "title": "Qui contacter si vous avez des questions ?",
+      "description": "Pour toute question concernant cette politique de confidentialité ou vos renseignements personnels, contactez-nous :",
+      "email": "remiguillette@gmail.com"
+    },
+    "changes": {
+      "title": "Modifications de cette politique",
+      "description": "Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment.",
+      "notification": "Nous vous informerons des modifications importantes par un avis sur notre site web ou par courriel si vous avez fourni votre adresse courriel."
+    },
+    "rights": {
+      "title": "Vos droits",
+      "description": "Conformément à la LPRPDE, vous avez le droit de :",
+      "userRights": [
+        "Accéder à vos renseignements personnels",
+        "Corriger des renseignements inexacts",
+        "Retirer votre consentement (sous réserve de restrictions légales)",
+        "Demander la suppression de vos données",
+        "Porter plainte auprès du Commissaire à la protection de la vie privée du Canada"
+      ]
+    }
   }
 }

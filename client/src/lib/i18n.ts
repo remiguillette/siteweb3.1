@@ -121,6 +121,75 @@ export interface TranslationData {
       canadaNumber: string;
     };
   };
+  privacy: {
+    title: string;
+    lastUpdated: string;
+    introduction: string;
+    companyInfo: {
+      title: string;
+      legalName: string;
+      operatingName: string;
+      website: string;
+      email: string;
+    };
+    dataCollection: {
+      title: string;
+      description: string;
+      personalInfo: {
+        title: string;
+        items: string[];
+      };
+      automaticData: {
+        title: string;
+        items: string[];
+      };
+    };
+    purpose: {
+      title: string;
+      description: string;
+      reasons: string[];
+    };
+    consent: {
+      title: string;
+      description: string;
+      methods: string[];
+    };
+    sharing: {
+      title: string;
+      description: string;
+      parties: string[];
+    };
+    internationalTransfers: {
+      title: string;
+      description: string;
+      replitInfo: string;
+    };
+    dataProtection: {
+      title: string;
+      description: string;
+      measures: string[];
+    };
+    cookies: {
+      title: string;
+      description: string;
+      replitCookies: string;
+    };
+    contact: {
+      title: string;
+      description: string;
+      email: string;
+    };
+    changes: {
+      title: string;
+      description: string;
+      notification: string;
+    };
+    rights: {
+      title: string;
+      description: string;
+      userRights: string[];
+    };
+  };
 }
 
 export const translations: Record<Language, TranslationData> = {

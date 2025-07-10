@@ -115,5 +115,121 @@
       "ontarioNumber2": "1001174693",
       "canadaNumber": "725808273"
     }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: July 10, 2025",
+    "introduction": "Rémi Guillette Group (\"we\", \"our\", \"us\") is committed to protecting the privacy and personal information of our clients and users of our website. This privacy policy describes how we collect, use, disclose, and protect your personal information in accordance with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).",
+    "companyInfo": {
+      "title": "Company Information",
+      "legalName": "Rémi Guillette RG Groupe",
+      "operatingName": "Rémi Guillette Group",
+      "website": "https://remiguillette.replit.app",
+      "email": "remiguillette@gmail.com"
+    },
+    "dataCollection": {
+      "title": "What data do we collect?",
+      "description": "We collect the following personal information when you use our services:",
+      "personalInfo": {
+        "title": "Personal information provided directly",
+        "items": [
+          "Full name (first and last name)",
+          "Email address",
+          "Phone number",
+          "Mailing address",
+          "Information about your business or organization",
+          "Messages and communications you send to us",
+          "Information about requested services"
+        ]
+      },
+      "automaticData": {
+        "title": "Automatically collected data",
+        "items": [
+          "IP address",
+          "Browser type and version",
+          "Operating system",
+          "Pages visited on our website",
+          "Date and time of visit",
+          "Session duration",
+          "Cookie and similar technology data"
+        ]
+      }
+    },
+    "purpose": {
+      "title": "Why are we collecting this information?",
+      "description": "We use your personal information for the following purposes:",
+      "reasons": [
+        "Provide our professional consulting services",
+        "Communicate with you about our services",
+        "Process your requests and respond to your inquiries",
+        "Improve our website and services",
+        "Comply with legal and regulatory obligations",
+        "Maintain the security of our systems",
+        "Analyze website usage for improvement"
+      ]
+    },
+    "consent": {
+      "title": "How do we obtain consent?",
+      "description": "We obtain your consent in several ways:",
+      "methods": [
+        "Explicit consent when submitting forms",
+        "Implied consent when using our services",
+        "Consent through acceptance of terms of use",
+        "Consent for cookies via our cookie banner"
+      ]
+    },
+    "sharing": {
+      "title": "Who do we share this information with?",
+      "description": "We do not sell your personal information. We may share it with:",
+      "parties": [
+        "Third-party service providers who help us operate our website (Replit)",
+        "Legal or accounting professionals as needed",
+        "Government authorities when required by law",
+        "Business partners with your explicit consent"
+      ]
+    },
+    "internationalTransfers": {
+      "title": "International transfers",
+      "description": "Our website is hosted by Replit, a U.S. company. Your data may be transferred to and stored in the United States.",
+      "replitInfo": "Replit implements appropriate security measures to protect your data in accordance with international data protection standards."
+    },
+    "dataProtection": {
+      "title": "How do we protect data?",
+      "description": "We implement various security measures:",
+      "measures": [
+        "Encryption of data in transit (SSL/TLS)",
+        "Limited access to personal information",
+        "Regular security monitoring",
+        "Staff training on data protection",
+        "Regular security system updates",
+        "Secure data backup"
+      ]
+    },
+    "cookies": {
+      "title": "Cookies and similar technologies",
+      "description": "We use cookies to improve your experience on our website. These cookies may include session cookies, persistent cookies, and analytics cookies.",
+      "replitCookies": "Replit also uses cookies for platform functionality. Please refer to Replit's privacy policy for more information about their cookie usage."
+    },
+    "contact": {
+      "title": "Who should I contact if I have questions?",
+      "description": "For any questions about this privacy policy or your personal information, contact us:",
+      "email": "remiguillette@gmail.com"
+    },
+    "changes": {
+      "title": "Changes to this policy",
+      "description": "We reserve the right to modify this privacy policy at any time.",
+      "notification": "We will notify you of significant changes through a notice on our website or by email if you have provided your email address."
+    },
+    "rights": {
+      "title": "Your rights",
+      "description": "Under PIPEDA, you have the right to:",
+      "userRights": [
+        "Access your personal information",
+        "Correct inaccurate information",
+        "Withdraw your consent (subject to legal restrictions)",
+        "Request deletion of your data",
+        "File a complaint with the Privacy Commissioner of Canada"
+      ]
+    }
   }
 }
