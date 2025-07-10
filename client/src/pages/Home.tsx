@@ -1,4 +1,4 @@
-import { ShieldCheck, Users, HardHat, Heart, Target, ClipboardList, Shield, CheckCircle } from 'lucide-react';
+import { Shield, User, HardHat, PawPrint, Target, ClipboardList, CheckCircle } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useState } from 'react';
 import { useToast } from '../hooks/use-toast';
@@ -59,14 +59,16 @@ export default function Home() {
 
   const divisions = [
     {
-      icon: ShieldCheck,
+      icon: Shield,
+      title: 'Public Safety Consulting Firm',
       data: t.divisions.publicSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
       tagColor: 'bg-orange-500/20 text-orange-400'
     },
     {
-      icon: Users,
+      icon: User,
+      title: 'Francophone Community Service',
       data: t.divisions.francophone,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-blue-400',
@@ -74,13 +76,15 @@ export default function Home() {
     },
     {
       icon: HardHat,
+      title: 'Occupational Health and Safety (OHS)',
       data: t.divisions.healthSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-blue-500',
       tagColor: 'bg-orange-500/20 text-orange-400'
     },
     {
-      icon: Heart,
+      icon: PawPrint,
+      title: 'Animal First Aid Service',
       data: t.divisions.animalAid,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-orange-500',
@@ -126,19 +130,25 @@ export default function Home() {
               <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center max-w-3xl mx-auto">
                 Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => scrollToSection('divisions')}
-                  className="bg-orange-500 hover:bg-orange-400 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105"
-                >
-                  {t.hero.discoverDivisions}
-                </button>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200"
-                >
-                  {t.hero.contactUs}
-                </button>
+              {/* Divisions Title and Cards */}
+              <div className="mt-12">
+                <h2 className="text-3xl font-bold text-white text-center mb-8">Divisions</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                  {divisions.map((division, index) => {
+                    const Icon = division.icon;
+                    return (
+                      <div
+                        key={index}
+                        className="bg-rg-card-bg rounded-xl p-6 hover:bg-rg-gray transition-all duration-300 transform hover:scale-105 border border-rg-gray text-center"
+                      >
+                        <div className={`w-16 h-16 bg-gradient-to-br ${division.gradientFrom} ${division.gradientTo} rounded-xl flex items-center justify-center mx-auto mb-4`}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="text-lg font-bold text-white">{division.title}</h3>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

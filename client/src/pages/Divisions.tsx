@@ -1,4 +1,4 @@
-import { ShieldCheck, Users, HardHat, Heart } from 'lucide-react';
+import { Shield, User, HardHat, PawPrint } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 
 export default function Divisions() {
@@ -6,14 +6,14 @@ export default function Divisions() {
 
   const divisions = [
     {
-      icon: ShieldCheck,
+      icon: Shield,
       data: t.divisions.publicSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
       tagColor: 'bg-orange-500/20 text-orange-400'
     },
     {
-      icon: Users,
+      icon: User,
       data: t.divisions.francophone,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-blue-400',
@@ -27,7 +27,7 @@ export default function Divisions() {
       tagColor: 'bg-orange-500/20 text-orange-400'
     },
     {
-      icon: Heart,
+      icon: PawPrint,
       data: t.divisions.animalAid,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-orange-500',
