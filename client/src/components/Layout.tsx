@@ -10,12 +10,12 @@ export const Layout = ({ children }: LayoutProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-rg-dark-bg text-gray-100">
+    <div className="min-h-screen bg-black text-gray-100">
       {/* Header */}
       <Header />
 
       {/* Main Content */}
-      <main className="pt-20">
+      <main>
         {children}
       </main>
 
