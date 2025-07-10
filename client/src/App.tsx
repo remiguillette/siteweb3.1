@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { TranslationProvider } from "./contexts/TranslationContext";
 import { Layout } from "./components/Layout";
 import { LoadingPage } from "./components/LoadingPage";
+import { CookieConsent } from "./components/CookieConsent";
 import Home from "./pages/Home";
 import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
@@ -51,6 +52,7 @@ function App() {
       <TooltipProvider>
         <TranslationProvider>
           <Toaster />
+          <CookieConsent />
           {isLoading ? (
             <LoadingPage onLoadingComplete={handleLoadingComplete} />
           ) : (

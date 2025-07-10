@@ -137,3 +137,6 @@ Preferred communication style: Simple, everyday language.
 - **Interactive Hero Cards**: Made all division cards in hero section clickable with routing to dedicated pages
 - **Consistent Design Pattern**: All division pages follow same design structure with service grids and bilingual content
 - **Division Page Card Title Styling**: Applied blue (#3b82f6) first word styling to all service card titles across all division pages (July 10, 2025)
+- **Privacy Policy Implementation**: Created comprehensive PIPEDA-compliant privacy policy page with bilingual support (`/privacy-policy` and `/politique-confidentialite`)
+- **Footer Navigation Fix**: Resolved duplicate privacy policy links in footer to show single dynamic link based on language
+- **Cookie Consent Popup**: Implemented GDPR/PIPEDA-compliant cookie consent modal with detailed cookie information, matching privacy policy design styling
