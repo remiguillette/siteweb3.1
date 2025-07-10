@@ -72,8 +72,11 @@ export const Header = () => {
           </div>
         </Link>
 
-        {/* Language Toggle */}
-        <div className="flex items-center">
+        {/* Ontario Pride Text & Language Toggle */}
+        <div className="flex items-center space-x-4">
+          <span className="text-[#f89422] font-medium text-sm hidden md:block">
+            {language === 'fr' ? 'Fier de l\'Ontario' : 'Proud of Ontario'}
+          </span>
           <button
             ref={buttonRef}
             onClick={toggleLanguage}
