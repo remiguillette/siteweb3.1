@@ -118,8 +118,20 @@ export default function FrancophoneServices() {
                   <div className="mr-4">
                     <Icon className="w-12 h-12 text-[#f89422]" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#f89422]">
-                    {language === 'fr' ? service.titleFr : service.titleEn}
+                  <h3 className="text-2xl font-bold">
+                    {(() => {
+                      const title = language === 'fr' ? service.titleFr : service.titleEn;
+                      const words = title.split(' ');
+                      const firstWord = words[0];
+                      const restWords = words.slice(1).join(' ');
+                      
+                      return (
+                        <>
+                          <span className="text-[#3b82f6]">{firstWord}</span>
+                          {restWords && <span className="text-[#f89422]"> {restWords}</span>}
+                        </>
+                      );
+                    })()}
                   </h3>
                 </div>
                 <p className="text-[#f89422] mb-6 text-lg leading-relaxed">

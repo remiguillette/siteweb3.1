@@ -34,6 +34,7 @@ Preferred communication style: Simple, everyday language.
 - **Accessibility**: AODA compliance considerations
 - **French Language Rule**: Main page is in French, first word of each sentence/title is always blue, remaining text is orange
 - **Card Design**: Division cards use black background with orange outline, orange icons without background
+- **Division Page Card Titles**: Service card titles on all division pages have first word in blue (#3b82f6), remaining text in orange (#f89422)
 
 ## Key Components
 
@@ -135,3 +136,4 @@ Preferred communication style: Simple, everyday language.
   - Animal First Aid Services (`/animal-first-aid`)
 - **Interactive Hero Cards**: Made all division cards in hero section clickable with routing to dedicated pages
 - **Consistent Design Pattern**: All division pages follow same design structure with service grids and bilingual content
+- **Division Page Card Title Styling**: Applied blue (#3b82f6) first word styling to all service card titles across all division pages (July 10, 2025)
