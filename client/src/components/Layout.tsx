@@ -12,7 +12,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
 
       {/* Main Content */}
-      <main className="w-full">
+      <main className="w-full" role="main">
         {children}
       </main>
 

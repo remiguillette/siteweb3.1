@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section id="accueil" className="bg-black pb-16 min-h-screen flex items-center w-full">
+      <section id="accueil" className="bg-black pb-16 min-h-screen flex items-center w-full" role="banner">
         <div className="container-responsive">
           <div className="text-center">
             {/* Hero Content */}
@@ -71,20 +71,27 @@ export default function Home() {
                 )}
               </p>
               {/* Divisions Title and Cards */}
-              <div className="mt-12">
-                <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>
+              <section className="mt-12" aria-labelledby="divisions-heading">
+                <h2 id="divisions-heading" className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>
                   {language === 'fr' ? 'Divisions' : 'Divisions'}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full" aria-label={language === 'fr' ? 'Divisions de services' : 'Service divisions'}>
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
-                    const cardContent = (
-                      <div
+                    const divisionTitle = language === 'fr' 
+                      ? `${division.titleFr.first}${division.titleFr.rest}`
+                      : `${division.titleEn.first}${division.titleEn.rest}`;
+                    
+                    return (
+                      <Link 
+                        key={index} 
+                        href={division.href}
                         className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center cursor-pointer h-40 flex flex-col justify-center"
                         style={{ borderColor: '#f89422' }}
+                        aria-label={`${language === 'fr' ? 'Voir' : 'View'} ${divisionTitle}`}
                       >
                         <div className="flex items-center justify-center mx-auto mb-4">
-                          <Icon className="w-12 h-12" style={{ color: '#f89422' }} />
+                          <Icon className="w-12 h-12" style={{ color: '#f89422' }} aria-hidden="true" />
                         </div>
                         <h3 className="text-lg font-bold leading-tight">
                           <span style={{ color: '#0d6efd' }}>
@@ -94,18 +101,11 @@ export default function Home() {
                             {language === 'fr' ? division.titleFr.rest : division.titleEn.rest}
                           </span>
                         </h3>
-                      </div>
-                    );
-
-                    // Make all cards clickable
-                    return (
-                      <Link key={index} href={division.href}>
-                        {cardContent}
                       </Link>
                     );
                   })}
-                </div>
-              </div>
+                </nav>
+              </section>
             </div>
           </div>
         </div>

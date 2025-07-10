@@ -52,13 +52,13 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="bg-black w-full py-4 shadow-md">
+    <header className="bg-black w-full py-4 shadow-md" role="banner">
       <div className="container-responsive flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-4">
+        <Link href="/" className="flex items-center space-x-4" aria-label={language === 'fr' ? 'Accueil - Rémi Guillette Groupe' : 'Home - Rémi Guillette Group'}>
           <img 
             src={beaverLogo} 
-            alt="Logo Beaver" 
+            alt={language === 'fr' ? 'Logo Rémi Guillette Groupe' : 'Rémi Guillette Group Logo'} 
             className={`h-50 w-60 mr-5 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
             style={{ objectFit: "contain" }}
           />
@@ -73,7 +73,7 @@ export const Header = () => {
         </Link>
 
         {/* Ontario Pride Text & Language Toggle */}
-        <div className="flex items-center space-x-6">
+        <nav className="flex items-center space-x-6" role="navigation" aria-label={language === 'fr' ? 'Menu principal' : 'Main menu'}>
           <span className="ontario-pride-text hidden md:block whitespace-nowrap">
             {language === 'fr' ? 'Fier de l\'Ontario' : 'Proud of Ontario'}
           </span>
@@ -81,11 +81,12 @@ export const Header = () => {
             ref={buttonRef}
             onClick={toggleLanguage}
             className="border-gradient-button flex items-center justify-center text-white px-6 py-3 font-medium text-sm"
+            aria-label={language === 'fr' ? 'Changer la langue vers l\'anglais' : 'Change language to French'}
           >
-            <Languages className="w-4 h-4 mr-2" />
+            <Languages className="w-4 h-4 mr-2" aria-hidden="true" />
             {language === 'fr' ? 'EN' : 'FR'}
           </button>
-        </div>
+        </nav>
       </div>
     </header>
   );

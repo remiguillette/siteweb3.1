@@ -7,7 +7,7 @@ export const Footer = () => {
   const { t, language } = useTranslation();
 
   return (
-    <footer className="bg-black py-12 w-full">
+    <footer className="bg-black py-12 w-full" role="contentinfo">
       <div className="container-responsive">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left column - empty for spacing */}
@@ -20,10 +20,11 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-80 transition-opacity"
+              aria-label={language === 'fr' ? 'Visiter le site externe Rémi Guillette Groupe' : 'Visit external Rémi Guillette Group site'}
             >
               <img 
                 src={beaverLogo} 
-                alt="Logo Beaver" 
+                alt={language === 'fr' ? 'Logo Rémi Guillette Groupe' : 'Rémi Guillette Group Logo'} 
                 className="h-32 w-32 mb-6"
                 style={{ objectFit: "contain" }}
               />
@@ -38,19 +39,19 @@ export const Footer = () => {
             <h3 className="font-bold text-2xl mb-2 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               Group
             </h3>
-            <div className="flex flex-col items-center gap-2 mt-6">
+            <nav className="flex flex-col items-center gap-2 mt-6" aria-label={language === 'fr' ? 'Menu pied de page' : 'Footer menu'}>
               <Link 
                 to={language === 'fr' ? '/politique-confidentialite' : '/privacy-policy'}
                 className="text-[#f89422] text-sm hover:text-white transition-colors"
               >
                 {t.footer.privacy}
               </Link>
-            </div>
+            </nav>
           </div>
 
           {/* Right column - contact information */}
-          <div className="flex flex-col">
-            <h3 className="font-bold text-xl mb-4 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <section className="flex flex-col" aria-labelledby="contact-heading">
+            <h3 id="contact-heading" className="font-bold text-xl mb-4 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               {t.footer.contact}
             </h3>
             <address className="not-italic text-[#f89422]">
@@ -59,11 +60,13 @@ export const Footer = () => {
               <p className="mb-2">{t.footer.address.city}</p>
               <p className="mb-2">{t.footer.address.postal}</p>
               <p className="mb-2 flex items-center">
-                <Phone className="w-4 h-4 mr-2" />
+                <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
+                <span className="sr-only">{language === 'fr' ? 'Téléphone: ' : 'Phone: '}</span>
                 {t.footer.phone}
               </p>
               <p className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
+                <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
+                <span className="sr-only">{language === 'fr' ? 'Courriel: ' : 'Email: '}</span>
                 {t.footer.email}
               </p>
             </address>
@@ -84,7 +87,7 @@ export const Footer = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </footer>

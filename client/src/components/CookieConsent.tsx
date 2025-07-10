@@ -35,13 +35,13 @@ export const CookieConsent = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/95 border-t border-[#f89422]">
+    <aside className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/95 border-t border-[#f89422]" role="dialog" aria-modal="true" aria-labelledby="cookie-consent-title">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <Cookie className="w-6 h-6 text-[#f89422] flex-shrink-0" />
+            <Cookie className="w-6 h-6 text-[#f89422] flex-shrink-0" aria-hidden="true" />
             <div className="min-w-0">
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 id="cookie-consent-title" className="text-lg font-semibold mb-2">
                 <span className="text-[#3b82f6]">{language === 'fr' ? 'Gestion' : 'Cookie'}</span>{' '}
                 <span className="text-[#f89422]">{language === 'fr' ? 'des Cookies' : 'Management'}</span>
               </h3>
@@ -65,6 +65,7 @@ export const CookieConsent = () => {
               onClick={() => setShowDetails(!showDetails)}
               className="text-[#f89422] hover:text-white transition-colors px-3 py-1 text-sm border border-[#f89422] rounded"
               aria-label={showDetails ? (language === 'fr' ? 'Masquer les détails' : 'Hide details') : (language === 'fr' ? 'Voir les détails' : 'Show details')}
+              aria-expanded={showDetails}
             >
               {showDetails 
                 ? (language === 'fr' ? 'Masquer' : 'Hide')
@@ -77,6 +78,7 @@ export const CookieConsent = () => {
               variant="outline"
               size="sm"
               className="border-[#f89422] text-[#f89422] hover:bg-[#f89422]/10"
+              aria-label={language === 'fr' ? 'Accepter les cookies essentiels seulement' : 'Accept essential cookies only'}
             >
               {language === 'fr' ? 'Essentiels' : 'Essential'}
             </Button>
@@ -85,6 +87,7 @@ export const CookieConsent = () => {
               onClick={handleAcceptAll}
               size="sm"
               className="bg-[#f89422] hover:bg-[#f89422]/80 text-black font-semibold"
+              aria-label={language === 'fr' ? 'Accepter tous les cookies' : 'Accept all cookies'}
             >
               {language === 'fr' ? 'Accepter' : 'Accept'}
             </Button>
@@ -92,9 +95,9 @@ export const CookieConsent = () => {
             <button
               onClick={() => setIsVisible(false)}
               className="text-[#f89422] hover:text-white transition-colors p-1"
-              aria-label={language === 'fr' ? 'Fermer' : 'Close'}
+              aria-label={language === 'fr' ? 'Fermer la bannière de cookies' : 'Close cookie banner'}
             >
-              <X className="w-5 h-5" />
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -158,6 +161,6 @@ export const CookieConsent = () => {
           </div>
         )}
       </div>
-    </div>
+    </aside>
   );
 };

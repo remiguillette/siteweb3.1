@@ -50,15 +50,15 @@ export default function Contact() {
   };
 
   return (
-    <div className="py-16 bg-rg-dark-bg min-h-screen w-full">
+    <main className="py-16 bg-rg-dark-bg min-h-screen w-full">
       <div className="container-responsive">
         {/* Header */}
-        <div className="text-center mb-16">
+        <header className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">{t.contact.title}</h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto">
             {t.contact.subtitle}
           </p>
-        </div>
+        </header>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
@@ -221,6 +221,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
