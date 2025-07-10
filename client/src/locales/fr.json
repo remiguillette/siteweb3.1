@@ -9,9 +9,95 @@
     "services": "Services",
     "contact": "Contact"
   },
+  "hero": {
+    "title": "Excellence en",
+    "titleHighlight": "Consultation",
+    "description": "Leader canadien en services de consultation professionnelle, offrant des solutions innovantes en sécurité publique, services communautaires francophones, santé et sécurité au travail.",
+    "discoverDivisions": "Découvrir nos divisions",
+    "contactUs": "Nous contacter"
+  },
+  "divisions": {
+    "title": "Nos Divisions",
+    "subtitle": "Quatre domaines d'expertise distincts pour répondre aux besoins diversifiés de nos clients canadiens",
+    "publicSafety": {
+      "title": "Consultation en Sécurité Publique",
+      "subtitle": "Services spécialisés",
+      "description": "Expertise en évaluation des risques, planification d'urgence et mise en œuvre de protocoles de sécurité pour les organismes publics et privés.",
+      "tags": ["Évaluation des risques", "Planification d'urgence"]
+    },
+    "francophone": {
+      "title": "Services Communautaires Francophones",
+      "subtitle": "Engagement communautaire",
+      "description": "Développement de programmes et services adaptés aux besoins spécifiques des communautés francophones du Canada.",
+      "tags": ["Programmes communautaires", "Services linguistiques"]
+    },
+    "healthSafety": {
+      "title": "Santé et Sécurité au Travail",
+      "subtitle": "Conformité AODA",
+      "description": "Formation, audit et mise en conformité pour assurer un environnement de travail sécuritaire selon les normes canadiennes.",
+      "tags": ["Formation SST", "Audit de conformité"]
+    },
+    "animalAid": {
+      "title": "Services de Premiers Soins Animaliers",
+      "subtitle": "Soins d'urgence",
+      "description": "Formation spécialisée et services d'urgence pour les soins aux animaux, destinés aux professionnels et propriétaires.",
+      "tags": ["Formation premiers soins", "Services d'urgence"]
+    }
+  },
+  "services": {
+    "title": "Services Principaux",
+    "subtitle": "Des solutions complètes pour accompagner votre organisation vers l'excellence opérationnelle",
+    "strategic": {
+      "title": "Consultation Stratégique",
+      "description": "Développement de stratégies personnalisées pour optimiser les performances organisationnelles et atteindre les objectifs à long terme.",
+      "features": ["Analyse organisationnelle", "Planification stratégique", "Optimisation des processus"]
+    },
+    "projectManagement": {
+      "title": "Gestion de Projets",
+      "description": "Direction et supervision de projets complexes avec méthodologies éprouvées pour garantir la livraison dans les délais et budgets.",
+      "features": ["Planification de projets", "Gestion des risques", "Contrôle qualité"]
+    },
+    "security": {
+      "title": "Sécurité et Conformité",
+      "description": "Audit, évaluation et mise en conformité avec les réglementations canadiennes pour assurer la sécurité et la conformité légale.",
+      "features": ["Audit de sécurité", "Mise en conformité", "Formation réglementaire"]
+    },
+    "ctaTitle": "Prêt à commencer votre projet?",
+    "ctaDescription": "Discutons de vos besoins et découvrons comment nos services peuvent transformer votre organisation.",
+    "ctaButton": "Obtenir une consultation gratuite"
+  },
+  "contact": {
+    "title": "Contactez-Nous",
+    "subtitle": "Nous sommes là pour vous accompagner. Contactez-nous pour discuter de vos besoins en consultation.",
+    "info": "Informations de Contact",
+    "address": "6388 Hawkins Street, Apt. 307, Niagara Falls, ON L2G 1P3",
+    "phone": "613 501-2160",
+    "email": "remiguillette@gmail.com",
+    "hours": "Heures d'ouverture",
+    "weekdays": "Lundi - Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche",
+    "closed": "Fermé",
+    "form": {
+      "title": "Demande d'information",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse courriel",
+      "service": "Service d'intérêt",
+      "selectService": "Sélectionnez un service",
+      "message": "Message",
+      "messagePlaceholder": "Décrivez vos besoins...",
+      "submit": "Envoyer la demande",
+      "successMessage": "Merci pour votre message. Nous vous contacterons bientôt!"
+    }
+  },
   "footer": {
-    "tagline": "Simple et propre",
-    "description": "Code propre et simple.",
-    "copyright": "© 2024 Rémi Guillette Groupe. Tous droits réservés."
+    "tagline": "Excellence en consultation",
+    "description": "Leader canadien en services de consultation professionnelle, nous nous engageons à fournir des solutions innovantes et durables pour nos clients à travers le Canada.",
+    "quickLinks": "Liens rapides",
+    "services": "Services",
+    "copyright": "© 2024 Rémi Guillette Groupe. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
   }
 }

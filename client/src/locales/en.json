@@ -9,9 +9,95 @@
     "services": "Services",
     "contact": "Contact"
   },
+  "hero": {
+    "title": "Excellence in",
+    "titleHighlight": "Consulting",
+    "description": "Canadian leader in professional consulting services, offering innovative solutions in public safety, francophone community services, occupational health and safety.",
+    "discoverDivisions": "Discover our divisions",
+    "contactUs": "Contact us"
+  },
+  "divisions": {
+    "title": "Our Divisions",
+    "subtitle": "Four distinct areas of expertise to meet the diverse needs of our Canadian clients",
+    "publicSafety": {
+      "title": "Public Safety Consulting",
+      "subtitle": "Specialized services",
+      "description": "Expertise in risk assessment, emergency planning and implementation of security protocols for public and private organizations.",
+      "tags": ["Risk Assessment", "Emergency Planning"]
+    },
+    "francophone": {
+      "title": "Francophone Community Services",
+      "subtitle": "Community engagement",
+      "description": "Development of programs and services tailored to the specific needs of francophone communities in Canada.",
+      "tags": ["Community Programs", "Language Services"]
+    },
+    "healthSafety": {
+      "title": "Occupational Health & Safety",
+      "subtitle": "AODA Compliance",
+      "description": "Training, auditing and compliance to ensure a safe work environment according to Canadian standards.",
+      "tags": ["OHS Training", "Compliance Audit"]
+    },
+    "animalAid": {
+      "title": "Animal First Aid Services",
+      "subtitle": "Emergency care",
+      "description": "Specialized training and emergency services for animal care, for professionals and owners.",
+      "tags": ["First Aid Training", "Emergency Services"]
+    }
+  },
+  "services": {
+    "title": "Core Services",
+    "subtitle": "Comprehensive solutions to guide your organization towards operational excellence",
+    "strategic": {
+      "title": "Strategic Consulting",
+      "description": "Development of customized strategies to optimize organizational performance and achieve long-term objectives.",
+      "features": ["Organizational Analysis", "Strategic Planning", "Process Optimization"]
+    },
+    "projectManagement": {
+      "title": "Project Management",
+      "description": "Direction and supervision of complex projects with proven methodologies to ensure delivery on time and within budget.",
+      "features": ["Project Planning", "Risk Management", "Quality Control"]
+    },
+    "security": {
+      "title": "Security & Compliance",
+      "description": "Audit, evaluation and compliance with Canadian regulations to ensure security and legal compliance.",
+      "features": ["Security Audit", "Compliance", "Regulatory Training"]
+    },
+    "ctaTitle": "Ready to start your project?",
+    "ctaDescription": "Let's discuss your needs and discover how our services can transform your organization.",
+    "ctaButton": "Get a free consultation"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are here to support you. Contact us to discuss your consulting needs.",
+    "info": "Contact Information",
+    "address": "6388 Hawkins Street, Apt. 307, Niagara Falls, ON L2G 1P3",
+    "phone": "613 501-2160",
+    "email": "remiguillette@gmail.com",
+    "hours": "Business Hours",
+    "weekdays": "Monday - Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "form": {
+      "title": "Information Request",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "service": "Service of Interest",
+      "selectService": "Select a service",
+      "message": "Message",
+      "messagePlaceholder": "Describe your needs...",
+      "submit": "Send request",
+      "successMessage": "Thank you for your message. We will contact you soon!"
+    }
+  },
   "footer": {
-    "tagline": "Simple and clean",
-    "description": "Clean and simple code.",
-    "copyright": "© 2024 Rémi Guillette Group. All rights reserved."
+    "tagline": "Excellence in consulting",
+    "description": "Canadian leader in professional consulting services, we are committed to providing innovative and sustainable solutions for our clients across Canada.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "copyright": "© 2024 Rémi Guillette Group. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   }
 }
