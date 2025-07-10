@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Building2, Menu, X } from 'lucide-react';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { Menu, X, Building2 } from 'lucide-react';
+import { Header } from './Header';
 import { useTranslation } from '../hooks/useTranslation';
 
 interface LayoutProps {
@@ -31,20 +31,12 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-rg-dark-bg text-gray-100">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 glass-effect border-b border-rg-gray">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Header />
+      
+      {/* Navigation */}
+      <nav className="fixed top-20 w-full z-50 glass-effect border-b border-rg-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 rg-gradient rounded-lg flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white">Rémi Guillette</h1>
-                <p className="text-sm text-gray-300">Groupe</p>
-              </div>
-            </Link>
-
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -64,14 +56,11 @@ export const Layout = ({ children }: LayoutProps) => {
               ))}
             </div>
 
-            {/* Language Toggle & Mobile Menu */}
-            <div className="flex items-center space-x-4">
-              <LanguageSwitcher />
-
-              {/* Mobile Menu Button */}
+            {/* Mobile Menu Button */}
+            <div className="flex items-center ml-auto md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-md hover:bg-rg-gray transition-colors duration-200"
+                className="p-2 rounded-md hover:bg-rg-gray transition-colors duration-200"
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6 text-gray-300" />
@@ -104,11 +93,11 @@ export const Layout = ({ children }: LayoutProps) => {
               </div>
             </div>
           )}
-        </nav>
-      </header>
+        </div>
+      </nav>
 
       {/* Main Content */}
-      <main className="pt-20">
+      <main className="pt-32">
         {children}
       </main>
 

@@ -4,6 +4,10 @@ import en from '../locales/en.json';
 export type Language = 'fr' | 'en';
 
 export interface TranslationData {
+  brand: {
+    groupe: string;
+    company: string;
+  };
   nav: {
     home: string;
     divisions: string;

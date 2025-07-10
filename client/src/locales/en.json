@@ -1,4 +1,8 @@
 {
+  "brand": {
+    "groupe": "Group",
+    "company": "Rémi Guillette"
+  },
   "nav": {
     "home": "Home",
     "divisions": "Divisions",
