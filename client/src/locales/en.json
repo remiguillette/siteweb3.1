@@ -33,9 +33,9 @@
     },
     "healthSafety": {
       "title": "Occupational Health & Safety",
-      "subtitle": "AODA Compliance",
-      "description": "Training, auditing and compliance to ensure a safe work environment according to Canadian standards.",
-      "tags": ["OHS Training", "Compliance Audit"]
+      "subtitle": "OHSA Compliance",
+      "description": "Training, auditing and compliance to ensure a safe work environment according to Canadian and provincial standards.",
+      "tags": ["OHS Training", "Regulatory Compliance"]
     },
     "animalAid": {
       "title": "Animal First Aid Services",

@@ -33,9 +33,9 @@
     },
     "healthSafety": {
       "title": "Santé et Sécurité au Travail",
-      "subtitle": "Conformité AODA",
-      "description": "Formation, audit et mise en conformité pour assurer un environnement de travail sécuritaire selon les normes canadiennes.",
-      "tags": ["Formation SST", "Audit de conformité"]
+      "subtitle": "Conformité LSST",
+      "description": "Formation, audit et mise en conformité pour assurer un environnement de travail sécuritaire selon les normes CNESST et canadiennes.",
+      "tags": ["Formation SST", "Conformité réglementaire"]
     },
     "animalAid": {
       "title": "Services de Premiers Soins Animaliers",

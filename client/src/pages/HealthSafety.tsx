@@ -1,4 +1,4 @@
-import { HardHat, CheckCircle, Shield, BookOpen, Users, FileCheck } from 'lucide-react';
+import { HardHat, CheckCircle, Shield, BookOpen, Users, FileCheck, AlertTriangle, Stethoscope } from 'lucide-react';
 import { useTranslation } from '../contexts/TranslationContext';
 
 export default function HealthSafety() {
@@ -9,8 +9,8 @@ export default function HealthSafety() {
       icon: Shield,
       titleFr: 'Évaluation des Risques',
       titleEn: 'Risk Assessment',
-      descriptionFr: 'Identification et évaluation complète des risques en milieu de travail selon les normes AODA et canadiennes.',
-      descriptionEn: 'Complete identification and assessment of workplace risks according to AODA and Canadian standards.',
+      descriptionFr: 'Identification et évaluation complète des risques en milieu de travail selon les normes CNESST et canadiennes.',
+      descriptionEn: 'Complete identification and assessment of workplace risks according to CNESST and Canadian standards.',
       features: language === 'fr' ? [
         'Inspection des lieux de travail',
         'Analyse des dangers',
@@ -43,28 +43,28 @@ export default function HealthSafety() {
     },
     {
       icon: FileCheck,
-      titleFr: 'Conformité AODA',
-      titleEn: 'AODA Compliance',
-      descriptionFr: 'Audit et mise en conformité avec la Loi sur l\'accessibilité pour les personnes handicapées de l\'Ontario.',
-      descriptionEn: 'Audit and compliance with the Accessibility for Ontarians with Disabilities Act.',
+      titleFr: 'Conformité Réglementaire',
+      titleEn: 'Regulatory Compliance',
+      descriptionFr: 'Audit et mise en conformité avec la Loi sur la santé et la sécurité du travail (LSST) et les règlements provinciaux.',
+      descriptionEn: 'Audit and compliance with the Occupational Health and Safety Act (OHSA) and provincial regulations.',
       features: language === 'fr' ? [
-        'Audit de conformité AODA',
-        'Plans d\'accessibilité',
-        'Formation sur l\'accessibilité',
-        'Mise en conformité'
+        'Audit de conformité LSST',
+        'Plans de santé-sécurité',
+        'Mise en conformité réglementaire',
+        'Documentation requise'
       ] : [
-        'AODA compliance audit',
-        'Accessibility plans',
-        'Accessibility training',
-        'Compliance implementation'
+        'OHSA compliance audit',
+        'Health & safety plans',
+        'Regulatory compliance',
+        'Required documentation'
       ]
     },
     {
       icon: Users,
       titleFr: 'Comités de Santé-Sécurité',
       titleEn: 'Health & Safety Committees',
-      descriptionFr: 'Mise en place et accompagnement des comités de santé et sécurité au travail.',
-      descriptionEn: 'Establishment and support of workplace health and safety committees.',
+      descriptionFr: 'Mise en place et accompagnement des comités de santé et sécurité au travail selon les exigences légales.',
+      descriptionEn: 'Establishment and support of workplace health and safety committees according to legal requirements.',
       features: language === 'fr' ? [
         'Formation des membres',
         'Procédures de comité',
@@ -75,6 +75,42 @@ export default function HealthSafety() {
         'Committee procedures',
         'Incident management',
         'Continuous improvement'
+      ]
+    },
+    {
+      icon: AlertTriangle,
+      titleFr: 'Gestion des Incidents',
+      titleEn: 'Incident Management',
+      descriptionFr: 'Systèmes complets de gestion des incidents, accidents et événements de travail.',
+      descriptionEn: 'Comprehensive systems for managing workplace incidents, accidents and events.',
+      features: language === 'fr' ? [
+        'Enquêtes d\'accidents',
+        'Rapports d\'incidents',
+        'Mesures correctives',
+        'Prévention des récidives'
+      ] : [
+        'Accident investigations',
+        'Incident reporting',
+        'Corrective measures',
+        'Recurrence prevention'
+      ]
+    },
+    {
+      icon: Stethoscope,
+      titleFr: 'Santé au Travail',
+      titleEn: 'Occupational Health',
+      descriptionFr: 'Programmes de surveillance et de protection de la santé des travailleurs.',
+      descriptionEn: 'Worker health surveillance and protection programs.',
+      features: language === 'fr' ? [
+        'Évaluation de l\'exposition',
+        'Programmes de surveillance',
+        'Ergonomie du travail',
+        'Prévention des maladies'
+      ] : [
+        'Exposure assessment',
+        'Surveillance programs',
+        'Workplace ergonomics',
+        'Disease prevention'
       ]
     }
   ];
@@ -97,15 +133,15 @@ export default function HealthSafety() {
           </div>
           <p className="text-xl text-[#f89422] max-w-4xl mx-auto">
             {language === 'fr' ? (
-              'Expertise en santé et sécurité au travail pour assurer la conformité AODA et créer des environnements de travail sécuritaires. Nos services couvrent l\'évaluation des risques, la formation et la mise en conformité réglementaire.'
+              'Expertise en santé et sécurité au travail pour assurer la conformité réglementaire et créer des environnements de travail sécuritaires. Nos services couvrent l\'évaluation des risques, la formation SST et la mise en conformité avec les lois provinciales.'
             ) : (
-              'Occupational health and safety expertise to ensure AODA compliance and create safe work environments. Our services cover risk assessment, training and regulatory compliance.'
+              'Occupational health and safety expertise to ensure regulatory compliance and create safe work environments. Our services cover risk assessment, OHS training and compliance with provincial legislation.'
             )}
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
