@@ -9,8 +9,8 @@ export default function FrancophoneServices() {
       icon: Users,
       titleFr: 'Services Communautaires',
       titleEn: 'Community Services',
-      descriptionFr: 'Programmes et services adaptés aux besoins spécifiques des communautés francophones du Canada.',
-      descriptionEn: 'Programs and services tailored to the specific needs of francophone communities in Canada.',
+      descriptionFr: 'Programmes et services adaptés aux besoins spécifiques des communautés franco-ontariennes dans toute la province.',
+      descriptionEn: 'Programs and services tailored to the specific needs of Franco-Ontarian communities throughout the province.',
       features: language === 'fr' ? [
         'Développement communautaire',
         'Programmes culturels',
@@ -45,8 +45,8 @@ export default function FrancophoneServices() {
       icon: Heart,
       titleFr: 'Accompagnement Social',
       titleEn: 'Social Support',
-      descriptionFr: 'Services d\'accompagnement et de soutien pour les familles et individus francophones.',
-      descriptionEn: 'Support and assistance services for francophone families and individuals.',
+      descriptionFr: 'Services d\'accompagnement et de soutien pour les familles et individus franco-ontariens.',
+      descriptionEn: 'Support and assistance services for Franco-Ontarian families and individuals.',
       features: language === 'fr' ? [
         'Soutien familial',
         'Aide à l\'intégration',
@@ -63,8 +63,8 @@ export default function FrancophoneServices() {
       icon: Globe,
       titleFr: 'Promotion Culturelle',
       titleEn: 'Cultural Promotion',
-      descriptionFr: 'Initiatives pour promouvoir et célébrer la culture francophone au sein de la communauté.',
-      descriptionEn: 'Initiatives to promote and celebrate francophone culture within the community.',
+      descriptionFr: 'Initiatives pour promouvoir et célébrer la culture franco-ontarienne au sein des communautés de l\'Ontario.',
+      descriptionEn: 'Initiatives to promote and celebrate Franco-Ontarian culture within Ontario communities.',
       features: language === 'fr' ? [
         'Événements culturels',
         'Partenariats institutionnels',
@@ -97,9 +97,9 @@ export default function FrancophoneServices() {
           </div>
           <p className="text-xl text-[#f89422] max-w-4xl mx-auto">
             {language === 'fr' ? (
-              'Services dédiés au développement et au soutien des communautés francophones. Nous offrons des programmes culturels, éducatifs et sociaux pour préserver et promouvoir la richesse de la francophonie canadienne.'
+              'Services dédiés au développement et au soutien des Franco-Ontariens. Nous offrons des programmes culturels, éducatifs et sociaux pour préserver et promouvoir la richesse de la francophonie ontarienne dans toute la province.'
             ) : (
-              'Services dedicated to the development and support of francophone communities. We offer cultural, educational and social programs to preserve and promote the richness of Canadian francophonie.'
+              'Services dedicated to the development and support of Franco-Ontarians. We offer cultural, educational and social programs to preserve and promote the richness of Franco-Ontarian culture throughout the province.'
             )}
           </p>
         </div>
