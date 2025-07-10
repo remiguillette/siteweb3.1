@@ -73,8 +73,8 @@ export const Header = () => {
         </Link>
 
         {/* Ontario Pride Text & Language Toggle */}
-        <div className="flex items-center space-x-4">
-          <span className="ontario-pride-text hidden md:block">
+        <div className="flex items-center space-x-6">
+          <span className="ontario-pride-text hidden md:block whitespace-nowrap">
             {language === 'fr' ? 'Fier de l\'Ontario' : 'Proud of Ontario'}
           </span>
           <button
@@ -83,7 +83,7 @@ export const Header = () => {
             className="border-gradient-button flex items-center justify-center text-white px-6 py-3 font-medium text-sm"
           >
             <Languages className="w-4 h-4 mr-2" />
-{language === 'fr' ? 'EN' : 'FR'}
+            {language === 'fr' ? 'EN' : 'FR'}
           </button>
         </div>
       </div>
