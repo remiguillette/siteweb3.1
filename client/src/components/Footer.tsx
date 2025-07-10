@@ -16,7 +16,7 @@ export const Footer = () => {
           {/* Middle column - main content */}
           <div className="flex flex-col items-center max-w-[300px] mx-auto">
             <a 
-              href="https://beaver-os-2-remiguillette.replit.app/"
+              href="https://rgbeavernet.ca/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-80 transition-opacity"
