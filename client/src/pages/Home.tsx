@@ -80,13 +80,13 @@ export default function Home() {
                     const Icon = division.icon;
                     const cardContent = (
                       <div
-                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center cursor-pointer"
+                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center cursor-pointer h-40 flex flex-col justify-center"
                         style={{ borderColor: '#f89422' }}
                       >
                         <div className="flex items-center justify-center mx-auto mb-4">
                           <Icon className="w-12 h-12" style={{ color: '#f89422' }} />
                         </div>
-                        <h3 className="text-lg font-bold">
+                        <h3 className="text-lg font-bold leading-tight">
                           <span style={{ color: '#0d6efd' }}>
                             {language === 'fr' ? division.titleFr.first : division.titleEn.first}
                           </span>
