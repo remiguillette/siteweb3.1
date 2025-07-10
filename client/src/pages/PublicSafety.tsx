@@ -138,30 +138,7 @@ export default function PublicSafety() {
           })}
         </div>
 
-        {/* Call to Action */}
-        <div className="bg-black rounded-xl p-8 text-center border-2" style={{ borderColor: '#f89422' }}>
-          <h2 className="text-3xl font-bold mb-4">
-            <span className="text-[#0d6efd]">
-              {language === 'fr' ? 'Prêt' : 'Ready'}
-            </span>
-            <span className="text-[#f89422]">
-              {language === 'fr' ? ' à améliorer votre sécurité publique ?' : ' to improve your public safety?'}
-            </span>
-          </h2>
-          <p className="text-xl text-[#f89422] mb-8 max-w-2xl mx-auto">
-            {language === 'fr' ? (
-              'Contactez-nous pour une consultation gratuite et découvrez comment nous pouvons renforcer vos systèmes de sécurité.'
-            ) : (
-              'Contact us for a free consultation and discover how we can strengthen your security systems.'
-            )}
-          </p>
-          <a
-            href="/contact"
-            className="inline-block bg-[#f89422] text-black px-8 py-3 rounded-lg font-semibold hover:bg-[#e6851f] transition-colors duration-300"
-          >
-            {language === 'fr' ? 'Nous contacter' : 'Contact Us'}
-          </a>
-        </div>
+
       </div>
     </div>
   );
