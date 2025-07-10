@@ -306,7 +306,7 @@
   @keyframes ontario-color-cycle {
     /* Orange phase (40% of cycle) */
     0%, 40% {
-      -webkit-text-fill-color: #ff6b35;
+      -webkit-text-fill-color: #f89422;
     }
     /* Flag colors phase (40% of cycle) */
     50%, 90% {
@@ -314,7 +314,7 @@
     }
     /* Return to orange */
     100% {
-      -webkit-text-fill-color: #ff6b35;
+      -webkit-text-fill-color: #f89422;
     }
   }
 }

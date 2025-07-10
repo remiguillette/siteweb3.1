@@ -28,7 +28,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Design System
 - **Theme**: Dark-first design with CSS custom properties
-- **Colors**: Black (#1a1625), Orange (#ff6b35), Blue (#3b82f6) palette
+- **Colors**: Black (#1a1625), Orange (#f89422), Blue (#3b82f6) palette
 - **Typography**: Inter font family
 - **Responsive**: Mobile-first approach with Tailwind breakpoints
 - **Accessibility**: AODA compliance considerations
