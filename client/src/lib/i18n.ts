@@ -104,6 +104,22 @@ export interface TranslationData {
     copyright: string;
     privacy: string;
     terms: string;
+    contact: string;
+    address: {
+      street: string;
+      apt: string;
+      city: string;
+      postal: string;
+    };
+    phone: string;
+    email: string;
+    registration: {
+      ontario: string;
+      canada: string;
+      ontarioNumber: string;
+      ontarioNumber2: string;
+      canadaNumber: string;
+    };
   };
 }
 

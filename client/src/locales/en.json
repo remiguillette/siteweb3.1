@@ -98,6 +98,22 @@
     "services": "Services",
     "copyright": "© 2024 Rémi Guillette Group. All rights reserved.",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Use"
+    "terms": "Terms of Use",
+    "contact": "Contact",
+    "address": {
+      "street": "6388 Hawkins Street",
+      "apt": "Apt. 307",
+      "city": "Niagara Falls, Ontario",
+      "postal": "L2G 1P3"
+    },
+    "phone": "613 501-2160",
+    "email": "remiguillette@gmail.com",
+    "registration": {
+      "ontario": "Ontario Registration",
+      "canada": "Canada Registration",
+      "ontarioNumber": "1001174676",
+      "ontarioNumber2": "1001174693",
+      "canadaNumber": "725808273"
+    }
   }
 }
