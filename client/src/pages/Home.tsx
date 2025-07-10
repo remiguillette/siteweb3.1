@@ -1,4 +1,4 @@
-import { Shield, User, HardHat, PawPrint, Target, ClipboardList, CheckCircle } from 'lucide-react';
+import { Target, ClipboardList, CheckCircle, Shield } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useState } from 'react';
 import { useToast } from '../hooks/use-toast';
@@ -57,44 +57,7 @@ export default function Home() {
     });
   };
 
-  const divisions = [
-    {
-      icon: Shield,
-      titleFirst: 'Cabinet-conseil',
-      titleRest: ' en sécurité publique',
-      data: t.divisions.publicSafety,
-      gradientFrom: 'from-orange-500',
-      gradientTo: 'to-orange-400',
-      tagColor: 'bg-orange-500/20 text-orange-400'
-    },
-    {
-      icon: User,
-      titleFirst: 'Services',
-      titleRest: ' Communautaires Francophones',
-      data: t.divisions.francophone,
-      gradientFrom: 'from-blue-500',
-      gradientTo: 'to-blue-400',
-      tagColor: 'bg-blue-500/20 text-blue-400'
-    },
-    {
-      icon: HardHat,
-      titleFirst: 'Services',
-      titleRest: ' en santé et Sécurité au Travail (SST)',
-      data: t.divisions.healthSafety,
-      gradientFrom: 'from-orange-500',
-      gradientTo: 'to-blue-500',
-      tagColor: 'bg-orange-500/20 text-orange-400'
-    },
-    {
-      icon: PawPrint,
-      titleFirst: 'Services',
-      titleRest: ' de Premiers Soins Animaliers',
-      data: t.divisions.animalAid,
-      gradientFrom: 'from-blue-500',
-      gradientTo: 'to-orange-500',
-      tagColor: 'bg-blue-500/20 text-blue-400'
-    }
-  ];
+
 
   const services = [
     {
