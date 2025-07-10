@@ -1,5 +1,6 @@
 import { Shield, User, HardHat, PawPrint } from 'lucide-react';
 import { useTranslation } from '../contexts/TranslationContext';
+import { Link } from 'wouter';
 
 export default function Home() {
   const { t, language } = useTranslation();
@@ -73,10 +74,9 @@ export default function Home() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
-                    return (
+                    const cardContent = (
                       <div
-                        key={index}
-                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center"
+                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center cursor-pointer"
                         style={{ borderColor: '#f89422' }}
                       >
                         <div className="flex items-center justify-center mx-auto mb-4">
@@ -90,6 +90,21 @@ export default function Home() {
                             {language === 'fr' ? division.titleFr.rest : division.titleEn.rest}
                           </span>
                         </h3>
+                      </div>
+                    );
+
+                    // Make the first card (Public Safety) clickable
+                    if (index === 0) {
+                      return (
+                        <Link key={index} href="/public-safety">
+                          {cardContent}
+                        </Link>
+                      );
+                    }
+
+                    return (
+                      <div key={index}>
+                        {cardContent}
                       </div>
                     );
                   })}

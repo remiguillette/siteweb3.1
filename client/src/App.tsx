@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import PublicSafety from "./pages/PublicSafety";
 import NotFound from "@/pages/not-found";
 import { useState } from "react";
 
@@ -21,6 +22,7 @@ function Router() {
         <Route path="/divisions" component={Divisions} />
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
+        <Route path="/public-safety" component={PublicSafety} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

@@ -128,3 +128,5 @@ Preferred communication style: Simple, everyday language.
 - **Language Toggle Fix**: Fixed toggle button to show target language instead of current language
 - **Hero Section Localization**: Implemented conditional rendering to maintain French content integrity while providing English translations
 - **State Synchronization**: Resolved language switching issues across all components using shared TranslationProvider context
+- **Public Safety Consulting Page**: Added dedicated page at `/public-safety` route with detailed services and bilingual content
+- **Interactive Hero Cards**: Made Public Safety division card clickable with routing to dedicated page
