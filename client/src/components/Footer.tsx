@@ -25,7 +25,10 @@ export const Footer = () => {
               <span className="text-[#f89422]">Guillette</span>
             </h3>
             <h3 className="font-bold text-2xl mb-2 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              {language === 'fr' ? 'Groupe' : 'Group'}
+              Groupe
+            </h3>
+            <h3 className="font-bold text-2xl mb-2 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              Group
             </h3>
             <div className="flex flex-col items-center gap-2 mt-6">
               <a 
