@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'wouter';
-import { Menu, X, Building2 } from 'lucide-react';
+import { useLocation } from 'wouter';
+import { Building2 } from 'lucide-react';
 import { Header } from './Header';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -9,7 +8,6 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children }: LayoutProps) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
   const { t } = useTranslation();
 
@@ -18,7 +16,6 @@ export const Layout = ({ children }: LayoutProps) => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false);
   };
 
   const navItems = [
@@ -36,9 +33,9 @@ export const Layout = ({ children }: LayoutProps) => {
       {/* Navigation */}
       <nav className="fixed top-20 w-full z-50 glass-effect border-b border-rg-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+          <div className="flex justify-center items-center py-4">
+            {/* Navigation */}
+            <div className="flex items-center space-x-8">
               {navItems.map((item) => (
                 <button
                   key={item.key}
@@ -55,44 +52,7 @@ export const Layout = ({ children }: LayoutProps) => {
                 </button>
               ))}
             </div>
-
-            {/* Mobile Menu Button */}
-            <div className="flex items-center ml-auto md:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-md hover:bg-rg-gray transition-colors duration-200"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 text-gray-300" />
-                ) : (
-                  <Menu className="w-6 h-6 text-gray-300" />
-                )}
-              </button>
-            </div>
           </div>
-
-          {/* Mobile Navigation */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden border-t border-rg-gray pt-4 pb-4">
-              <div className="space-y-2">
-                {navItems.map((item) => (
-                  <button
-                    key={item.key}
-                    onClick={() => {
-                      if (location === '/') {
-                        scrollToSection(item.sectionId);
-                      } else {
-                        window.location.href = `/#${item.sectionId}`;
-                      }
-                    }}
-                    className="block w-full text-left px-3 py-2 text-gray-300 hover:text-rg-orange transition-colors duration-200"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </nav>
 
