@@ -265,6 +265,58 @@
   .header-logo-group {
     animation: headerFadeInUp 0.7s ease-out;
   }
+
+  /* Franco-Ontarian Flag Animation for Ontario Pride Text */
+  .ontario-pride-text {
+    font-weight: 600;
+    font-size: 0.875rem;
+    
+    /* Franco-Ontarian flag gradient (Green and White) */
+    background-image: linear-gradient(
+      90deg, 
+      #00693C 45%, /* Franco-Ontarian Green */
+      #FFFFFF 50%, /* White */
+      #00693C 55%  /* Franco-Ontarian Green */
+    );
+    background-size: 400% 100%;
+    
+    /* Text masking for gradient effect */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    
+    /* Dual animation: wave effect + color cycling */
+    animation: 
+      ontario-wave-effect 3s linear infinite,
+      ontario-color-cycle 12s linear infinite;
+  }
+
+  /* Wave effect animation - moves the gradient */
+  @keyframes ontario-wave-effect {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Color cycle animation - alternates between orange and flag colors */
+  @keyframes ontario-color-cycle {
+    /* Orange phase (40% of cycle) */
+    0%, 40% {
+      -webkit-text-fill-color: #ff6b35;
+    }
+    /* Flag colors phase (40% of cycle) */
+    50%, 90% {
+      -webkit-text-fill-color: transparent;
+    }
+    /* Return to orange */
+    100% {
+      -webkit-text-fill-color: #ff6b35;
+    }
+  }
 }
 
 @layer utilities {
