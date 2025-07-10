@@ -19,9 +19,8 @@ export const Header = () => {
               <span className="text-[#0d6efd] text-4xl font-bold">Rémi</span>
               <span className="text-[#f89422] text-4xl font-bold">Guillette</span>
             </div>
-            <p className="text-[#f89422] text-2xl font-semibold whitespace-nowrap">
-              {t.brand.groupe}
-            </p>
+            <p className="text-[#f89422] text-2xl font-semibold whitespace-nowrap">Groupe</p>
+            <p className="text-[#f89422] text-xl font-semibold whitespace-nowrap">Group</p>
           </div>
         </Link>
 
