@@ -6,8 +6,8 @@ export const Footer = () => {
   const { t, language } = useTranslation();
 
   return (
-    <footer className="bg-black py-12 border-t border-[#f89422]">
-      <div className="container mx-auto px-4">
+    <footer className="bg-black py-12 border-t border-[#f89422] w-full">
+      <div className="container-responsive">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left column - empty for spacing */}
           <div></div>

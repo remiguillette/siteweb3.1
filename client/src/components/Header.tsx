@@ -46,8 +46,8 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="bg-black w-full py-4 px-6 shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="bg-black w-full py-4 shadow-md">
+      <div className="container-responsive flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-4">
           <img 

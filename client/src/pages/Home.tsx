@@ -46,21 +46,21 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section id="accueil" className="bg-black pb-16 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="accueil" className="bg-black pb-16 min-h-screen flex items-center w-full">
+        <div className="container-responsive">
           <div className="text-center">
             {/* Hero Content */}
-            <div className="max-w-4xl mx-auto">
+            <div className="w-full">
               <h1 className="text-4xl lg:text-6xl font-bold text-[#f89422] mb-6">
                 <span className="text-[#0d6efd]">Solutions</span> innovantes pour votre entreprise
               </h1>
-              <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center max-w-3xl mx-auto">
+              <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center">
                 Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
               {/* Divisions Title and Cards */}
               <div className="mt-12">
                 <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>Divisions</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
                     return (

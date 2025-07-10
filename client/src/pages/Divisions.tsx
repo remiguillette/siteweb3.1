@@ -36,8 +36,8 @@ export default function Divisions() {
   ];
 
   return (
-    <div className="py-16 bg-rg-dark-bg min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-16 bg-rg-dark-bg min-h-screen w-full">
+      <div className="container-responsive">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">{t.divisions.title}</h1>
