@@ -40,7 +40,8 @@ Preferred communication style: Simple, everyday language.
 ### Frontend Components
 - **Layout**: Main layout with navigation, language switcher, and responsive mobile menu
 - **Pages**: Home, Divisions, Services, Contact with smooth scrolling navigation
-- **Language System**: Bilingual support with persistent language preference
+- **Language System**: React Context-based bilingual support with persistent language preference and global state management
+- **Translation Context**: TranslationProvider manages language state across all components
 - **UI Library**: Complete Shadcn/ui component set including forms, dialogs, toasts
 
 ### Backend Components
@@ -68,10 +69,11 @@ Preferred communication style: Simple, everyday language.
 4. Responses formatted consistently with error handling
 
 ### Internationalization Flow
-1. Language preference stored in localStorage
-2. Custom hook provides translation function and language switching
-3. JSON translation files for French and English (Canadian)
+1. Language preference stored in localStorage and managed via React Context
+2. TranslationProvider context manages global language state across all components
+3. JSON translation files for French and English (Canadian) with conditional rendering for hero content
 4. Document language attribute updates dynamically
+5. Hero section uses conditional rendering to preserve original French content while providing English translations
 
 ## External Dependencies
 
@@ -117,3 +119,12 @@ Preferred communication style: Simple, everyday language.
 - AODA accessibility compliance considerations
 - Division cards in hero section with French titles (first word blue, rest orange)
 - Orange icons without background, black cards with orange outline
+- Global language state management via React Context
+- Conditional rendering for hero content to preserve French styling while providing English translations
+- Language toggle button showing target language (EN when French active, FR when English active)
+
+### Recent Changes (July 2025)
+- **Translation System Overhaul**: Converted from individual component hooks to React Context-based global state management
+- **Language Toggle Fix**: Fixed toggle button to show target language instead of current language
+- **Hero Section Localization**: Implemented conditional rendering to maintain French content integrity while providing English translations
+- **State Synchronization**: Resolved language switching issues across all components using shared TranslationProvider context
