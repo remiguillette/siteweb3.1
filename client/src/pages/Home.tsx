@@ -134,83 +134,13 @@ export default function Home() {
               <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center max-w-3xl mx-auto">
                 Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
-              {/* Divisions Title and Cards */}
-              <div className="mt-12">
-                <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>Divisions</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                  {divisions.map((division, index) => {
-                    const Icon = division.icon;
-                    return (
-                      <div
-                        key={index}
-                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 text-center"
-                        style={{ borderColor: '#f89422' }}
-                      >
-                        <div className="flex items-center justify-center mx-auto mb-4">
-                          <Icon className="w-12 h-12" style={{ color: '#f89422' }} />
-                        </div>
-                        <h3 className="text-lg font-bold">
-                          <span style={{ color: '#0d6efd' }}>{division.titleFirst}</span>
-                          <span style={{ color: '#f89422' }}>{division.titleRest}</span>
-                        </h3>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Divisions Section */}
-      <section id="divisions" className="py-16 bg-rg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">{t.divisions.title}</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t.divisions.subtitle}
-            </p>
-          </div>
 
-          {/* Divisions Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {divisions.map((division, index) => {
-              const Icon = division.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-rg-card-bg rounded-2xl p-8 hover:bg-rg-gray transition-all duration-300 transform hover:scale-105 border border-rg-gray"
-                >
-                  <div className="flex items-center mb-6">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${division.gradientFrom} ${division.gradientTo} rounded-xl flex items-center justify-center mr-4`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{division.data.title}</h3>
-                      <p className="text-orange-400">{division.data.subtitle}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    {division.data.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {division.data.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className={`px-3 py-1 ${division.tagColor} rounded-full text-sm`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <section id="services" className="py-16 bg-rg-dark-bg">
