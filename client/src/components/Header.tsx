@@ -49,7 +49,13 @@ export const Header = () => {
     <header className="bg-black w-full py-4 px-6 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-4">
+          <img 
+            src={beaverLogo} 
+            alt="Logo Beaver" 
+            className={`h-16 w-16 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
+            style={{ objectFit: "contain" }}
+          />
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
               <span className={`text-[#0d6efd] text-4xl font-bold transition-all duration-700 ${isLoaded ? 'header-logo-remi' : 'opacity-0 translate-x-[-20px]'}`}>Rémi</span>
