@@ -7,6 +7,8 @@ export default function Home() {
   const divisions = [
     {
       icon: Shield,
+      titleFirst: 'Cabinet-conseil',
+      titleRest: ' en sécurité publique',
       data: t.divisions.publicSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
@@ -14,6 +16,8 @@ export default function Home() {
     },
     {
       icon: User,
+      titleFirst: 'Services',
+      titleRest: ' Communautaires Francophones',
       data: t.divisions.francophone,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-blue-400',
@@ -21,6 +25,8 @@ export default function Home() {
     },
     {
       icon: HardHat,
+      titleFirst: 'Services',
+      titleRest: ' en santé et Sécurité au Travail (SST)',
       data: t.divisions.healthSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-blue-500',
@@ -28,6 +34,8 @@ export default function Home() {
     },
     {
       icon: PawPrint,
+      titleFirst: 'Services',
+      titleRest: ' de Premiers Soins Animaliers',
       data: t.divisions.animalAid,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-orange-500',
@@ -44,14 +52,14 @@ export default function Home() {
             {/* Hero Content */}
             <div className="w-full">
               <h1 className="text-4xl lg:text-6xl font-bold text-[#f89422] mb-6">
-                <span className="text-[#0d6efd]">{t.hero.title}</span> {t.hero.titleHighlight}
+                <span className="text-[#0d6efd]">Solutions</span> innovantes pour votre entreprise
               </h1>
               <p className="text-xl text-[#f89422] mb-8 leading-relaxed text-center">
-                {t.hero.description}
+                Spécialiste en services d'entreprise, le Groupe Rémi Guillette offre une gamme complète de solutions adaptées à vos besoins spécifiques.
               </p>
               {/* Divisions Title and Cards */}
               <div className="mt-12">
-                <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>{t.divisions.title}</h2>
+                <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>Divisions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
@@ -65,8 +73,8 @@ export default function Home() {
                           <Icon className="w-12 h-12" style={{ color: '#f89422' }} />
                         </div>
                         <h3 className="text-lg font-bold">
-                          <span style={{ color: '#0d6efd' }}>{division.data.title.split(' ')[0]}</span>
-                          <span style={{ color: '#f89422' }}> {division.data.title.split(' ').slice(1).join(' ')}</span>
+                          <span style={{ color: '#0d6efd' }}>{division.titleFirst}</span>
+                          <span style={{ color: '#f89422' }}>{division.titleRest}</span>
                         </h3>
                       </div>
                     );
