@@ -129,5 +129,12 @@ export const translations: Record<Language, TranslationData> = {
 };
 
 export const getTranslation = (language: Language): TranslationData => {
-  return translations[language];
+  const translationData = translations[language];
+  console.log('📚 Translation data requested:', {
+    language,
+    hasData: !!translationData,
+    availableLanguages: Object.keys(translations),
+    sampleTranslation: translationData?.brand?.company || 'undefined'
+  });
+  return translationData;
 };

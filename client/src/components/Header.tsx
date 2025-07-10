@@ -10,7 +10,13 @@ export const Header = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const toggleLanguage = () => {
-    changeLanguage(language === 'fr' ? 'en' : 'fr');
+    const newLang = language === 'fr' ? 'en' : 'fr';
+    console.log('🔄 Header language toggle clicked:', {
+      currentLanguage: language,
+      targetLanguage: newLang,
+      component: 'Header'
+    });
+    changeLanguage(newLang);
   };
 
   useEffect(() => {
