@@ -38,22 +38,6 @@ export const Footer = () => {
               >
                 {t.footer.privacy}
               </Link>
-              {language === 'fr' && (
-                <Link 
-                  to="/privacy-policy" 
-                  className="text-[#f89422] text-sm hover:text-white transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              )}
-              {language === 'en' && (
-                <Link 
-                  to="/politique-confidentialite" 
-                  className="text-[#f89422] text-sm hover:text-white transition-colors"
-                >
-                  Politique de confidentialité
-                </Link>
-              )}
             </div>
           </div>
 
