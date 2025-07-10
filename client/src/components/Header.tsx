@@ -80,7 +80,7 @@ export const Header = () => {
             className="border-gradient-button flex items-center justify-center text-white px-6 py-3 font-medium text-sm"
           >
             <Languages className="w-4 h-4 mr-2" />
-            {language === 'fr' ? 'FR' : 'EN'}
+{language === 'fr' ? 'EN' : 'FR'}
           </button>
         </div>
       </div>
