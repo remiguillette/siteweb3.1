@@ -4,11 +4,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "./components/Layout";
+import { LoadingPage } from "./components/LoadingPage";
 import Home from "./pages/Home";
 import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import NotFound from "@/pages/not-found";
+import { useState } from "react";
 
 function Router() {
   return (
@@ -26,11 +28,21 @@ function Router() {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        {isLoading ? (
+          <LoadingPage onLoadingComplete={handleLoadingComplete} />
+        ) : (
+          <Router />
+        )}
       </TooltipProvider>
     </QueryClientProvider>
   );
