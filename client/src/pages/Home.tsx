@@ -60,7 +60,8 @@ export default function Home() {
   const divisions = [
     {
       icon: Shield,
-      title: 'Public Safety Consulting Firm',
+      titleFirst: 'Sécurité',
+      titleRest: ' Publique Conseil',
       data: t.divisions.publicSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-orange-400',
@@ -68,7 +69,8 @@ export default function Home() {
     },
     {
       icon: User,
-      title: 'Francophone Community Service',
+      titleFirst: 'Services',
+      titleRest: ' Communautaires Francophones',
       data: t.divisions.francophone,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-blue-400',
@@ -76,7 +78,8 @@ export default function Home() {
     },
     {
       icon: HardHat,
-      title: 'Occupational Health and Safety (OHS)',
+      titleFirst: 'Santé',
+      titleRest: ' et Sécurité au Travail (SST)',
       data: t.divisions.healthSafety,
       gradientFrom: 'from-orange-500',
       gradientTo: 'to-blue-500',
@@ -84,7 +87,8 @@ export default function Home() {
     },
     {
       icon: PawPrint,
-      title: 'Animal First Aid Service',
+      titleFirst: 'Services',
+      titleRest: ' de Premiers Soins Animaliers',
       data: t.divisions.animalAid,
       gradientFrom: 'from-blue-500',
       gradientTo: 'to-orange-500',
@@ -132,19 +136,22 @@ export default function Home() {
               </p>
               {/* Divisions Title and Cards */}
               <div className="mt-12">
-                <h2 className="text-3xl font-bold text-white text-center mb-8">Divisions</h2>
+                <h2 className="text-3xl font-bold text-orange-500 text-center mb-8">Divisions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
                     return (
                       <div
                         key={index}
-                        className="bg-rg-card-bg rounded-xl p-6 hover:bg-rg-gray transition-all duration-300 transform hover:scale-105 border border-rg-gray text-center"
+                        className="bg-black rounded-xl p-6 hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 border-2 border-orange-500 text-center"
                       >
-                        <div className={`w-16 h-16 bg-gradient-to-br ${division.gradientFrom} ${division.gradientTo} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                          <Icon className="w-8 h-8 text-white" />
+                        <div className="flex items-center justify-center mx-auto mb-4">
+                          <Icon className="w-12 h-12 text-orange-500" />
                         </div>
-                        <h3 className="text-lg font-bold text-white">{division.title}</h3>
+                        <h3 className="text-lg font-bold">
+                          <span className="text-blue-500">{division.titleFirst}</span>
+                          <span className="text-orange-500">{division.titleRest}</span>
+                        </h3>
                       </div>
                     );
                   })}

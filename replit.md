@@ -32,6 +32,8 @@ Preferred communication style: Simple, everyday language.
 - **Typography**: Inter font family
 - **Responsive**: Mobile-first approach with Tailwind breakpoints
 - **Accessibility**: AODA compliance considerations
+- **French Language Rule**: Main page is in French, first word of each sentence/title is always blue, remaining text is orange
+- **Card Design**: Division cards use black background with orange outline, orange icons without background
 
 ## Key Components
 
@@ -113,3 +115,5 @@ Preferred communication style: Simple, everyday language.
 - Responsive navigation with smooth scrolling
 - Dark theme with professional branding
 - AODA accessibility compliance considerations
+- Division cards in hero section with French titles (first word blue, rest orange)
+- Orange icons without background, black cards with orange outline
