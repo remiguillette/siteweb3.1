@@ -181,9 +181,11 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     try {
       const response = await fetch(`${apiConfig.baseUrl}/messages/${currentSessionId}`, {
         headers: {
+          'Authorization': `Basic ${credentials}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }
+        },
+        mode: 'cors'
       });
 
       if (!response.ok) {
@@ -195,7 +197,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
-  }, [apiConfig.baseUrl]);
+  }, [apiConfig.baseUrl, credentials]);
 
   const startPolling = useCallback((sessionId: string) => {
     if (pollIntervalRef.current) {
@@ -239,9 +241,11 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       const response = await fetch(`${apiConfig.baseUrl}/messages`, {
         method: 'POST',
         headers: {
+          'Authorization': `Basic ${credentials}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify(messageData)
       });
 
@@ -268,9 +272,11 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         await fetch(`${apiConfig.baseUrl}/sessions/${sessionId}/status`, {
           method: 'PATCH',
           headers: {
+            'Authorization': `Basic ${credentials}`,
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
+          mode: 'cors',
           body: JSON.stringify({ status: 'closed' })
         });
       } catch (error) {
