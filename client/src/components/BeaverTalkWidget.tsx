@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { MessageCircle, X, Send, AlertTriangle } from 'lucide-react';
 import { useTranslation } from '@/contexts/TranslationContext';
-import { apiRequest } from '@/lib/queryClient';
-import type { ChatMessage, ChatSession, InsertChatSession, InsertChatMessage } from '@shared/schema';
 
 interface BeaverTalkConfig {
   userId?: string;
@@ -11,6 +9,25 @@ interface BeaverTalkConfig {
   userDepartment?: string;
   category?: 'general' | 'technical' | 'emergency' | 'feedback';
   priority?: 'low' | 'normal' | 'high' | 'urgent';
+  baseUrl?: string;
+  username?: string;
+  password?: string;
+}
+
+interface BeaverTalkMessage {
+  id: string;
+  sessionId: string;
+  senderId: string;
+  senderName: string;
+  senderType: 'user' | 'agent';
+  messageContent: string;
+  messageType: 'text' | 'image' | 'file';
+  timestamp: string;
+  securityScore?: number;
+  threadId?: string;
+  isFiltered?: boolean;
+  userAgent?: string;
+  ipAddress?: string;
 }
 
 interface BeaverTalkWidgetProps {
@@ -22,13 +39,30 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<BeaverTalkMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected'>('connecting');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Default configuration for BeaverTalk API
+  const apiConfig = {
+    baseUrl: config.baseUrl || import.meta.env.VITE_BEAVERTALK_API_URL || 'https://your-beavernet-domain.com/api/chat',
+    username: config.username || import.meta.env.VITE_BEAVERTALK_USERNAME || 'remiguillette',
+    password: config.password || import.meta.env.VITE_BEAVERTALK_PASSWORD || 'MC44rg99qc@',
+    userId: config.userId || `rgra_user_${Math.random().toString(36).substr(2, 9)}`,
+    userName: config.userName || 'RGRA Website User',
+    userEmail: config.userEmail,
+    userDepartment: config.userDepartment,
+    category: config.category || 'general',
+    priority: config.priority || 'normal'
+  };
+
+  const credentials = btoa(`${apiConfig.username}:${apiConfig.password}`);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -38,28 +72,76 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     scrollToBottom();
   }, [messages]);
 
+  // Test connection to BeaverTalk API
+  const testConnection = async () => {
+    try {
+      setConnectionStatus('connecting');
+      
+      // Try to connect to the API health endpoint
+      const response = await fetch(`${apiConfig.baseUrl}/health`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Basic ${credentials}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setConnectionStatus('connected');
+        setIsConnected(true);
+        setError(null);
+      } else {
+        throw new Error(`Connection failed: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('BeaverTalk connection error:', error);
+      setConnectionStatus('disconnected');
+      setIsConnected(false);
+      setError('Unable to connect to BeaverTalk support system. Please check your network connection.');
+    }
+  };
+
+  // Test connection when widget opens
+  useEffect(() => {
+    if (isOpen && !isConnected) {
+      testConnection();
+    }
+  }, [isOpen]);
+
   const generateSessionId = () => {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `rgra_session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
 
   const createSession = async (): Promise<string> => {
     const newSessionId = generateSessionId();
     
-    const sessionData: InsertChatSession = {
+    const sessionData = {
       sessionId: newSessionId,
-      userId: config.userId || `rgra_user_${Math.random().toString(36).substr(2, 9)}`,
-      userName: config.userName || 'RGRA Website User',
-      userEmail: config.userEmail,
-      userDepartment: config.userDepartment,
-      category: config.category || 'general',
-      priority: config.priority || 'normal',
+      userId: apiConfig.userId,
+      userName: apiConfig.userName,
+      userEmail: apiConfig.userEmail,
+      userDepartment: apiConfig.userDepartment,
+      category: apiConfig.category,
+      priority: apiConfig.priority,
       clientSite: window.location.hostname,
       referrerUrl: window.location.href,
     };
 
     try {
-      await apiRequest('POST', '/api/chat/sessions', sessionData);
-      
+      const response = await fetch(`${apiConfig.baseUrl}/sessions`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${credentials}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sessionData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to create session: ${response.status}`);
+      }
+
+      const session = await response.json();
       setSessionId(newSessionId);
       return newSessionId;
     } catch (error) {
@@ -70,13 +152,23 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 
   const fetchMessages = useCallback(async (currentSessionId: string) => {
     try {
-      const response = await apiRequest('GET', `/api/chat/messages/${currentSessionId}`);
+      const response = await fetch(`${apiConfig.baseUrl}/messages/${currentSessionId}`, {
+        headers: {
+          'Authorization': `Basic ${credentials}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch messages: ${response.status}`);
+      }
+
       const newMessages = await response.json();
       setMessages(newMessages);
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
-  }, []);
+  }, [credentials, apiConfig.baseUrl]);
 
   const startPolling = useCallback((sessionId: string) => {
     if (pollIntervalRef.current) {
@@ -109,16 +201,27 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         startPolling(currentSessionId);
       }
 
-      const messageData: InsertChatMessage = {
+      const messageData = {
         sessionId: currentSessionId,
-        senderId: config.userId || `rgra_user_${Math.random().toString(36).substr(2, 9)}`,
-        senderName: config.userName || 'RGRA Website User',
+        senderId: apiConfig.userId,
+        senderName: apiConfig.userName,
         senderType: 'user',
         messageContent: inputValue,
         messageType: 'text',
       };
 
-      await apiRequest('POST', '/api/chat/messages', messageData);
+      const response = await fetch(`${apiConfig.baseUrl}/messages`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${credentials}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(messageData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to send message: ${response.status}`);
+      }
 
       setInputValue('');
       
@@ -136,7 +239,14 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
   const closeSession = async () => {
     if (sessionId) {
       try {
-        await apiRequest('PATCH', `/api/chat/sessions/${sessionId}/status`, { status: 'closed' });
+        await fetch(`${apiConfig.baseUrl}/sessions/${sessionId}/status`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Basic ${credentials}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: 'closed' })
+        });
       } catch (error) {
         console.error('Error closing session:', error);
       }
@@ -206,20 +316,48 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 
           {/* Messages Container */}
           <div className="flex-1 p-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 space-y-4">
-            {/* Welcome Message */}
-            <div className="bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
-              <div className="flex items-start space-x-2">
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                  B
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t.chat.title}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                    {t.chat.welcome}
-                  </p>
+            {/* Connection Status */}
+            {connectionStatus === 'connecting' && (
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-300 p-3 rounded-lg text-sm">
+                <div className="flex items-center space-x-2">
+                  <div className="w-4 h-4 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
+                  <span>{t.chat.connecting}</span>
                 </div>
               </div>
-            </div>
+            )}
+
+            {connectionStatus === 'connected' && (
+              <div className="bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+                <div className="flex items-start space-x-2">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                    B
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t.chat.title}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                      {t.chat.welcome}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {connectionStatus === 'disconnected' && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 p-3 rounded-lg text-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Connection Failed</p>
+                    <p className="text-xs mt-1">Unable to connect to BeaverTalk support system</p>
+                  </div>
+                  <button
+                    onClick={testConnection}
+                    className="px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700"
+                  >
+                    Retry
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Messages */}
             {messages.map((message) => (
@@ -272,13 +410,13 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder={t.chat.placeholder}
-                disabled={isLoading}
+                placeholder={connectionStatus === 'connected' ? t.chat.placeholder : 'Connecting to BeaverTalk...'}
+                disabled={isLoading || connectionStatus !== 'connected'}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
               />
               <button
                 onClick={sendMessage}
-                disabled={isLoading || !inputValue.trim()}
+                disabled={isLoading || !inputValue.trim() || connectionStatus !== 'connected'}
                 className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-gray-400 disabled:to-gray-500 text-white rounded-lg transition-all duration-200 flex items-center space-x-1 disabled:cursor-not-allowed"
               >
                 {isLoading ? (

@@ -21,7 +21,13 @@ export const Layout = ({ children }: LayoutProps) => {
       <Footer />
 
       {/* BeaverTalk Chat Widget */}
-      <BeaverTalkWidget />
+      <BeaverTalkWidget config={{
+        baseUrl: import.meta.env.VITE_BEAVERTALK_API_URL,
+        username: import.meta.env.VITE_BEAVERTALK_USERNAME,
+        password: import.meta.env.VITE_BEAVERTALK_PASSWORD,
+        category: 'general',
+        priority: 'normal'
+      }} />
     </div>
   );
 };
