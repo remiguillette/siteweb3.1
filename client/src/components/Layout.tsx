@@ -1,5 +1,6 @@
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { BeaverTalkWidget } from './BeaverTalkWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,6 +19,9 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Footer */}
       <Footer />
+
+      {/* BeaverTalk Chat Widget */}
+      <BeaverTalkWidget />
     </div>
   );
 };
