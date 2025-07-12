@@ -7,6 +7,7 @@ import { TranslationProvider } from "./contexts/TranslationContext";
 import { Layout } from "./components/Layout";
 import { LoadingPage } from "./components/LoadingPage";
 import { CookieConsent } from "./components/CookieConsent";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
@@ -17,6 +18,8 @@ import HealthSafety from "./pages/HealthSafety";
 import AnimalFirstAid from "./pages/AnimalFirstAid";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
+import ServerError from "./pages/ServerError";
+import ErrorTest from "./pages/ErrorTest";
 import { useState } from "react";
 
 function Router() {
@@ -33,6 +36,10 @@ function Router() {
         <Route path="/animal-first-aid" component={AnimalFirstAid} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/politique-confidentialite" component={PrivacyPolicy} />
+        {/* Error pages for testing */}
+        <Route path="/test-404" component={NotFound} />
+        <Route path="/test-500" component={ServerError} />
+        <Route path="/error-test" component={ErrorTest} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>
@@ -48,19 +55,21 @@ function App() {
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <TranslationProvider>
-          <Toaster />
-          <CookieConsent />
-          {isLoading ? (
-            <LoadingPage onLoadingComplete={handleLoadingComplete} />
-          ) : (
-            <Router />
-          )}
-        </TranslationProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <TranslationProvider>
+            <Toaster />
+            <CookieConsent />
+            {isLoading ? (
+              <LoadingPage onLoadingComplete={handleLoadingComplete} />
+            ) : (
+              <Router />
+            )}
+          </TranslationProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

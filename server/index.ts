@@ -1,5 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import compression from "compression";
+import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -81,11 +82,18 @@ app.use((req, res, next) => {
     // Log error details in development, sanitize in production
     if (app.get("env") === "development") {
       console.error("Error:", err);
-      res.status(status).json({ 
-        message, 
-        stack: err.stack,
-        details: err 
-      });
+      
+      // For API requests, return JSON
+      if (_req.path.startsWith('/api')) {
+        res.status(status).json({ 
+          message, 
+          stack: err.stack,
+          details: err 
+        });
+      } else {
+        // For regular page requests, let Vite handle it (will show error page)
+        _next(err);
+      }
     } else {
       // Production error handling - don't leak sensitive information
       console.error("Production error:", {
@@ -96,9 +104,14 @@ app.use((req, res, next) => {
         timestamp: new Date().toISOString()
       });
       
-      res.status(status).json({ 
-        message: status === 500 ? "Internal Server Error" : message 
-      });
+      if (_req.path.startsWith('/api')) {
+        res.status(status).json({ 
+          message: status === 500 ? "Internal Server Error" : message 
+        });
+      } else {
+        // For page requests in production, serve the error page
+        res.status(status).sendFile(path.resolve(import.meta.dirname, "../public/index.html"));
+      }
     }
   });
 

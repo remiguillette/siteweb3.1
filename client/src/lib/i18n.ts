@@ -190,6 +190,23 @@ export interface TranslationData {
       userRights: string[];
     };
   };
+  errors: {
+    404: {
+      title: string;
+      subtitle: string;
+      description: string;
+      backHome: string;
+      contact: string;
+    };
+    500: {
+      title: string;
+      subtitle: string;
+      description: string;
+      retry: string;
+      backHome: string;
+      contact: string;
+    };
+  };
 }
 
 export const translations: Record<Language, TranslationData> = {

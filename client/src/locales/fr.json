@@ -231,5 +231,22 @@
         "Porter plainte auprès du Commissaire à la protection de la vie privée du Canada"
       ]
     }
+  },
+  "errors": {
+    "404": {
+      "title": "Page introuvable",
+      "subtitle": "La page que vous recherchez n'existe pas",
+      "description": "Il semble que vous ayez suivi un lien brisé ou saisi une URL qui n'existe pas sur ce site.",
+      "backHome": "Retour à l'accueil",
+      "contact": "Contactez-nous si vous pensez qu'il s'agit d'une erreur"
+    },
+    "500": {
+      "title": "Erreur serveur",
+      "subtitle": "Une erreur inattendue s'est produite",
+      "description": "Nous nous excusons pour la gêne occasionnée. Notre équipe technique a été informée et travaille à résoudre le problème.",
+      "retry": "Réessayer",
+      "backHome": "Retour à l'accueil",
+      "contact": "Contactez le support si le problème persiste"
+    }
   }
 }

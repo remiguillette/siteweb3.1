@@ -231,5 +231,22 @@
         "File a complaint with the Privacy Commissioner of Canada"
       ]
     }
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "subtitle": "The page you're looking for doesn't exist",
+      "description": "It looks like you followed a broken link or entered a URL that doesn't exist on this site.",
+      "backHome": "Back to home",
+      "contact": "Contact us if you think this is an error"
+    },
+    "500": {
+      "title": "Server error",
+      "subtitle": "An unexpected error occurred",
+      "description": "We apologize for the inconvenience. Our technical team has been notified and is working to resolve the issue.",
+      "retry": "Try again",
+      "backHome": "Back to home",
+      "contact": "Contact support if the problem persists"
+    }
   }
 }
