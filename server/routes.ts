@@ -98,6 +98,125 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ status: "healthy", timestamp: new Date().toISOString() });
   });
 
+  // BeaverTalk API Proxy routes to bypass CORS
+  app.get("/api/beavertalk/health", async (req, res) => {
+    try {
+      const response = await fetch("https://rgbeavernet.ca/api/chat/health", {
+        method: "GET",
+        headers: {
+          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("BeaverTalk API proxy error:", error);
+      res.status(500).json({ error: "Failed to connect to BeaverTalk API", details: error.message });
+    }
+  });
+
+  app.post("/api/beavertalk/sessions", async (req, res) => {
+    try {
+      const response = await fetch("https://rgbeavernet.ca/api/chat/sessions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(req.body)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("BeaverTalk API proxy error:", error);
+      res.status(500).json({ error: "Failed to create BeaverTalk session", details: error.message });
+    }
+  });
+
+  app.post("/api/beavertalk/messages", async (req, res) => {
+    try {
+      const response = await fetch("https://rgbeavernet.ca/api/chat/messages", {
+        method: "POST",
+        headers: {
+          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(req.body)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("BeaverTalk API proxy error:", error);
+      res.status(500).json({ error: "Failed to send message to BeaverTalk", details: error.message });
+    }
+  });
+
+  app.get("/api/beavertalk/messages/:sessionId", async (req, res) => {
+    try {
+      const response = await fetch(`https://rgbeavernet.ca/api/chat/messages/${req.params.sessionId}`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("BeaverTalk API proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch messages from BeaverTalk", details: error.message });
+    }
+  });
+
+  app.patch("/api/beavertalk/sessions/:sessionId/status", async (req, res) => {
+    try {
+      const response = await fetch(`https://rgbeavernet.ca/api/chat/sessions/${req.params.sessionId}/status`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(req.body)
+      });
+      
+      if (!response.ok) {
+        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("BeaverTalk API proxy error:", error);
+      res.status(500).json({ error: "Failed to update session status", details: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
