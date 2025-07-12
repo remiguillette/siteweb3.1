@@ -77,6 +77,12 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     try {
       setConnectionStatus('connecting');
       
+      console.log('BeaverTalk API Config:', {
+        baseUrl: apiConfig.baseUrl,
+        username: apiConfig.username,
+        hasPassword: !!apiConfig.password
+      });
+      
       // Try to connect to the API health endpoint
       const response = await fetch(`${apiConfig.baseUrl}/health`, {
         method: 'GET',
@@ -86,18 +92,24 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         }
       });
 
+      console.log('BeaverTalk API Response:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
+      });
+
       if (response.ok) {
         setConnectionStatus('connected');
         setIsConnected(true);
         setError(null);
       } else {
-        throw new Error(`Connection failed: ${response.status}`);
+        throw new Error(`Connection failed: ${response.status} - ${response.statusText}`);
       }
     } catch (error) {
       console.error('BeaverTalk connection error:', error);
       setConnectionStatus('disconnected');
       setIsConnected(false);
-      setError('Unable to connect to BeaverTalk support system. Please check your network connection.');
+      setError(`Unable to connect to BeaverTalk support system. Error: ${error.message}`);
     }
   };
 
