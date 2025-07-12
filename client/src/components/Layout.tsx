@@ -20,14 +20,14 @@ export const Layout = ({ children }: LayoutProps) => {
       {/* Footer */}
       <Footer />
 
-      {/* BeaverTalk Chat Widget */}
-      <BeaverTalkWidget config={{
+      {/* BeaverTalk Chat Widget - Temporarily Disabled */}
+      {/* <BeaverTalkWidget config={{
         baseUrl: import.meta.env.VITE_BEAVERTALK_API_URL,
         username: import.meta.env.VITE_BEAVERTALK_USERNAME,
         password: import.meta.env.VITE_BEAVERTALK_PASSWORD,
         category: 'general',
         priority: 'normal'
-      }} />
+      }} /> */}
     </div>
   );
 };
