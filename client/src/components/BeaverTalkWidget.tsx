@@ -95,13 +95,20 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       console.log('BeaverTalk API Response:', {
         status: response.status,
         statusText: response.statusText,
-        ok: response.ok
+        ok: response.ok,
+        contentType: response.headers.get('content-type')
       });
 
-      if (response.ok) {
+      // Check if we got a JSON response (real API) or HTML (website)
+      const contentType = response.headers.get('content-type');
+      const isHtml = contentType && contentType.includes('text/html');
+
+      if (response.ok && !isHtml) {
         setConnectionStatus('connected');
         setIsConnected(true);
         setError(null);
+      } else if (isHtml) {
+        throw new Error('BeaverTalk API endpoints not available. The server is returning the website instead of API responses.');
       } else {
         throw new Error(`Connection failed: ${response.status} - ${response.statusText}`);
       }
@@ -109,7 +116,15 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       console.error('BeaverTalk connection error:', error);
       setConnectionStatus('disconnected');
       setIsConnected(false);
-      setError(`Unable to connect to BeaverTalk support system. Error: ${error.message}`);
+      
+      // Provide more specific error messages
+      if (error.message.includes('API endpoints not available')) {
+        setError('BeaverTalk API is not yet deployed. Please contact support for API endpoint setup.');
+      } else if (error.message.includes('Failed to fetch')) {
+        setError('Unable to connect to BeaverTalk server. Please check your internet connection.');
+      } else {
+        setError(`Connection failed: ${error.message}`);
+      }
     }
   };
 
@@ -356,17 +371,20 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 
             {connectionStatus === 'disconnected' && (
               <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 p-3 rounded-lg text-sm">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col space-y-2">
                   <div>
                     <p className="font-medium">Connection Failed</p>
-                    <p className="text-xs mt-1">Unable to connect to BeaverTalk support system</p>
+                    <p className="text-xs mt-1">{error || 'Unable to connect to BeaverTalk support system'}</p>
                   </div>
-                  <button
-                    onClick={testConnection}
-                    className="px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700"
-                  >
-                    Retry
-                  </button>
+                  <div className="flex justify-between items-center">
+                    <p className="text-xs text-red-600 dark:text-red-400">Please contact support directly for assistance</p>
+                    <button
+                      onClick={testConnection}
+                      className="px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700"
+                    >
+                      Retry
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
