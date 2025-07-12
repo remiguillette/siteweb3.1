@@ -49,11 +49,11 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Default configuration for BeaverTalk API (using local proxy)
+  // Default configuration for BeaverTalk API (production)
   const apiConfig = {
-    baseUrl: '/api/beavertalk', // Use local proxy instead of direct API
-    username: '', // Not needed for proxy
-    password: '', // Not needed for proxy
+    baseUrl: config.baseUrl || import.meta.env.VITE_BEAVERTALK_API_URL || 'https://rgbeavernet.ca/api/chat',
+    username: config.username || import.meta.env.VITE_BEAVERTALK_USERNAME || 'remiguillette',
+    password: config.password || import.meta.env.VITE_BEAVERTALK_PASSWORD || 'MC.44rg99qc@',
     userId: config.userId || `rgra_user_${Math.random().toString(36).substr(2, 9)}`,
     userName: config.userName || 'RGRA Website User',
     userEmail: config.userEmail,
@@ -62,7 +62,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     priority: config.priority || 'normal'
   };
 
-  // No credentials needed for proxy - handled server-side
+  const credentials = btoa(`${apiConfig.username}:${apiConfig.password}`);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -83,13 +83,15 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         hasPassword: !!apiConfig.password
       });
       
-      // Try to connect to the API health endpoint via proxy
+      // Try to connect to the API health endpoint
       const response = await fetch(`${apiConfig.baseUrl}/health`, {
         method: 'GET',
         headers: {
+          'Authorization': `Basic ${credentials}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }
+        },
+        mode: 'cors'
       });
 
       console.log('BeaverTalk API Response:', {
@@ -154,9 +156,11 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       const response = await fetch(`${apiConfig.baseUrl}/sessions`, {
         method: 'POST',
         headers: {
+          'Authorization': `Basic ${credentials}`,
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify(sessionData)
       });
 
