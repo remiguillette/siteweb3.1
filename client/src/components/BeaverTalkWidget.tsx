@@ -88,8 +88,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         method: 'GET',
         headers: {
           'Authorization': `Basic ${credentials}`,
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        mode: 'cors'
       });
 
       console.log('BeaverTalk API Response:', {
@@ -159,8 +161,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         method: 'POST',
         headers: {
           'Authorization': `Basic ${credentials}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify(sessionData)
       });
 
@@ -182,8 +186,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       const response = await fetch(`${apiConfig.baseUrl}/messages/${currentSessionId}`, {
         headers: {
           'Authorization': `Basic ${credentials}`,
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        mode: 'cors'
       });
 
       if (!response.ok) {
@@ -241,8 +247,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         method: 'POST',
         headers: {
           'Authorization': `Basic ${credentials}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
+        mode: 'cors',
         body: JSON.stringify(messageData)
       });
 
@@ -270,8 +278,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
           method: 'PATCH',
           headers: {
             'Authorization': `Basic ${credentials}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
+          mode: 'cors',
           body: JSON.stringify({ status: 'closed' })
         });
       } catch (error) {
