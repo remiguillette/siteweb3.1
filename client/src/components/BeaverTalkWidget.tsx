@@ -144,14 +144,10 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     
     const sessionData = {
       sessionId: newSessionId,
-      userId: apiConfig.userId,
       userName: apiConfig.userName,
-      userEmail: apiConfig.userEmail,
-      userDepartment: apiConfig.userDepartment,
+      status: 'active',
       category: apiConfig.category,
       priority: apiConfig.priority,
-      clientSite: window.location.hostname,
-      referrerUrl: window.location.href,
     };
 
     try {
@@ -230,7 +226,6 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 
       const messageData = {
         sessionId: currentSessionId,
-        senderId: apiConfig.userId,
         senderName: apiConfig.userName,
         senderType: 'user',
         messageContent: inputValue,

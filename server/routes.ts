@@ -128,6 +128,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/beavertalk/sessions", async (req, res) => {
     try {
+      console.log("BeaverTalk session request body:", JSON.stringify(req.body, null, 2));
+      
       const response = await fetch("https://rgbeavernet.ca/api/chat/sessions", {
         method: "POST",
         headers: {
@@ -139,7 +141,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       if (!response.ok) {
-        throw new Error(`BeaverTalk API responded with status: ${response.status}`);
+        const errorText = await response.text();
+        console.error(`BeaverTalk API error (${response.status}):`, errorText);
+        throw new Error(`BeaverTalk API responded with status: ${response.status} - ${errorText}`);
       }
       
       const data = await response.json();
