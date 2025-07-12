@@ -53,13 +53,13 @@ export const Header = () => {
 
   return (
     <header className="bg-black w-full py-2 md:py-4 shadow-md" role="banner">
-      <div className="container-responsive flex items-center justify-between">
+      <div className="w-full px-2 md:px-4 lg:px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 md:space-x-4" aria-label={language === 'fr' ? 'Accueil - Rémi Guillette Groupe' : 'Home - Rémi Guillette Group'}>
+        <Link href="/" className="flex items-center space-x-1 md:space-x-2 lg:space-x-3" aria-label={language === 'fr' ? 'Accueil - Rémi Guillette Groupe' : 'Home - Rémi Guillette Group'}>
           <img 
             src={beaverLogo} 
             alt={language === 'fr' ? 'Logo Rémi Guillette Groupe' : 'Rémi Guillette Group Logo'} 
-            className={`h-8 w-10 md:h-12 lg:h-50 md:w-12 lg:w-60 mr-1 md:mr-5 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
+            className={`h-8 w-10 md:h-12 md:w-14 lg:h-16 lg:w-20 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0 scale-75'}`}
             style={{ objectFit: "contain" }}
           />
           <div className="flex flex-col">
