@@ -99,12 +99,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // BeaverTalk API Proxy routes to bypass CORS
+  const beavertalkUsername = process.env.VITE_BEAVERTALK_USERNAME || 'remiguillette';
+  const beavertalkPassword = process.env.VITE_BEAVERTALK_PASSWORD || 'MC.84rg99qc@';
+  const beavertalkAuth = Buffer.from(`${beavertalkUsername}:${beavertalkPassword}`).toString("base64");
+
   app.get("/api/beavertalk/health", async (req, res) => {
     try {
       const response = await fetch("https://rgbeavernet.ca/api/chat/health", {
         method: "GET",
         headers: {
-          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Authorization": `Basic ${beavertalkAuth}`,
           "Content-Type": "application/json",
           "Accept": "application/json"
         }
@@ -127,7 +131,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const response = await fetch("https://rgbeavernet.ca/api/chat/sessions", {
         method: "POST",
         headers: {
-          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Authorization": `Basic ${beavertalkAuth}`,
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
@@ -151,7 +155,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const response = await fetch("https://rgbeavernet.ca/api/chat/messages", {
         method: "POST",
         headers: {
-          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Authorization": `Basic ${beavertalkAuth}`,
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
@@ -175,7 +179,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const response = await fetch(`https://rgbeavernet.ca/api/chat/messages/${req.params.sessionId}`, {
         method: "GET",
         headers: {
-          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Authorization": `Basic ${beavertalkAuth}`,
           "Content-Type": "application/json",
           "Accept": "application/json"
         }
@@ -198,7 +202,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const response = await fetch(`https://rgbeavernet.ca/api/chat/sessions/${req.params.sessionId}/status`, {
         method: "PATCH",
         headers: {
-          "Authorization": `Basic ${Buffer.from("remiguillette:MC44rg99qc@").toString("base64")}`,
+          "Authorization": `Basic ${beavertalkAuth}`,
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
