@@ -127,7 +127,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
       
     } catch (error) {
       console.error('Error sending message:', error);
-      setError('Failed to send message. Please try again.');
+      setError(t.chat.error);
     } finally {
       setIsLoading(false);
     }
@@ -177,7 +177,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         <button
           onClick={handleToggleChat}
           className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 group"
-          aria-label="Open chat support"
+          aria-label={t.chat.openChat}
         >
           <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
           <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
@@ -192,13 +192,13 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
           {/* Header */}
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div>
-              <h3 className="font-bold text-lg">BeaverTalk Support</h3>
-              <p className="text-sm opacity-90">We're here to help</p>
+              <h3 className="font-bold text-lg">{t.chat.title}</h3>
+              <p className="text-sm opacity-90">{t.chat.subtitle}</p>
             </div>
             <button 
               onClick={handleToggleChat} 
               className="text-white hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-white/20"
-              aria-label="Close chat"
+              aria-label={t.chat.closeChat}
             >
               <X size={20} />
             </button>
@@ -213,9 +213,9 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
                   B
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">BeaverTalk Support</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{t.chat.title}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                    Welcome! How can I help you today?
+                    {t.chat.welcome}
                   </p>
                 </div>
               </div>
@@ -272,7 +272,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your message..."
+                placeholder={t.chat.placeholder}
                 disabled={isLoading}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
               />
@@ -289,7 +289,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
               </button>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Press Enter to send • Powered by BeaverTalk
+              Press Enter to send • {t.chat.poweredBy}
             </p>
           </div>
         </div>

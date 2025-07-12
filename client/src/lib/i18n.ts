@@ -207,6 +207,19 @@ export interface TranslationData {
       contact: string;
     };
   };
+  chat: {
+    title: string;
+    subtitle: string;
+    welcome: string;
+    placeholder: string;
+    send: string;
+    typing: string;
+    error: string;
+    connecting: string;
+    poweredBy: string;
+    openChat: string;
+    closeChat: string;
+  };
 }
 
 export const translations: Record<Language, TranslationData> = {

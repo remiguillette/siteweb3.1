@@ -69,7 +69,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Auto-respond if it's a user message (simulate BeaverTalk agent)
       if (messageData.senderType === 'user') {
         setTimeout(async () => {
-          const agentResponses = [
+          // Determine if session is French or English based on client site or content
+          const isEnglish = session.clientSite?.includes('en') || 
+                           messageData.messageContent.toLowerCase().match(/\b(hello|hi|help|english)\b/);
+          
+          const agentResponsesFr = [
+            "Merci de contacter le support BeaverTalk. Je serai ravi de vous aider avec votre demande.",
+            "Je comprends votre préoccupation. Laissez-moi examiner cela pour vous immédiatement.",
+            "Excellente question ! Laissez-moi vous fournir les informations dont vous avez besoin.",
+            "Je peux certainement vous aider avec cela. Voici ce que je recommande...",
+            "Merci de nous avoir contactés. J'examine votre demande et répondrai sous peu.",
+            "J'apprécie que vous nous ayez signalé cela. Laissez-moi vérifier nos systèmes.",
+            "Parfait ! J'ai des solutions qui devraient aider avec votre situation.",
+            "Je vois de quoi vous parlez. C'est en fait une demande courante que nous traitons."
+          ];
+
+          const agentResponsesEn = [
             "Thank you for contacting BeaverTalk support. I'll be happy to help you with your inquiry.",
             "I understand your concern. Let me look into this for you right away.",
             "That's a great question! Let me provide you with the information you need.",
@@ -79,6 +94,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             "Perfect! I have some solutions that should help with your situation.",
             "I see what you're asking about. This is actually a common request we handle."
           ];
+
+          const agentResponses = isEnglish ? agentResponsesEn : agentResponsesFr;
           
           const randomResponse = agentResponses[Math.floor(Math.random() * agentResponses.length)];
           
