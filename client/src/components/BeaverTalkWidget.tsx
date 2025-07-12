@@ -58,10 +58,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
     };
 
     try {
-      await apiRequest('/api/chat/sessions', {
-        method: 'POST',
-        body: JSON.stringify(sessionData),
-      });
+      await apiRequest('POST', '/api/chat/sessions', sessionData);
       
       setSessionId(newSessionId);
       return newSessionId;
@@ -73,7 +70,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
 
   const fetchMessages = useCallback(async (currentSessionId: string) => {
     try {
-      const response = await apiRequest(`/api/chat/messages/${currentSessionId}`);
+      const response = await apiRequest('GET', `/api/chat/messages/${currentSessionId}`);
       const newMessages = await response.json();
       setMessages(newMessages);
     } catch (error) {
@@ -121,10 +118,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
         messageType: 'text',
       };
 
-      await apiRequest('/api/chat/messages', {
-        method: 'POST',
-        body: JSON.stringify(messageData),
-      });
+      await apiRequest('POST', '/api/chat/messages', messageData);
 
       setInputValue('');
       
@@ -142,10 +136,7 @@ export const BeaverTalkWidget: React.FC<BeaverTalkWidgetProps> = ({
   const closeSession = async () => {
     if (sessionId) {
       try {
-        await apiRequest(`/api/chat/sessions/${sessionId}/status`, {
-          method: 'PATCH',
-          body: JSON.stringify({ status: 'closed' }),
-        });
+        await apiRequest('PATCH', `/api/chat/sessions/${sessionId}/status`, { status: 'closed' });
       } catch (error) {
         console.error('Error closing session:', error);
       }
