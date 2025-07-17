@@ -69,12 +69,12 @@ export default function Contact() {
   };
 
   return (
-    <main className="py-16 bg-rg-dark-bg min-h-screen w-full">
+    <main className="py-16 bg-black min-h-screen w-full">
       <div className="container-responsive">
         {/* Header */}
         <header className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">{t.contact.title}</h1>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#f89422' }}>{t.contact.title}</h1>
+          <p className="text-xl max-w-4xl mx-auto" style={{ color: '#f89422' }}>
             {t.contact.subtitle}
           </p>
         </header>
@@ -82,54 +82,54 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-rg-card-bg rounded-2xl p-8 border border-rg-gray">
-              <h2 className="text-2xl font-bold text-white mb-6">{t.contact.info}</h2>
+            <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
+              <h2 className="text-2xl font-bold mb-6" style={{ color: '#f89422' }}>{t.contact.info}</h2>
               
               {/* Address */}
               <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6" style={{ color: '#f89422' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white mb-1">Adresse</h3>
-                  <p className="text-gray-300">{t.contact.address}</p>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Adresse</h3>
+                  <p style={{ color: '#f89422' }}>{t.contact.address}</p>
                 </div>
               </div>
 
               {/* Phone */}
               <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6" style={{ color: '#0d6efd' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white mb-1">Téléphone</h3>
-                  <p className="text-gray-300">{t.contact.phone}</p>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
+                  <p style={{ color: '#f89422' }}>{t.contact.phone}</p>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6" style={{ color: '#f89422' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white mb-1">Courriel</h3>
-                  <p className="text-gray-300">{t.contact.email}</p>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Courriel</h3>
+                  <p style={{ color: '#f89422' }}>{t.contact.email}</p>
                 </div>
               </div>
             </div>
 
             {/* Business Hours */}
-            <div className="bg-rg-card-bg rounded-2xl p-8 border border-rg-gray">
-              <h2 className="text-xl font-bold text-white mb-4">{t.contact.hours}</h2>
-              <div className="space-y-2 text-gray-300">
+            <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
+              <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.hours}</h2>
+              <div className="space-y-2" style={{ color: '#f89422' }}>
                 <div className="flex justify-between">
                   <span>{t.contact.weekdays}</span>
                   <span>8h00 - 18h00</span>
@@ -147,12 +147,12 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-rg-card-bg rounded-2xl p-8 border border-rg-gray">
-            <h2 className="text-2xl font-bold text-white mb-6">{t.contact.form.title}</h2>
+          <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#f89422' }}>{t.contact.form.title}</h2>
             <form onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="firstName" className="block text-sm font-medium mb-2" style={{ color: '#f89422' }}>
                     {t.contact.form.firstName}
                   </label>
                   <input
@@ -161,12 +161,13 @@ export default function Contact() {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-rg-dark-bg border border-rg-gray rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
+                    style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                     placeholder="Votre prénom"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="lastName" className="block text-sm font-medium mb-2" style={{ color: '#f89422' }}>
                     {t.contact.form.lastName}
                   </label>
                   <input
@@ -175,14 +176,15 @@ export default function Contact() {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-rg-dark-bg border border-rg-gray rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
+                    style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                     placeholder="Votre nom"
                   />
                 </div>
               </div>
 
               <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#f89422' }}>
                   {t.contact.form.email}
                 </label>
                 <input
@@ -191,13 +193,14 @@ export default function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-rg-dark-bg border border-rg-gray rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
+                  style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                   placeholder="votre@email.com"
                 />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="service" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="service" className="block text-sm font-medium mb-2" style={{ color: '#f89422' }}>
                   {t.contact.form.service}
                 </label>
                 <select
@@ -205,7 +208,8 @@ export default function Contact() {
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-rg-dark-bg border border-rg-gray rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
+                  style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                 >
                   <option value="">{t.contact.form.selectService}</option>
                   <option value="public-safety">Consultation en Sécurité Publique</option>
@@ -216,7 +220,7 @@ export default function Contact() {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#f89422' }}>
                   {t.contact.form.message}
                 </label>
                 <textarea
@@ -225,7 +229,8 @@ export default function Contact() {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-rg-dark-bg border border-rg-gray rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent resize-none"
+                  style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                   placeholder={t.contact.form.messagePlaceholder}
                 ></textarea>
               </div>
@@ -233,7 +238,15 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={contactMutation.isPending}
-                className="w-full bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-400 hover:to-blue-400 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
+                className="w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                style={{
+                  background: contactMutation.isPending 
+                    ? 'linear-gradient(to right, #6b7280, #6b7280)' 
+                    : 'linear-gradient(to right, #f89422, #0d6efd)',
+                  ':hover': {
+                    background: 'linear-gradient(to right, #fb923c, #3b82f6)'
+                  }
+                }}
               >
                 {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
               </button>
