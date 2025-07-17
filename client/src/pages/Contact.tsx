@@ -108,7 +108,13 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
-                  <p style={{ color: '#f89422' }}>{t.contact.phone}</p>
+                  <a 
+                    href={`tel:${t.contact.phone}`} 
+                    className="hover:underline transition-all duration-200"
+                    style={{ color: '#f89422' }}
+                  >
+                    {t.contact.phone}
+                  </a>
                 </div>
               </div>
 

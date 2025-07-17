@@ -62,7 +62,12 @@ export const Footer = () => {
               <p className="mb-2 flex items-center">
                 <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
                 <span className="sr-only">{language === 'fr' ? 'Téléphone: ' : 'Phone: '}</span>
-                {t.footer.phone}
+                <a 
+                  href={`tel:${t.footer.phone}`} 
+                  className="hover:text-white transition-colors"
+                >
+                  {t.footer.phone}
+                </a>
               </p>
               <p className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
