@@ -80,6 +80,83 @@ async function sendToDiscordWebhook(contactData: InsertContactMessage) {
 
 export async function registerRoutes(app: Express): Promise<Server> {
 
+  // Dynamic sitemap generation
+  app.get("/sitemap.xml", (req, res) => {
+    const protocol = req.secure ? 'https' : 'http';
+    const host = req.get('host');
+    const baseUrl = `${protocol}://${host}`;
+    
+    const currentDate = new Date().toISOString().split('T')[0];
+    
+    const urls = [
+      { path: '/', priority: '1.0', changefreq: 'monthly' },
+      { path: '/divisions', priority: '0.8', changefreq: 'monthly' },
+      { path: '/services', priority: '0.8', changefreq: 'monthly' },
+      { path: '/contact', priority: '0.7', changefreq: 'monthly' },
+      { path: '/public-safety', priority: '0.7', changefreq: 'monthly' },
+      { path: '/francophone-services', priority: '0.7', changefreq: 'monthly' },
+      { path: '/health-safety', priority: '0.7', changefreq: 'monthly' },
+      { path: '/animal-first-aid', priority: '0.7', changefreq: 'monthly' },
+      { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+      { path: '/politique-confidentialite', priority: '0.3', changefreq: 'yearly' }
+    ];
+    
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(url => `  <url>
+    <loc>${baseUrl}${url.path}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>${url.changefreq}</changefreq>
+    <priority>${url.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+    
+    res.setHeader('Content-Type', 'application/xml');
+    res.send(sitemap);
+  });
+
+  // Dynamic robots.txt generation
+  app.get("/robots.txt", (req, res) => {
+    const protocol = req.secure ? 'https' : 'http';
+    const host = req.get('host');
+    const baseUrl = `${protocol}://${host}`;
+    
+    const robots = `User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: ${baseUrl}/sitemap.xml`;
+    
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(robots);
+  });
+
+  // SEO health check endpoint
+  app.get("/api/seo-health", (req, res) => {
+    const protocol = req.secure ? 'https' : 'http';
+    const host = req.get('host');
+    const baseUrl = `${protocol}://${host}`;
+    
+    const seoStatus = {
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      domain: host,
+      sitemapUrl: `${baseUrl}/sitemap.xml`,
+      robotsUrl: `${baseUrl}/robots.txt`,
+      googleVerification: `${baseUrl}/googlec46fc42c837208e4.html`,
+      seoFeatures: {
+        dynamicSitemap: true,
+        robotsTxt: true,
+        googleVerification: true,
+        metaTags: true,
+        multiLanguage: true,
+        structuredData: false
+      }
+    };
+    
+    res.json(seoStatus);
+  });
+
   // Test routes for error handling
   app.get("/api/test-error", (req, res) => {
     throw new Error("This is a test server error for 500 page testing");

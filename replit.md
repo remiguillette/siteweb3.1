@@ -125,6 +125,14 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
+- **Dynamic Sitemap & SEO Fix** (July 17, 2025): Resolved Google indexing sitemap error
+  - Fixed sitemap.xml with dynamic domain resolution instead of hardcoded placeholder URLs
+  - Added server-side sitemap generation that adapts to current domain automatically
+  - Implemented dynamic robots.txt generation with proper sitemap references
+  - Added SEO health check endpoint `/api/seo-health` for monitoring
+  - Updated sitemap with current date and proper XML formatting
+  - Fixed "Google index sitemap missing error" by ensuring proper domain URLs
+  - Maintained all existing SEO features: meta tags, Google verification, multilingual support
 - **Discord Webhook Integration** (July 17, 2025): Connected contact form to Discord notifications
   - Added Discord webhook function to server routes with rich embed formatting
   - Configured automatic sending of contact form submissions to Discord channel

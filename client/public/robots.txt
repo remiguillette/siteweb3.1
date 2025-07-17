@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://your-domain.replit.app/sitemap.xml
+Sitemap: https://remi-guillette-groupe.replit.app/sitemap.xml
