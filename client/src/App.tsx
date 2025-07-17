@@ -12,7 +12,6 @@ import Home from "./pages/Home";
 import Divisions from "./pages/Divisions";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import ContactAdmin from "./pages/ContactAdmin";
 import PublicSafety from "./pages/PublicSafety";
 import FrancophoneServices from "./pages/FrancophoneServices";
 import HealthSafety from "./pages/HealthSafety";
@@ -31,7 +30,6 @@ function Router() {
         <Route path="/divisions" component={Divisions} />
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
-        <Route path="/contact-admin" component={ContactAdmin} />
         <Route path="/public-safety" component={PublicSafety} />
         <Route path="/francophone-services" component={FrancophoneServices} />
         <Route path="/health-safety" component={HealthSafety} />
