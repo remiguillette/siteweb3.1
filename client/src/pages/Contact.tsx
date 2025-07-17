@@ -238,15 +238,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={contactMutation.isPending}
-                className="w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed"
-                style={{
-                  background: contactMutation.isPending 
-                    ? 'linear-gradient(to right, #6b7280, #6b7280)' 
-                    : 'linear-gradient(to right, #f89422, #0d6efd)',
-                  ':hover': {
-                    background: 'linear-gradient(to right, #fb923c, #3b82f6)'
-                  }
-                }}
+                className={`w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed ${
+                  contactMutation.isPending 
+                    ? 'bg-gray-500' 
+                    : 'bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6]'
+                }`}
               >
                 {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
               </button>
