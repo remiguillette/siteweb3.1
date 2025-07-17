@@ -74,10 +74,9 @@
     "phone": "613 501-2160",
     "email": "remiguillette@gmail.com",
     "hours": "Business Hours",
-    "weekdays": "Monday - Friday",
-    "saturday": "Saturday",
-    "sunday": "Sunday",
-    "closed": "Closed",
+    "availability": "24/7 - Year Round",
+    "serviceAvailable": "Services available at all times",
+    "holidays": "Canadian Federal Holidays: On Call",
     "form": {
       "title": "Information Request",
       "firstName": "First Name",

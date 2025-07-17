@@ -74,10 +74,9 @@
     "phone": "613 501-2160",
     "email": "remiguillette@gmail.com",
     "hours": "Heures d'ouverture",
-    "weekdays": "Lundi - Vendredi",
-    "saturday": "Samedi",
-    "sunday": "Dimanche",
-    "closed": "Fermé",
+    "availability": "24/7 - Toute l'année",
+    "serviceAvailable": "Services disponibles en tout temps",
+    "holidays": "Jours fériés canadiens : Sur appel",
     "form": {
       "title": "Demande d'information",
       "firstName": "Prénom",

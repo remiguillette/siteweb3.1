@@ -129,18 +129,15 @@ export default function Contact() {
             {/* Business Hours */}
             <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
               <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.hours}</h2>
-              <div className="space-y-2" style={{ color: '#f89422' }}>
-                <div className="flex justify-between">
-                  <span>{t.contact.weekdays}</span>
-                  <span>8h00 - 18h00</span>
+              <div className="space-y-3" style={{ color: '#f89422' }}>
+                <div className="text-center">
+                  <span className="font-semibold text-lg">{t.contact.availability}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>{t.contact.saturday}</span>
-                  <span>9h00 - 15h00</span>
+                <div className="text-center text-sm">
+                  <span>{t.contact.serviceAvailable}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>{t.contact.sunday}</span>
-                  <span>{t.contact.closed}</span>
+                <div className="text-center text-sm">
+                  <span>{t.contact.holidays}</span>
                 </div>
               </div>
             </div>
