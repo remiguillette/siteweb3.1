@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
+import { insertContactMessageSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
 
@@ -16,6 +17,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "healthy", timestamp: new Date().toISOString() });
+  });
+
+  // Contact form submission
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const validatedData = insertContactMessageSchema.parse(req.body);
+      const message = await storage.createContactMessage(validatedData);
+      res.json({ success: true, message: "Message sent successfully", id: message.id });
+    } catch (error) {
+      console.error("Error creating contact message:", error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ success: false, error: "Invalid form data", details: error.errors });
+      } else {
+        res.status(500).json({ success: false, error: "Internal server error" });
+      }
+    }
+  });
+
+  // Get all contact messages (for admin purposes)
+  app.get("/api/contact", async (req, res) => {
+    try {
+      const messages = await storage.getContactMessages();
+      res.json({ success: true, messages });
+    } catch (error) {
+      console.error("Error fetching contact messages:", error);
+      res.status(500).json({ success: false, error: "Internal server error" });
+    }
   });
 
 

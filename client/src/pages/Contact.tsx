@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
+import { useMutation } from '@tanstack/react-query';
+import { apiRequest } from '../lib/queryClient';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -11,6 +13,37 @@ export default function Contact() {
     email: '',
     service: '',
     message: ''
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      return await apiRequest('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message envoyé",
+        description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
+      });
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        service: '',
+        message: ''
+      });
+    },
+    onError: (error: any) => {
+      console.error('Contact form error:', error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.",
+        variant: "destructive"
+      });
+    }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,20 +59,8 @@ export default function Contact() {
       return;
     }
 
-    // Simulate form submission
-    toast({
-      title: "Message envoyé",
-      description: t.contact.form.successMessage
-    });
-
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      service: '',
-      message: ''
-    });
+    // Submit form to backend
+    contactMutation.mutate(formData);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -213,9 +234,10 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-400 hover:to-blue-400 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105"
+                disabled={contactMutation.isPending}
+                className="w-full bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-400 hover:to-blue-400 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100"
               >
-                {t.contact.form.submit}
+                {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
               </button>
             </form>
           </div>
