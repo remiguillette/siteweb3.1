@@ -2,6 +2,7 @@ import { Phone, Mail } from 'lucide-react';
 import { Link } from 'wouter';
 import { useTranslation } from '../contexts/TranslationContext';
 import beaverLogo from '../assets/beaver.png';
+import { SiX, SiInstagram, SiDiscord } from 'react-icons/si';
 
 export const Footer = () => {
   const { t, language } = useTranslation();
@@ -75,6 +76,43 @@ export const Footer = () => {
                 {t.footer.email}
               </p>
             </address>
+            
+            {/* Social Media Links */}
+            <div className="mt-6">
+              <h4 className="font-bold text-lg mb-3 text-[#f89422]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                {language === 'fr' ? 'Suivez-nous' : 'Follow Us'}
+              </h4>
+              <div className="flex gap-4">
+                <a
+                  href="https://x.com/RGRA_ON"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#f89422] hover:text-white transition-colors"
+                  aria-label={language === 'fr' ? 'Suivez-nous sur X (Twitter)' : 'Follow us on X (Twitter)'}
+                >
+                  <SiX className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://www.instagram.com/rgra_on?igsh=MXQ2dnIwNTg5MXhreg=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#f89422] hover:text-white transition-colors"
+                  aria-label={language === 'fr' ? 'Suivez-nous sur Instagram' : 'Follow us on Instagram'}
+                >
+                  <SiInstagram className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://discord.gg/qFbVDPCFz9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#f89422] hover:text-white transition-colors"
+                  aria-label={language === 'fr' ? 'Rejoignez notre Discord' : 'Join our Discord'}
+                >
+                  <SiDiscord className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+            
             <div className="mt-6 border-t border-[#f89422] pt-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-left text-[#f89422]">
