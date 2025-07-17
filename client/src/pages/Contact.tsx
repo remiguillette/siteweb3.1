@@ -94,7 +94,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Adresse</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>{t.contact.labels.address}</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.address}</p>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.phone}</h3>
                   <a 
                     href={`tel:${t.contact.phone}`} 
                     className="hover:underline transition-all duration-200"
@@ -126,7 +126,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Courriel</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>{t.contact.labels.email}</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.email}</p>
                 </div>
               </div>
@@ -166,7 +166,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder="Votre prénom"
+                    placeholder={t.contact.form.placeholders.firstName}
                   />
                 </div>
                 <div>
@@ -181,7 +181,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder="Votre nom"
+                    placeholder={t.contact.form.placeholders.lastName}
                   />
                 </div>
               </div>
@@ -198,7 +198,7 @@ export default function Contact() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                  placeholder="votre@email.com"
+                  placeholder={t.contact.form.placeholders.email}
                 />
               </div>
 
@@ -215,10 +215,10 @@ export default function Contact() {
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                 >
                   <option value="">{t.contact.form.selectService}</option>
-                  <option value="public-safety">Consultation en Sécurité Publique</option>
-                  <option value="francophone">Services Communautaires Francophones</option>
-                  <option value="health-safety">Santé et Sécurité au Travail</option>
-                  <option value="animal-aid">Premiers Soins Animaliers</option>
+                  <option value="public-safety">{t.contact.services.publicSafety}</option>
+                  <option value="francophone">{t.contact.services.francophone}</option>
+                  <option value="health-safety">{t.contact.services.healthSafety}</option>
+                  <option value="animal-aid">{t.contact.services.animalAid}</option>
                 </select>
               </div>
 

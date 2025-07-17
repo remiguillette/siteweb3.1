@@ -87,7 +87,23 @@
       "message": "Message",
       "messagePlaceholder": "Describe your needs...",
       "submit": "Send request",
-      "successMessage": "Thank you for your message. We will contact you soon!"
+      "successMessage": "Thank you for your message. We will contact you soon!",
+      "placeholders": {
+        "firstName": "Your first name",
+        "lastName": "Your last name",
+        "email": "your@email.com"
+      }
+    },
+    "labels": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "services": {
+      "publicSafety": "Public Safety Consulting",
+      "francophone": "Francophone Community Services", 
+      "healthSafety": "Occupational Health & Safety",
+      "animalAid": "Animal First Aid Services"
     }
   },
   "footer": {

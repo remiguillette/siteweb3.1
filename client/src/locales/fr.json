@@ -87,7 +87,23 @@
       "message": "Message",
       "messagePlaceholder": "Décrivez vos besoins...",
       "submit": "Envoyer la demande",
-      "successMessage": "Merci pour votre message. Nous vous contacterons bientôt!"
+      "successMessage": "Merci pour votre message. Nous vous contacterons bientôt!",
+      "placeholders": {
+        "firstName": "Votre prénom",
+        "lastName": "Votre nom",
+        "email": "votre@email.com"
+      }
+    },
+    "labels": {
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "Courriel"
+    },
+    "services": {
+      "publicSafety": "Consultation en Sécurité Publique",
+      "francophone": "Services Communautaires Francophones",
+      "healthSafety": "Santé et Sécurité au Travail",
+      "animalAid": "Premiers Soins Animaliers"
     }
   },
   "footer": {
