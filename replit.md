@@ -125,6 +125,13 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
+- **Discord Webhook Integration** (July 17, 2025): Connected contact form to Discord notifications
+  - Added Discord webhook function to server routes with rich embed formatting
+  - Configured automatic sending of contact form submissions to Discord channel
+  - Implemented error handling to prevent form submission failures
+  - Added proper French service name mapping for Discord messages
+  - Formatted messages with orange color theme and organized fields
+  - Successfully tested and verified Discord integration working
 - **BeaverTalk Chat Widget Removal** (July 17, 2025): Complete cleanup of failed chat integration
   - Removed BeaverTalkWidget component and all related files
   - Cleaned up API proxy routes from server
