@@ -1,6 +1,5 @@
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { BeaverTalkWidget } from './BeaverTalkWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,15 +18,6 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Footer */}
       <Footer />
-
-      {/* BeaverTalk Chat Widget - Temporarily Disabled */}
-      {/* <BeaverTalkWidget config={{
-        baseUrl: import.meta.env.VITE_BEAVERTALK_API_URL,
-        username: import.meta.env.VITE_BEAVERTALK_USERNAME,
-        password: import.meta.env.VITE_BEAVERTALK_PASSWORD,
-        category: 'general',
-        priority: 'normal'
-      }} /> */}
     </div>
   );
 };

@@ -248,18 +248,5 @@
       "backHome": "Back to home",
       "contact": "Contact support if the problem persists"
     }
-  },
-  "chat": {
-    "title": "BeaverTalk Support",
-    "subtitle": "We're here to help",
-    "welcome": "Welcome! How can I help you today?",
-    "placeholder": "Type your message...",
-    "send": "Send",
-    "typing": "Agent is typing...",
-    "error": "Failed to send message. Please try again.",
-    "connecting": "Connecting...",
-    "poweredBy": "Powered by BeaverTalk",
-    "openChat": "Open chat support",
-    "closeChat": "Close chat"
   }
 }
