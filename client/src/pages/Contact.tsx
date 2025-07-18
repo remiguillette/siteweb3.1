@@ -62,8 +62,8 @@ export default function Contact() {
       return;
     }
 
-    // reCAPTCHA validation (only if reCAPTCHA is enabled)
-    if (import.meta.env.VITE_RECAPTCHA_SITE_KEY && !recaptchaToken) {
+    // reCAPTCHA validation
+    if (!recaptchaToken) {
       toast({
         title: "Erreur", 
         description: "Veuillez compléter la vérification reCAPTCHA.",
@@ -262,18 +262,12 @@ export default function Contact() {
 
               {/* reCAPTCHA */}
               <div className="mb-6 flex justify-center">
-                {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                    onChange={handleRecaptchaChange}
-                    theme="dark"
-                  />
-                ) : (
-                  <div className="text-[#f89422] text-center text-sm">
-                    reCAPTCHA loading...
-                  </div>
-                )}
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey="6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE"
+                  onChange={handleRecaptchaChange}
+                  theme="dark"
+                />
               </div>
 
               <button
