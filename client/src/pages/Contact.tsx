@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -14,9 +16,14 @@ export default function Contact() {
     service: '',
     message: ''
   });
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+
+  // Debug environment variables
+  console.log('VITE_RECAPTCHA_SITE_KEY:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
+  console.log('All env vars:', import.meta.env);
 
   const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
+    mutationFn: async (data: typeof formData & { recaptchaToken: string }) => {
       const response = await apiRequest('POST', '/api/contact', data);
       return response.json();
     },
@@ -25,7 +32,7 @@ export default function Contact() {
         title: "Message envoyé",
         description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
       });
-      // Reset form
+      // Reset form and reCAPTCHA
       setFormData({
         firstName: '',
         lastName: '',
@@ -33,6 +40,8 @@ export default function Contact() {
         service: '',
         message: ''
       });
+      setRecaptchaToken(null);
+      recaptchaRef.current?.reset();
     },
     onError: (error: any) => {
       console.error('Contact form error:', error);
@@ -57,8 +66,25 @@ export default function Contact() {
       return;
     }
 
+    // reCAPTCHA validation (only if reCAPTCHA is enabled)
+    if (import.meta.env.VITE_RECAPTCHA_SITE_KEY && !recaptchaToken) {
+      toast({
+        title: "Erreur", 
+        description: "Veuillez compléter la vérification reCAPTCHA.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     // Submit form to backend
-    contactMutation.mutate(formData);
+    contactMutation.mutate({ 
+      ...formData, 
+      recaptchaToken: recaptchaToken || '' 
+    });
+  };
+
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -236,6 +262,22 @@ export default function Contact() {
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                   placeholder={t.contact.form.messagePlaceholder}
                 ></textarea>
+              </div>
+
+              {/* reCAPTCHA */}
+              <div className="mb-6 flex justify-center">
+                {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                    onChange={handleRecaptchaChange}
+                    theme="dark"
+                  />
+                ) : (
+                  <div className="text-[#f89422] text-center text-sm">
+                    reCAPTCHA loading...
+                  </div>
+                )}
               </div>
 
               <button

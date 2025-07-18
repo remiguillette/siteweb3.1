@@ -4,6 +4,32 @@ import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
 
+// reCAPTCHA verification function
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  
+  if (!secretKey) {
+    console.warn("reCAPTCHA secret key not configured");
+    return false;
+  }
+
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${secretKey}&response=${token}`
+    });
+
+    const data = await response.json();
+    return data.success === true;
+  } catch (error) {
+    console.error('reCAPTCHA verification failed:', error);
+    return false;
+  }
+}
+
 // Discord webhook function
 async function sendToDiscordWebhook(contactData: InsertContactMessage) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
@@ -173,7 +199,29 @@ Sitemap: ${baseUrl}/sitemap.xml`;
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
-      const validatedData = insertContactMessageSchema.parse(req.body);
+      // Extract reCAPTCHA token from request body
+      const { recaptchaToken, ...formData } = req.body;
+      
+      // Verify reCAPTCHA token if provided and configured
+      if (process.env.RECAPTCHA_SECRET_KEY) {
+        if (!recaptchaToken) {
+          return res.status(400).json({ 
+            success: false, 
+            error: "reCAPTCHA token is required" 
+          });
+        }
+
+        const recaptchaValid = await verifyRecaptcha(recaptchaToken);
+        if (!recaptchaValid) {
+          return res.status(400).json({ 
+            success: false, 
+            error: "reCAPTCHA verification failed" 
+          });
+        }
+      }
+
+      // Validate form data (excluding reCAPTCHA token)
+      const validatedData = insertContactMessageSchema.parse(formData);
       const message = await storage.createContactMessage(validatedData);
       
       // Send to Discord webhook
