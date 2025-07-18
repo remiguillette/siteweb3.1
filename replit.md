@@ -83,6 +83,7 @@ Preferred communication style: Simple, everyday language.
 - **UI/Styling**: TailwindCSS, Radix UI, Lucide React icons
 - **Backend**: Express, Drizzle ORM, PostgreSQL drivers
 - **Development**: Vite, TypeScript, ESBuild
+- **Security**: react-google-recaptcha for form spam protection
 
 ### Database Integration
 - **ORM**: Drizzle with PostgreSQL dialect
@@ -110,6 +111,7 @@ Preferred communication style: Simple, everyday language.
 - **Database**: PostgreSQL connection via DATABASE_URL environment variable
 - **Development**: Replit-specific development features and error handling
 - **Build**: Separate development and production build processes
+- **Security**: reCAPTCHA integration requires RECAPTCHA_SITE_KEY and RECAPTCHA_SECRET_KEY environment variables
 
 ### Key Features
 - Bilingual Canadian content (French primary, English secondary)
@@ -125,6 +127,21 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
+- **reCAPTCHA Integration** (July 17, 2025): Added spam protection to contact form
+  - Integrated react-google-recaptcha library with dark theme matching website design
+  - Added backend reCAPTCHA verification using Google's API
+  - Implemented graceful fallback when reCAPTCHA keys are not configured
+  - Protected contact form submissions against spam and bot attacks
+  - Added conditional rendering and validation based on reCAPTCHA availability
+  - Environment variables: RECAPTCHA_SITE_KEY and RECAPTCHA_SECRET_KEY required for activation
+- **Contact Form Translation Fix** (July 17, 2025): Resolved missing English translations
+  - Fixed hardcoded French labels for "Address", "Phone", "Email" fields
+  - Updated form input placeholders to use proper translation keys
+  - Added service dropdown options with bilingual support
+  - Enhanced translation structure with new label and service sections
+- **Footer Contact Link** (July 17, 2025): Added navigation link to contact page
+  - Added contact link above privacy policy link in footer navigation
+  - Uses consistent styling and localization with existing footer elements
 - **Dynamic Sitemap & SEO Fix** (July 17, 2025): Resolved Google indexing sitemap error
   - Fixed sitemap.xml with dynamic domain resolution instead of hardcoded placeholder URLs
   - Added server-side sitemap generation that adapts to current domain automatically

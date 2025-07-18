@@ -18,10 +18,6 @@ export default function Contact() {
   });
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
-  // Debug environment variables
-  console.log('VITE_RECAPTCHA_SITE_KEY:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
-  console.log('All env vars:', import.meta.env);
-
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData & { recaptchaToken: string }) => {
       const response = await apiRequest('POST', '/api/contact', data);
