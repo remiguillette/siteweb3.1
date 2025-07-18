@@ -108,9 +108,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Dynamic sitemap generation
   app.get("/sitemap.xml", (req, res) => {
-    const protocol = req.secure ? 'https' : 'http';
+    // Use the production domain or fallback to request host for local development
     const host = req.get('host');
-    const baseUrl = `${protocol}://${host}`;
+    const isLocalDev = host?.includes('localhost') || host?.includes('127.0.0.1');
+    const baseUrl = isLocalDev ? `http://${host}` : 'https://rgra.ca';
     
     const currentDate = new Date().toISOString().split('T')[0];
     
@@ -143,9 +144,10 @@ ${urls.map(url => `  <url>
 
   // Dynamic robots.txt generation
   app.get("/robots.txt", (req, res) => {
-    const protocol = req.secure ? 'https' : 'http';
+    // Use the production domain or fallback to request host for local development
     const host = req.get('host');
-    const baseUrl = `${protocol}://${host}`;
+    const isLocalDev = host?.includes('localhost') || host?.includes('127.0.0.1');
+    const baseUrl = isLocalDev ? `http://${host}` : 'https://rgra.ca';
     
     const robots = `User-agent: *
 Allow: /
@@ -159,9 +161,10 @@ Sitemap: ${baseUrl}/sitemap.xml`;
 
   // SEO health check endpoint
   app.get("/api/seo-health", (req, res) => {
-    const protocol = req.secure ? 'https' : 'http';
+    // Use the production domain or fallback to request host for local development
     const host = req.get('host');
-    const baseUrl = `${protocol}://${host}`;
+    const isLocalDev = host?.includes('localhost') || host?.includes('127.0.0.1');
+    const baseUrl = isLocalDev ? `http://${host}` : 'https://rgra.ca';
     
     const seoStatus = {
       status: "healthy",
