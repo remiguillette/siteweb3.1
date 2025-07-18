@@ -203,14 +203,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
       const { recaptchaToken, ...formData } = req.body;
       
       // Verify reCAPTCHA token if provided and configured
-      if (process.env.RECAPTCHA_SECRET_KEY) {
-        if (!recaptchaToken) {
-          return res.status(400).json({ 
-            success: false, 
-            error: "reCAPTCHA token is required" 
-          });
-        }
-
+      if (process.env.RECAPTCHA_SECRET_KEY && recaptchaToken) {
         const recaptchaValid = await verifyRecaptcha(recaptchaToken);
         if (!recaptchaValid) {
           return res.status(400).json({ 

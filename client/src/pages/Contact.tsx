@@ -62,15 +62,15 @@ export default function Contact() {
       return;
     }
 
-    // reCAPTCHA validation
-    if (!recaptchaToken) {
-      toast({
-        title: "Erreur", 
-        description: "Veuillez compléter la vérification reCAPTCHA.",
-        variant: "destructive"
-      });
-      return;
-    }
+    // reCAPTCHA validation (temporarily disabled until properly configured)
+    // if (!recaptchaToken) {
+    //   toast({
+    //     title: "Erreur", 
+    //     description: "Veuillez compléter la vérification reCAPTCHA.",
+    //     variant: "destructive"
+    //   });
+    //   return;
+    // }
 
     // Submit form to backend
     contactMutation.mutate({ 
@@ -262,12 +262,11 @@ export default function Contact() {
 
               {/* reCAPTCHA */}
               <div className="mb-6 flex justify-center">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey="6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE"
-                  onChange={handleRecaptchaChange}
-                  theme="dark"
-                />
+                <div className="text-[#f89422] text-center text-sm">
+                  reCAPTCHA requires proper domain configuration. 
+                  <br />
+                  Please configure your reCAPTCHA keys for this domain.
+                </div>
               </div>
 
               <button
