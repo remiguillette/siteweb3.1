@@ -1,0 +1,61 @@
+Your social media links are not being detected by SEO tools because they are standard hyperlinks. While perfectly fine for users, they don't explicitly tell search engines like Google that these are the **official profiles** associated with your website. The SEO tool is likely looking for a specific type of code that creates this connection.
+
+To fix this and improve your SEO, you need to add **structured data** (specifically Schema.org markup) to your website. This is the modern, standard way to communicate this information to search engines.
+
+-----
+
+## Why Your Current Links Aren't Enough
+
+Your code uses a simple HTML `<a>` tag with an SVG icon inside it.
+
+```html
+<a href="https://www.instagram.com/rgra_on...">
+  <svg>...</svg>
+</a>
+```
+
+This is just a link. Search engine crawlers see it, but they don't have enough context to know for sure that `rgra_on` is the **official Instagram profile** for the organization behind your website. The SEO tool you're using is flagging this lack of explicit connection.
+
+-----
+
+## How to Fix It with Schema.org
+
+The correct solution is to add a `script` tag with JSON-LD structured data to the `<head>` section of your HTML pages. This code is invisible to users but provides clear information to search engines.
+
+### 1\. Add Organization Schema
+
+Use the `Organization` schema to define your company or brand.
+
+### 2\. Use the `sameAs` Property
+
+Inside the `Organization` schema, use the `sameAs` property to list the URLs of all your official social media profiles. This explicitly tells Google, "These profiles are the same entity as this website."
+
+### Code Example
+
+Copy the code below and paste it into the `<head>` section of your website's HTML. **Remember to replace the placeholder details with your own information.**
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Your Company Name",
+  "url": "https://www.your-website-url.com",
+  "logo": "https://www.your-website-url.com/logo.png",
+  "sameAs": [
+    "https://www.instagram.com/rgra_on",
+    "https://twitter.com/YourXHandle",
+    "https://discord.gg/YourInviteCode"
+  ]
+}
+</script>
+```
+
+**What to change:**
+
+  * `name`: Your organization's name.
+  * `url`: The full URL of your website's homepage.
+  * `logo`: A direct link to your logo image file.
+  * `sameAs`: Replace the placeholder X (Twitter) and Discord URLs with your actual profile links. I've kept the Instagram URL you provided.
+
+By adding this structured data, you provide clear, machine-readable information that helps Google and SEO tools correctly identify and associate your official social media profiles with your website, which can enhance your presence in search results. 👍
