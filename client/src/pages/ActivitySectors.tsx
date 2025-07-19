@@ -1,7 +1,7 @@
 import { Shield, User, HardHat, PawPrint } from 'lucide-react';
 import { useTranslation } from '../contexts/TranslationContext';
 
-export default function Divisions() {
+export default function ActivitySectors() {
   const { t } = useTranslation();
 
   const divisions = [

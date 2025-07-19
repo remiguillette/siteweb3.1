@@ -40,7 +40,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Components
 - **Layout**: Main layout with navigation, language switcher, and responsive mobile menu
-- **Pages**: Home, Divisions, Services, Contact with smooth scrolling navigation
+- **Pages**: Home, Activity Sectors, Services, Contact with smooth scrolling navigation
 - **Language System**: React Context-based bilingual support with persistent language preference and global state management
 - **Translation Context**: TranslationProvider manages language state across all components
 - **UI Library**: Complete Shadcn/ui component set including forms, dialogs, toasts
@@ -181,7 +181,16 @@ Preferred communication style: Simple, everyday language.
   - Animal First Aid Services (`/animal-first-aid`)
 - **Interactive Hero Cards**: Made all division cards in hero section clickable with routing to dedicated pages
 - **Consistent Design Pattern**: All division pages follow same design structure with service grids and bilingual content
-- **Division Page Card Title Styling**: Applied blue (#3b82f6) first word styling to all service card titles across all division pages (July 10, 2025)
+- **Activity Sector Page Card Title Styling**: Applied blue (#3b82f6) first word styling to all service card titles across all activity sector pages (July 10, 2025)
+
+## Recent Changes
+
+- **Terminology Update (July 19, 2025)**: Changed "Divisions" to "Secteurs d'activité" (Activity Sectors) throughout the application to better reflect Canadian legal reality
+  - Updated all translation files (fr.json and en.json) to use new terminology
+  - Renamed Divisions.tsx to ActivitySectors.tsx
+  - Updated routing from `/divisions` to `/secteurs-activite` 
+  - Updated Home page hardcoded text to match new terminology
+  - This change aligns the application terminology with the client's actual organizational structure5)
 - **Privacy Policy Implementation**: Created comprehensive PIPEDA-compliant privacy policy page with bilingual support (`/privacy-policy` and `/politique-confidentialite`)
 - **Footer Navigation Fix**: Resolved duplicate privacy policy links in footer to show single dynamic link based on language
 - **Cookie Consent Popup**: Implemented GDPR/PIPEDA-compliant cookie consent modal with detailed cookie information, matching privacy policy design styling

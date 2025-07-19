@@ -5,7 +5,7 @@
   },
   "nav": {
     "home": "Home",
-    "divisions": "Divisions",
+    "divisions": "Activity Sectors",
     "services": "Services",
     "contact": "Contact"
   },
@@ -13,11 +13,11 @@
     "title": "Innovative",
     "titleHighlight": " solutions for your business",
     "description": "Business services specialist, Rémi Guillette Group offers a complete range of solutions tailored to your specific needs.",
-    "discoverDivisions": "Discover our divisions",
+    "discoverDivisions": "Discover our activity sectors",
     "contactUs": "Contact us"
   },
   "divisions": {
-    "title": "Our Divisions",
+    "title": "Our Activity Sectors",
     "subtitle": "Four distinct areas of expertise to meet the diverse needs of our Canadian clients",
     "publicSafety": {
       "title": "Public Safety Consulting",

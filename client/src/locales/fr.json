@@ -5,7 +5,7 @@
   },
   "nav": {
     "home": "Accueil",
-    "divisions": "Divisions",
+    "divisions": "Secteurs d'activité",
     "services": "Services",
     "contact": "Contact"
   },
@@ -13,11 +13,11 @@
     "title": "Excellence en",
     "titleHighlight": "Consultation",
     "description": "Leader canadien en services de consultation professionnelle, offrant des solutions innovantes en sécurité publique, services communautaires francophones, santé et sécurité au travail.",
-    "discoverDivisions": "Découvrir nos divisions",
+    "discoverDivisions": "Découvrir nos secteurs d'activité",
     "contactUs": "Nous contacter"
   },
   "divisions": {
-    "title": "Nos Divisions",
+    "title": "Nos Secteurs d'activité",
     "subtitle": "Quatre domaines d'expertise distincts pour répondre aux besoins diversifiés de nos clients canadiens",
     "publicSafety": {
       "title": "Consultation en Sécurité Publique",

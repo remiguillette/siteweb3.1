@@ -9,7 +9,7 @@ import { LoadingPage } from "./components/LoadingPage";
 import { CookieConsent } from "./components/CookieConsent";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import Home from "./pages/Home";
-import Divisions from "./pages/Divisions";
+import ActivitySectors from "./pages/ActivitySectors";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import PublicSafety from "./pages/PublicSafety";
@@ -27,7 +27,7 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/divisions" component={Divisions} />
+        <Route path="/secteurs-activite" component={ActivitySectors} />
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />

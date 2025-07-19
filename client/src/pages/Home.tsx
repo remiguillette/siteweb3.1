@@ -73,9 +73,9 @@ export default function Home() {
               {/* Divisions Title and Cards */}
               <section className="mt-12" aria-labelledby="divisions-heading">
                 <h2 id="divisions-heading" className="text-3xl font-bold text-center mb-8" style={{ color: '#f89422' }}>
-                  {language === 'fr' ? 'Divisions' : 'Divisions'}
+                  {language === 'fr' ? 'Secteurs d\'activité' : 'Activity Sectors'}
                 </h2>
-                <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full" aria-label={language === 'fr' ? 'Divisions de services' : 'Service divisions'}>
+                <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full" aria-label={language === 'fr' ? 'Secteurs d\'activité de services' : 'Service activity sectors'}>
                   {divisions.map((division, index) => {
                     const Icon = division.icon;
                     const divisionTitle = language === 'fr' 
