@@ -181,6 +181,7 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         multiLanguage: true,
         structuredData: true,
         organizationSchema: true,
+        localBusinessSchema: true,
         socialMediaProfiles: true
       }
     };
