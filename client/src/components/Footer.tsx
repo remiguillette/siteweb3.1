@@ -99,7 +99,7 @@ export const Footer = () => {
                   <SiX className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.instagram.com/rgra_on?igsh=MXQ2dnIwNTg5MXhreg=="
+                  href="https://www.instagram.com/rgra_on"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#f89422] hover:text-white transition-colors"

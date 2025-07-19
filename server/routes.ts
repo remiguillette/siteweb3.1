@@ -179,7 +179,9 @@ Sitemap: ${baseUrl}/sitemap.xml`;
         googleVerification: true,
         metaTags: true,
         multiLanguage: true,
-        structuredData: false
+        structuredData: true,
+        organizationSchema: true,
+        socialMediaProfiles: true
       }
     };
     
