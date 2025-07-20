@@ -1,0 +1,23 @@
+# Version du fichier de configuration App Runner.
+version: 1.0
+
+# Environnement d'exécution Node.js.
+runtime: nodejs18
+
+# Commandes pour compiler votre application.
+build:
+  # Installe toutes les dépendances listées dans package.json.
+  install:
+    - npm install
+  # Exécute le script "build" de votre package.json.
+  # Ceci lancera "vite build && esbuild..."
+  build: npm run build
+
+# Commande pour lancer votre application après la compilation.
+run:
+  # Utilise votre script "start" qui lance le bon fichier (dist/index.js).
+  # C'est la ligne qui a été corrigée.
+  command: npm run start
+  # Assurez-vous que ce port correspond à celui de votre serveur Express.
+  network:
+    port: 8080
