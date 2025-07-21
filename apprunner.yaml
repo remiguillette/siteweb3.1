@@ -7,7 +7,7 @@ runtime: nodejs18
 # Section 'build' corrigée.
 build:
   # La clé 'commands' est requise et doit contenir une liste de commandes.
-  commands: |
+  commands:|
     - npm install
     - npm run build
 
