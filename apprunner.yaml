@@ -1,7 +1,10 @@
+# Version du fichier de configuration App Runner.
 version: 1.0
 
+# Environnement d'exécution Node.js.
 runtime: nodejs18
 
+# Section 'build'.
 build:
   commands:
     pre-build:
@@ -9,11 +12,14 @@ build:
     build:
       - npm run build
 
+# Section 'run' avec la syntaxe correcte pour 'env'.
 run:
   command: npm run start
   network:
     port: 8080
-
+  # 'env' doit être une liste (commençant par des tirets).
   env:
-    LOG_DIRECTORY: /tmp
-    NODE_ENV: production
+    - name: LOG_DIRECTORY
+      value: /tmp
+    - name: NODE_ENV
+      value: production
