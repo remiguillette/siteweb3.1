@@ -1,18 +1,16 @@
-# Version du fichier de configuration App Runner.
 version: 1.0
 
-# Environnement d'exécution Node.js.
 runtime: nodejs18
 
-# Section 'build' avec la syntaxe correcte.
 build:
   commands:
-    - npm install
-    - npm run build
+    install:
+      - npm install
+    build:
+      - npm run build
 
-# Commande pour lancer votre application après la compilation.
 run:
   command: npm run start
   network:
-    # Assurez-vous que ce port correspond à celui de votre serveur Express.
+   
     port: 8080
