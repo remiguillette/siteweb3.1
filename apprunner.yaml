@@ -9,12 +9,11 @@ build:
     build:
       - npm run build
 
-
 run:
   command: npm run start
   network:
     port: 8080
 
-  variables:
+  env:
     LOG_DIRECTORY: /tmp
     NODE_ENV: production
