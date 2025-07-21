@@ -15,3 +15,6 @@ run:
   command: npm run start
   network:
     port: 8080
+    variables:
+  LOG_DIRECTORY: /tmp
+  NODE_ENV: production
