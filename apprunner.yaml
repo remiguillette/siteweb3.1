@@ -4,13 +4,14 @@ runtime: nodejs18
 
 build:
   commands:
-    install:
+   
+    pre-build:
       - npm install
     build:
       - npm run build
 
+
 run:
   command: npm run start
   network:
-   
     port: 8080
