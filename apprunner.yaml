@@ -4,20 +4,18 @@ version: 1.0
 # Environnement d'exécution Node.js.
 runtime: nodejs18
 
-# Commandes pour compiler votre application.
+# Section 'build' corrigée.
 build:
-  # Installe toutes les dépendances listées dans package.json.
-  install:
+  # La clé 'commands' est requise et doit contenir une liste de commandes.
+  commands:
+    # Étape 1 : Installer les dépendances.
     - npm install
-  # Exécute le script "build" de votre package.json.
-  # Ceci lancera "vite build && esbuild..."
-  build: npm run build
+    # Étape 2 : Lancer le script de build de votre package.json.
+    - npm run build
 
 # Commande pour lancer votre application après la compilation.
 run:
-  # Utilise votre script "start" qui lance le bon fichier (dist/index.js).
-  # C'est la ligne qui a été corrigée.
   command: npm run start
-  # Assurez-vous que ce port correspond à celui de votre serveur Express.
   network:
+    # Assurez-vous que ce port correspond à celui de votre serveur Express.
     port: 8080
