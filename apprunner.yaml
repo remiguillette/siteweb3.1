@@ -7,10 +7,8 @@ runtime: nodejs18
 # Section 'build' corrigée.
 build:
   # La clé 'commands' est requise et doit contenir une liste de commandes.
-  commands:
-    # Étape 1 : Installer les dépendances.
+  commands: |
     - npm install
-    # Étape 2 : Lancer le script de build de votre package.json.
     - npm run build
 
 # Commande pour lancer votre application après la compilation.
