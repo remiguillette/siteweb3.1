@@ -4,10 +4,9 @@ version: 1.0
 # Environnement d'exécution Node.js.
 runtime: nodejs18
 
-# Section 'build' corrigée.
+# Section 'build' avec la syntaxe correcte.
 build:
-  # La clé 'commands' est requise et doit contenir une liste de commandes.
-  commands:|
+  commands:
     - npm install
     - npm run build
 
