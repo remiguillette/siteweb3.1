@@ -3,76 +3,57 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
-import { RecaptchaEnterpriseServiceClient } from '@google-cloud/recaptcha-enterprise';
 
-// reCAPTCHA Enterprise verification function
-async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTACT_FORM'): Promise<{ valid: boolean, score?: number, isDevelopment?: boolean }> {
-  const projectID = "rapid-gadget-387721";
-  const recaptchaKey = "6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE";
+// Simple anti-spam protection
+const submissionTracker = new Map<string, number[]>();
+
+function isSpamSubmission(ip: string): boolean {
+  const now = Date.now();
+  const oneHour = 60 * 60 * 1000;
+  const maxSubmissions = 5; // Max 5 submissions per hour per IP
   
-  if (!token) {
-    console.warn("reCAPTCHA token is empty, allowing in development");
-    // In development, allow empty tokens
-    return { valid: process.env.NODE_ENV === 'development', isDevelopment: true };
+  // Get submission times for this IP
+  const submissions = submissionTracker.get(ip) || [];
+  
+  // Remove submissions older than 1 hour
+  const recentSubmissions = submissions.filter(time => now - time < oneHour);
+  
+  // Update the tracker
+  submissionTracker.set(ip, recentSubmissions);
+  
+  // Check if limit exceeded
+  return recentSubmissions.length >= maxSubmissions;
+}
+
+function recordSubmission(ip: string): void {
+  const now = Date.now();
+  const submissions = submissionTracker.get(ip) || [];
+  submissions.push(now);
+  submissionTracker.set(ip, submissions);
+}
+
+function validateFormContent(data: any): boolean {
+  // Basic spam content detection
+  const spamKeywords = ['viagra', 'casino', 'lottery', 'winner', 'urgent', 'click here', 'free money'];
+  const text = `${data.firstName} ${data.lastName} ${data.email} ${data.message}`.toLowerCase();
+  
+  // Check for spam keywords
+  if (spamKeywords.some(keyword => text.includes(keyword))) {
+    return false;
   }
-
-  try {
-    // Create the reCAPTCHA client
-    const client = new RecaptchaEnterpriseServiceClient();
-    const projectPath = client.projectPath(projectID);
-
-    // Create the assessment request
-    const request = {
-      assessment: {
-        event: {
-          token: token,
-          siteKey: recaptchaKey,
-        },
-      },
-      parent: projectPath,
-    };
-
-    const [response] = await client.createAssessment(request);
-
-    // Check if the token is valid
-    if (!response.tokenProperties?.valid) {
-      console.log(`reCAPTCHA assessment failed: ${response.tokenProperties?.invalidReason}`);
-      // In development, be more lenient
-      if (process.env.NODE_ENV === 'development') {
-        console.warn("reCAPTCHA failed in development, allowing submission");
-        return { valid: true, isDevelopment: true };
-      }
-      return { valid: false };
-    }
-
-    // Check if the expected action was executed
-    if (response.tokenProperties?.action === action) {
-      const score = response.riskAnalysis?.score || 0;
-      console.log(`reCAPTCHA score: ${score}`);
-      
-      // Accept scores above 0.5 (you can adjust this threshold)
-      return { valid: score >= 0.5, score };
-    } else {
-      console.log("reCAPTCHA action mismatch");
-      // In development, be more lenient
-      if (process.env.NODE_ENV === 'development') {
-        console.warn("reCAPTCHA action mismatch in development, allowing submission");
-        return { valid: true, isDevelopment: true };
-      }
-      return { valid: false };
-    }
-  } catch (error) {
-    console.error('reCAPTCHA Enterprise verification failed:', error);
-    
-    // In development environment, allow form submission even if reCAPTCHA fails
-    // This prevents development workflow interruption due to Google Cloud auth issues
-    if (process.env.NODE_ENV === 'development') {
-      console.warn("reCAPTCHA Enterprise error in development environment, allowing form submission");
-      return { valid: true, isDevelopment: true };
-    }
-    
-    return { valid: false };
+  
+  // Check for excessive links
+  const linkCount = (data.message.match(/https?:\/\//g) || []).length;
+  if (linkCount > 2) {
+    return false;
   }
+  
+  // Check message length (too short or too long)
+  if (data.message.length < 10 || data.message.length > 2000) {
+    return false;
+  }
+  
+  return true;
 }
 
 // Discord webhook function
@@ -250,34 +231,41 @@ Sitemap: ${baseUrl}/sitemap.xml`;
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
-      // Extract reCAPTCHA token from request body
+      const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
+      
+      // Simple anti-spam checks
+      if (isSpamSubmission(clientIP)) {
+        console.warn(`Spam submission blocked from IP: ${clientIP}`);
+        return res.status(429).json({ 
+          success: false, 
+          error: "Trop de soumissions. Veuillez réessayer plus tard." 
+        });
+      }
+      
+      // Extract form data (ignore any recaptcha token for simplicity)
       const { recaptchaToken, ...formData } = req.body;
       
-      // Verify reCAPTCHA Enterprise token if provided
-      if (recaptchaToken) {
-        const recaptchaResult = await verifyRecaptchaEnterprise(recaptchaToken, 'CONTACT_FORM');
-        if (!recaptchaResult.valid) {
-          return res.status(400).json({ 
-            success: false, 
-            error: "reCAPTCHA verification failed" 
-          });
-        }
-        if (recaptchaResult.isDevelopment) {
-          console.log(`Contact form submitted in development mode with reCAPTCHA bypass`);
-        } else {
-          console.log(`Contact form submitted with reCAPTCHA score: ${recaptchaResult.score}`);
-        }
-      } else {
-        console.log("Contact form submitted without reCAPTCHA token");
-      }
-
-      // Validate form data (excluding reCAPTCHA token)
+      // Validate form data
       const validatedData = insertContactMessageSchema.parse(formData);
+      
+      // Content validation
+      if (!validateFormContent(validatedData)) {
+        console.warn(`Spam content detected from IP: ${clientIP}`);
+        return res.status(400).json({ 
+          success: false, 
+          error: "Le contenu du message n'est pas valide." 
+        });
+      }
+      
+      // Record successful submission
+      recordSubmission(clientIP);
+      
       const message = await storage.createContactMessage(validatedData);
       
       // Send to Discord webhook
       await sendToDiscordWebhook(validatedData);
       
+      console.log(`Contact form submitted successfully from IP: ${clientIP}`);
       res.json({ success: true, message: "Message sent successfully", id: message.id });
     } catch (error) {
       console.error("Error creating contact message:", error);

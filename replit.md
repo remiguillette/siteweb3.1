@@ -127,13 +127,13 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
-- **reCAPTCHA Integration** (July 17, 2025): Added spam protection to contact form
-  - Integrated react-google-recaptcha library with dark theme matching website design
-  - Added backend reCAPTCHA verification using Google's API
-  - Implemented graceful fallback when reCAPTCHA keys are not configured
-  - Protected contact form submissions against spam and bot attacks
-  - Added conditional rendering and validation based on reCAPTCHA availability
-  - Environment variables: RECAPTCHA_SITE_KEY and RECAPTCHA_SECRET_KEY required for activation
+- **Simple Anti-Spam Protection** (July 22, 2025): Replaced complex reCAPTCHA with lightweight backend protection
+  - Implemented IP-based rate limiting (max 5 submissions per hour per IP)
+  - Added content validation for spam keywords and excessive links
+  - Message length validation (10-2000 characters)
+  - Simple, invisible protection without client-side dependencies
+  - Compatible with Replit environment without external API keys
+  - Removed reCAPTCHA Enterprise and related Google Cloud dependencies
 - **Contact Form Translation Fix** (July 17, 2025): Resolved missing English translations
   - Fixed hardcoded French labels for "Address", "Phone", "Email" fields
   - Updated form input placeholders to use proper translation keys

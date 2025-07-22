@@ -4,18 +4,6 @@ import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
 
-// Declare grecaptcha for TypeScript
-declare global {
-  interface Window {
-    grecaptcha: {
-      enterprise: {
-        ready: (callback: () => void) => void;
-        execute: (siteKey: string, options: { action: string }) => Promise<string>;
-      };
-    };
-  }
-}
-
 export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -26,10 +14,9 @@ export default function Contact() {
     service: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData & { recaptchaToken: string }) => {
+    mutationFn: async (data: typeof formData) => {
       const response = await apiRequest('POST', '/api/contact', data);
       return response.json();
     },
@@ -46,20 +33,19 @@ export default function Contact() {
         service: '',
         message: ''
       });
-      setIsSubmitting(false);
     },
     onError: (error: any) => {
       console.error('Contact form error:', error);
+      const errorMessage = error?.message || "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
       toast({
         title: "Erreur",
-        description: "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.",
+        description: errorMessage,
         variant: "destructive"
       });
-      setIsSubmitting(false);
     }
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -72,37 +58,27 @@ export default function Contact() {
       return;
     }
 
-    setIsSubmitting(true);
-
-    try {
-      let recaptchaToken = '';
-      
-      // Execute reCAPTCHA Enterprise if available
-      if (window.grecaptcha && window.grecaptcha.enterprise) {
-        await new Promise<void>((resolve) => {
-          window.grecaptcha.enterprise.ready(() => resolve());
-        });
-        
-        recaptchaToken = await window.grecaptcha.enterprise.execute(
-          '6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE',
-          { action: 'CONTACT_FORM' }
-        );
-      }
-
-      // Submit form to backend
-      contactMutation.mutate({ 
-        ...formData, 
-        recaptchaToken 
-      });
-    } catch (error) {
-      console.error('reCAPTCHA error:', error);
+    // Simple frontend validation
+    if (formData.message.length < 10) {
       toast({
-        title: "Erreur reCAPTCHA",
-        description: "Erreur de vérification. Veuillez réessayer.",
+        title: "Erreur",
+        description: "Le message doit contenir au moins 10 caractères.",
         variant: "destructive"
       });
-      setIsSubmitting(false);
+      return;
     }
+
+    if (formData.message.length > 2000) {
+      toast({
+        title: "Erreur",
+        description: "Le message ne peut pas dépasser 2000 caractères.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Submit form to backend
+    contactMutation.mutate(formData);
   };
 
 
@@ -284,25 +260,25 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* reCAPTCHA Enterprise - Invisible */}
+              {/* Anti-spam protection notice */}
               <div className="mb-6 flex justify-center">
                 <div className="text-[#f89422] text-center text-sm">
-                  🛡️ Protégé par reCAPTCHA Enterprise
+                  🛡️ Formulaire protégé contre les abus
                   <br />
-                  <span className="text-xs opacity-75">Vérification automatique lors de l'envoi</span>
+                  <span className="text-xs opacity-75">Protection automatique activée</span>
                 </div>
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting || contactMutation.isPending}
+                disabled={contactMutation.isPending}
                 className={`w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed ${
-                  isSubmitting || contactMutation.isPending 
+                  contactMutation.isPending 
                     ? 'bg-gray-500' 
                     : 'bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6]'
                 }`}
               >
-                {isSubmitting || contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
+                {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
               </button>
             </form>
           </div>
