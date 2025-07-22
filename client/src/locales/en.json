@@ -72,7 +72,7 @@
     "info": "Contact Information",
     "address": "6388 Hawkins Street, Apt. 307, Niagara Falls, ON L2G 1P3",
     "phone": "613 501-2160",
-    "email": "remiguillette@gmail.com",
+    "email": "remiguillette@rgra.ca",
     "hours": "Business Hours",
     "availability": "24/7 - Year Round",
     "serviceAvailable": "Services available at all times",
@@ -122,7 +122,7 @@
       "postal": "L2G 1P3"
     },
     "phone": "613 501-2160",
-    "email": "remiguillette@gmail.com",
+    "email": "remiguillette@rgra.ca",
     "registration": {
       "ontario": "Ontario Registration",
       "canada": "Canada Registration",
@@ -140,7 +140,7 @@
       "legalName": "Rémi Guillette RG Groupe",
       "operatingName": "Rémi Guillette Group",
       "website": "https://remiguillette.replit.app",
-      "email": "remiguillette@gmail.com"
+      "email": "remiguillette@rgra.ca"
     },
     "dataCollection": {
       "title": "What data do we collect?",
@@ -228,7 +228,7 @@
     "contact": {
       "title": "Who should I contact if I have questions?",
       "description": "For any questions about this privacy policy or your personal information, contact us:",
-      "email": "remiguillette@gmail.com"
+      "email": "remiguillette@rgra.ca"
     },
     "changes": {
       "title": "Changes to this policy",
