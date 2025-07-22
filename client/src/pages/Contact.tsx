@@ -62,15 +62,15 @@ export default function Contact() {
       return;
     }
 
-    // reCAPTCHA validation (temporarily disabled until properly configured)
-    // if (!recaptchaToken) {
-    //   toast({
-    //     title: "Erreur", 
-    //     description: "Veuillez compléter la vérification reCAPTCHA.",
-    //     variant: "destructive"
-    //   });
-    //   return;
-    // }
+    // reCAPTCHA validation
+    if (!recaptchaToken) {
+      toast({
+        title: "Erreur", 
+        description: "Veuillez compléter la vérification reCAPTCHA.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     // Submit form to backend
     contactMutation.mutate({ 
@@ -116,7 +116,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>{t.contact.labels.address}</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Adresse</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.address}</p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.phone}</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
                   <a 
                     href={`tel:${t.contact.phone}`} 
                     className="hover:underline transition-all duration-200"
@@ -148,7 +148,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>{t.contact.labels.email}</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Courriel</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.email}</p>
                 </div>
               </div>
@@ -159,13 +159,13 @@ export default function Contact() {
               <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.hours}</h2>
               <div className="space-y-3" style={{ color: '#f89422' }}>
                 <div className="text-center">
-                  <span className="font-semibold text-lg">{t.contact.availability}</span>
+                  <span className="font-semibold text-lg">24/7 - Toute l'année</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>{t.contact.serviceAvailable}</span>
+                  <span>Services disponibles en tout temps</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>{t.contact.holidays}</span>
+                  <span>Jours fériés canadiens : Sur appel</span>
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder={t.contact.form.placeholders.firstName}
+                    placeholder="Votre prénom"
                   />
                 </div>
                 <div>
@@ -203,7 +203,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder={t.contact.form.placeholders.lastName}
+                    placeholder="Votre nom"
                   />
                 </div>
               </div>
@@ -220,7 +220,7 @@ export default function Contact() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                  placeholder={t.contact.form.placeholders.email}
+                  placeholder="votre@email.com"
                 />
               </div>
 
@@ -237,10 +237,10 @@ export default function Contact() {
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                 >
                   <option value="">{t.contact.form.selectService}</option>
-                  <option value="public-safety">{t.contact.services.publicSafety}</option>
-                  <option value="francophone">{t.contact.services.francophone}</option>
-                  <option value="health-safety">{t.contact.services.healthSafety}</option>
-                  <option value="animal-aid">{t.contact.services.animalAid}</option>
+                  <option value="public-safety">Consultation en Sécurité Publique</option>
+                  <option value="francophone">Services Communautaires Francophones</option>
+                  <option value="health-safety">Santé et Sécurité au Travail</option>
+                  <option value="animal-aid">Premiers Soins Animaliers</option>
                 </select>
               </div>
 
@@ -262,11 +262,12 @@ export default function Contact() {
 
               {/* reCAPTCHA */}
               <div className="mb-6 flex justify-center">
-                <div className="text-[#f89422] text-center text-sm">
-                  reCAPTCHA requires proper domain configuration. 
-                  <br />
-                  Please configure your reCAPTCHA keys for this domain.
-                </div>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || ""}
+                  onChange={handleRecaptchaChange}
+                  theme="dark"
+                />
               </div>
 
               <button
