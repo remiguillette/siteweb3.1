@@ -4,32 +4,60 @@ import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
 
-// Simple anti-spam protection
+// Enhanced anti-spam and flood protection
 const submissionTracker = new Map<string, number[]>();
+const shortTermTracker = new Map<string, number[]>(); // For short-term flood protection
 
 function isSpamSubmission(ip: string): boolean {
   const now = Date.now();
   const oneHour = 60 * 60 * 1000;
-  const maxSubmissions = 5; // Max 5 submissions per hour per IP
+  const oneMinute = 60 * 1000;
+  const fiveMinutes = 5 * 60 * 1000;
   
   // Get submission times for this IP
   const submissions = submissionTracker.get(ip) || [];
+  const shortTermSubmissions = shortTermTracker.get(ip) || [];
   
-  // Remove submissions older than 1 hour
+  // Remove old submissions
   const recentSubmissions = submissions.filter(time => now - time < oneHour);
+  const recentShortTerm = shortTermSubmissions.filter(time => now - time < fiveMinutes);
   
-  // Update the tracker
+  // Update the trackers
   submissionTracker.set(ip, recentSubmissions);
+  shortTermTracker.set(ip, recentShortTerm);
   
-  // Check if limit exceeded
-  return recentSubmissions.length >= maxSubmissions;
+  // Multiple layer protection:
+  // 1. Max 2 submissions per hour per IP
+  if (recentSubmissions.length >= 2) {
+    return true;
+  }
+  
+  // 2. Max 2 submissions per 5 minutes per IP
+  if (recentShortTerm.length >= 2) {
+    return true;
+  }
+  
+  // 3. No more than 1 submission per minute per IP
+  const lastMinuteSubmissions = recentShortTerm.filter(time => now - time < oneMinute);
+  if (lastMinuteSubmissions.length >= 1) {
+    return true;
+  }
+  
+  return false;
 }
 
 function recordSubmission(ip: string): void {
   const now = Date.now();
+  
+  // Record in both trackers
   const submissions = submissionTracker.get(ip) || [];
+  const shortTermSubmissions = shortTermTracker.get(ip) || [];
+  
   submissions.push(now);
+  shortTermSubmissions.push(now);
+  
   submissionTracker.set(ip, submissions);
+  shortTermTracker.set(ip, shortTermSubmissions);
 }
 
 function validateFormContent(data: any): boolean {
@@ -233,27 +261,66 @@ Sitemap: ${baseUrl}/sitemap.xml`;
     try {
       const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
       
-      // Simple anti-spam checks
+      // Enhanced anti-spam and bot protection
       if (isSpamSubmission(clientIP)) {
-        console.warn(`Spam submission blocked from IP: ${clientIP}`);
+        console.warn(`Flood protection triggered for IP: ${clientIP}`);
         return res.status(429).json({ 
           success: false, 
-          error: "Trop de soumissions. Veuillez réessayer plus tard." 
+          error: "Trop de soumissions détectées. Veuillez attendre avant de soumettre à nouveau." 
         });
       }
       
-      // Extract form data (ignore any recaptcha token for simplicity)
-      const { recaptchaToken, ...formData } = req.body;
+      // Honeypot check - if hidden field is filled, it's a bot
+      if (req.body.website || req.body.url || req.body.phone_hidden) {
+        console.warn(`Bot detected via honeypot from IP: ${clientIP}`);
+        return res.status(400).json({ 
+          success: false, 
+          error: "Soumission invalide détectée." 
+        });
+      }
       
-      // Validate form data
+      // Check submission time (must be at least 3 seconds to prevent instant bot submissions)
+      const submissionStartTime = req.body.formStartTime;
+      if (submissionStartTime) {
+        const submissionTime = Date.now() - parseInt(submissionStartTime);
+        if (submissionTime < 3000) { // Less than 3 seconds
+          console.warn(`Too fast submission detected from IP: ${clientIP}, time: ${submissionTime}ms`);
+          return res.status(400).json({ 
+            success: false, 
+            error: "Soumission trop rapide. Veuillez prendre le temps de remplir le formulaire." 
+          });
+        }
+      }
+      
+      // Extract form data (ignore any recaptcha token and honeypot fields)
+      const { recaptchaToken, website, url, phone_hidden, formStartTime, ...formData } = req.body;
+      
+      // Enhanced server-side validation
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Tous les champs obligatoires doivent être remplis." 
+        });
+      }
+      
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Format d'email invalide." 
+        });
+      }
+      
+      // Validate form data with schema
       const validatedData = insertContactMessageSchema.parse(formData);
       
-      // Content validation
+      // Enhanced content validation
       if (!validateFormContent(validatedData)) {
         console.warn(`Spam content detected from IP: ${clientIP}`);
         return res.status(400).json({ 
           success: false, 
-          error: "Le contenu du message n'est pas valide." 
+          error: "Le contenu du message contient des éléments non autorisés." 
         });
       }
       
@@ -266,13 +333,13 @@ Sitemap: ${baseUrl}/sitemap.xml`;
       await sendToDiscordWebhook(validatedData);
       
       console.log(`Contact form submitted successfully from IP: ${clientIP}`);
-      res.json({ success: true, message: "Message sent successfully", id: message.id });
+      res.json({ success: true, message: "Message envoyé avec succès", id: message.id });
     } catch (error) {
       console.error("Error creating contact message:", error);
       if (error instanceof z.ZodError) {
-        res.status(400).json({ success: false, error: "Invalid form data", details: error.errors });
+        res.status(400).json({ success: false, error: "Données du formulaire invalides", details: error.errors });
       } else {
-        res.status(500).json({ success: false, error: "Internal server error" });
+        res.status(500).json({ success: false, error: "Erreur interne du serveur" });
       }
     }
   });

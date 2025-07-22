@@ -18,12 +18,27 @@ export default function Contact() {
     message: ''
   });
 
+  // Anti-spam protection
+  const [formStartTime] = useState(Date.now());
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      const response = await apiRequest('POST', '/api/contact', data);
+      // Add anti-spam fields to submission
+      const submissionData = {
+        ...data,
+        formStartTime: formStartTime.toString(),
+        // Honeypot fields (should remain empty)
+        website: '',
+        url: '',
+        phone_hidden: ''
+      };
+      
+      const response = await apiRequest('POST', '/api/contact', submissionData);
       return response.json();
     },
     onSuccess: () => {
+      setIsSubmitting(false);
       toast({
         title: "Message envoyé",
         description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
@@ -38,6 +53,7 @@ export default function Contact() {
       });
     },
     onError: (error: any) => {
+      setIsSubmitting(false);
       console.error('Contact form error:', error);
       const errorMessage = error?.message || "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
       toast({
@@ -51,11 +67,38 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Prevent double submission
+    if (isSubmitting || contactMutation.isPending) {
+      return;
+    }
+
+    // Check minimum time requirement (3 seconds)
+    const timeSinceLoad = Date.now() - formStartTime;
+    if (timeSinceLoad < 3000) {
+      toast({
+        title: "Erreur",
+        description: "Veuillez prendre le temps de bien remplir le formulaire.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
       toast({
         title: "Erreur",
         description: "Veuillez remplir tous les champs obligatoires.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Enhanced email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Erreur",
+        description: "Veuillez entrer une adresse email valide.",
         variant: "destructive"
       });
       return;
@@ -80,7 +123,8 @@ export default function Contact() {
       return;
     }
 
-    // Submit form to backend
+    // Set submitting state and submit form
+    setIsSubmitting(true);
     contactMutation.mutate(formData);
   };
 
@@ -290,27 +334,64 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* Anti-spam protection notice */}
+              {/* Honeypot fields - Hidden from users but visible to bots */}
+              <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  placeholder="Leave this empty"
+                />
+                <input
+                  type="url"
+                  name="url"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  placeholder="Leave this empty"
+                />
+                <input
+                  type="tel"
+                  name="phone_hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  placeholder="Leave this empty"
+                />
+              </div>
+
+              {/* Enhanced anti-spam protection notice */}
               <div className="mb-6 flex justify-center">
                 <div className="text-[#f89422] text-center text-sm flex flex-col items-center">
                   <div className="flex items-center gap-2 mb-1">
                     <Shield size={16} aria-hidden="true" />
-                    <span>Formulaire protégé contre les abus</span>
+                    <span>Protection renforcée contre les abus</span>
                   </div>
-                  <span className="text-xs opacity-75">Protection automatique activée</span>
+                  <span className="text-xs opacity-75">
+                    Limite: 2 messages/heure • Protection contre les bots
+                  </span>
                 </div>
               </div>
 
               <button
                 type="submit"
-                disabled={contactMutation.isPending}
+                disabled={isSubmitting || contactMutation.isPending}
                 className={`w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed ${
-                  contactMutation.isPending 
+                  isSubmitting || contactMutation.isPending 
                     ? 'bg-gray-500' 
                     : 'bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6]'
                 }`}
               >
-                {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
+                {isSubmitting || contactMutation.isPending ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Envoi en cours...
+                  </span>
+                ) : (
+                  t.contact.form.submit
+                )}
               </button>
             </form>
           </div>
