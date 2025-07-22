@@ -127,6 +127,14 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
+- **PWA Configuration Fix** (July 22, 2025): Resolved missing PWA icons and incorrect manifest configuration
+  - Fixed manifest.json icon paths from `/src/assets/beaver.png` to `/icon-192.png` and `/icon-512.png`
+  - Copied beaver.png to public directory with proper PWA naming: icon-192.png, icon-512.png, apple-touch-icon.png
+  - Updated index.html favicon references to use public directory paths instead of src/assets
+  - Enhanced manifest.json with proper PWA attributes: orientation, scope, lang, categories
+  - Added "purpose: any maskable" to icons for better Android compatibility
+  - Fixed structured data logo URLs in both Organization and ProfessionalService schemas
+  - Replaced generic Chrome "R" icons with proper beaver logo for PWA installation
 - **Automatic Scroll to Top on Navigation** (July 22, 2025): Fixed footer contact link navigation issue
   - Created useScrollToTop hook to automatically scroll to top when navigating between pages
   - Applied to Contact page to ensure users are taken to top of page when clicking contact link from footer
