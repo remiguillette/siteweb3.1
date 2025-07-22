@@ -85,7 +85,7 @@ export default function FrancophoneServices() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-6">
-            <User className="w-16 h-16 text-[#f89422] mr-4" />
+            <User className="w-16 h-16 text-[#f89422] mr-4" aria-hidden="true" />
             <h1 className="text-4xl lg:text-5xl font-bold">
               <span className="text-[#0d6efd]">
                 {language === 'fr' ? 'Services' : 'Francophone'}
@@ -116,7 +116,7 @@ export default function FrancophoneServices() {
               >
                 <div className="flex items-center mb-6">
                   <div className="mr-4">
-                    <Icon className="w-12 h-12 text-[#f89422]" />
+                    <Icon className="w-12 h-12 text-[#f89422]" aria-hidden="true" />
                   </div>
                   <h3 className="text-2xl font-bold">
                     {(() => {
@@ -140,7 +140,7 @@ export default function FrancophoneServices() {
                 <div className="space-y-3">
                   {service.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-[#0d6efd] mr-3 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-[#0d6efd] mr-3 flex-shrink-0" aria-hidden="true" />
                       <span className="text-[#f89422]">{feature}</span>
                     </div>
                   ))}

@@ -96,7 +96,7 @@ export const Footer = () => {
                   className="text-[#f89422] hover:text-white transition-colors"
                   aria-label={language === 'fr' ? 'Suivez-nous sur X (Twitter)' : 'Follow us on X (Twitter)'}
                 >
-                  <SiX className="w-6 h-6" />
+                  <SiX className="w-6 h-6" aria-hidden="true" />
                 </a>
                 <a
                   href="https://www.instagram.com/rgra_on"
@@ -105,7 +105,7 @@ export const Footer = () => {
                   className="text-[#f89422] hover:text-white transition-colors"
                   aria-label={language === 'fr' ? 'Suivez-nous sur Instagram' : 'Follow us on Instagram'}
                 >
-                  <SiInstagram className="w-6 h-6" />
+                  <SiInstagram className="w-6 h-6" aria-hidden="true" />
                 </a>
                 <a
                   href="https://discord.gg/qFbVDPCFz9"
@@ -114,7 +114,7 @@ export const Footer = () => {
                   className="text-[#f89422] hover:text-white transition-colors"
                   aria-label={language === 'fr' ? 'Rejoignez notre Discord' : 'Join our Discord'}
                 >
-                  <SiDiscord className="w-6 h-6" />
+                  <SiDiscord className="w-6 h-6" aria-hidden="true" />
                 </a>
               </div>
             </div>

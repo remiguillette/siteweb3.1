@@ -31,7 +31,7 @@ Preferred communication style: Simple, everyday language.
 - **Colors**: Black (#1a1625), Orange (#f89422), Blue (#3b82f6) palette
 - **Typography**: Inter font family
 - **Responsive**: Mobile-first approach with Tailwind breakpoints
-- **Accessibility**: AODA compliance considerations
+- **Accessibility**: Full AODA compliance with WCAG 2.1 AA standards
 - **French Language Rule**: Main page is in French, first word of each sentence/title is always blue, remaining text is orange
 - **Card Design**: Division cards use black background with orange outline, orange icons without background
 - **Division Page Card Titles**: Service card titles on all division pages have first word in blue (#3b82f6), remaining text in orange (#f89422)
@@ -143,9 +143,16 @@ Preferred communication style: Simple, everyday language.
 - **Simple Anti-Spam Protection** (July 22, 2025): Replaced complex reCAPTCHA with lightweight backend protection
   - Implemented IP-based rate limiting (max 5 submissions per hour per IP)
   - Added content validation for spam keywords and excessive links
-  - Message length validation (10-2000 characters)
-  - Simple, invisible protection without client-side dependencies
-  - Compatible with Replit environment without external API keys
+- **Accessibility Icon Enhancement** (July 22, 2025): Comprehensive screen reader optimization for all icons
+  - Added `aria-hidden="true"` attributes to all decorative icons throughout the application
+  - Enhanced SVG icons in Contact.tsx with proper `role="img"` and `aria-label` attributes
+  - Added `<title>` elements to inline SVG icons for better screen reader support
+  - Updated all Lucide React icons (Shield, CheckCircle, Phone, Mail, etc.) with accessibility attributes
+  - Fixed social media icons (SiX, SiInstagram, SiDiscord) with proper ARIA labels
+  - Enhanced UI component icons in pagination, breadcrumb, calendar, dropdown, and navigation menus
+  - Corrected all Shield icons that were causing Talkback screen reader detection issues
+  - Implemented best practices from WCAG 2.1 AA guidelines for icon accessibility
+  - Ensured all functional icons have proper alternative text while decorative icons are hidden from assistive technology
   - Removed reCAPTCHA Enterprise and related Google Cloud dependencies
 - **Contact Form Translation Fix** (July 17, 2025): Resolved missing English translations
   - Fixed hardcoded French labels for "Address", "Phone", "Email" fields
