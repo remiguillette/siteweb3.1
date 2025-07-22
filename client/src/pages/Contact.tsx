@@ -4,10 +4,12 @@ import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
 import { Shield } from 'lucide-react';
+import { useScrollToTop } from '../hooks/useScrollToTop';
 
 export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
+  useScrollToTop(); // Automatically scroll to top when navigating to this page
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',

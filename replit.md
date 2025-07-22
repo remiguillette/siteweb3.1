@@ -127,6 +127,11 @@ Preferred communication style: Simple, everyday language.
 - Language toggle button showing target language (EN when French active, FR when English active)
 
 ### Recent Changes (July 2025)
+- **Automatic Scroll to Top on Navigation** (July 22, 2025): Fixed footer contact link navigation issue
+  - Created useScrollToTop hook to automatically scroll to top when navigating between pages
+  - Applied to Contact page to ensure users are taken to top of page when clicking contact link from footer
+  - Prevents users from being left lost in footer when page changes
+  - Smooth scrolling animation for better user experience
 - **Simple Anti-Spam Protection** (July 22, 2025): Replaced complex reCAPTCHA with lightweight backend protection
   - Implemented IP-based rate limiting (max 5 submissions per hour per IP)
   - Added content validation for spam keywords and excessive links
