@@ -1,14 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
-import ReCAPTCHA from 'react-google-recaptcha';
+
+// Declare grecaptcha for TypeScript
+declare global {
+  interface Window {
+    grecaptcha: {
+      enterprise: {
+        ready: (callback: () => void) => void;
+        execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      };
+    };
+  }
+}
 
 export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -16,7 +26,7 @@ export default function Contact() {
     service: '',
     message: ''
   });
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData & { recaptchaToken: string }) => {
@@ -28,7 +38,7 @@ export default function Contact() {
         title: "Message envoyé",
         description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
       });
-      // Reset form and reCAPTCHA
+      // Reset form
       setFormData({
         firstName: '',
         lastName: '',
@@ -36,8 +46,7 @@ export default function Contact() {
         service: '',
         message: ''
       });
-      setRecaptchaToken(null);
-      recaptchaRef.current?.reset();
+      setIsSubmitting(false);
     },
     onError: (error: any) => {
       console.error('Contact form error:', error);
@@ -46,10 +55,11 @@ export default function Contact() {
         description: "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.",
         variant: "destructive"
       });
+      setIsSubmitting(false);
     }
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -62,26 +72,40 @@ export default function Contact() {
       return;
     }
 
-    // reCAPTCHA validation (only if reCAPTCHA is configured)
-    if (import.meta.env.VITE_RECAPTCHA_SITE_KEY && !recaptchaToken) {
+    setIsSubmitting(true);
+
+    try {
+      let recaptchaToken = '';
+      
+      // Execute reCAPTCHA Enterprise if available
+      if (window.grecaptcha && window.grecaptcha.enterprise) {
+        await new Promise<void>((resolve) => {
+          window.grecaptcha.enterprise.ready(() => resolve());
+        });
+        
+        recaptchaToken = await window.grecaptcha.enterprise.execute(
+          '6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE',
+          { action: 'CONTACT_FORM' }
+        );
+      }
+
+      // Submit form to backend
+      contactMutation.mutate({ 
+        ...formData, 
+        recaptchaToken 
+      });
+    } catch (error) {
+      console.error('reCAPTCHA error:', error);
       toast({
-        title: "Erreur", 
-        description: "Veuillez compléter la vérification reCAPTCHA.",
+        title: "Erreur reCAPTCHA",
+        description: "Erreur de vérification. Veuillez réessayer.",
         variant: "destructive"
       });
-      return;
+      setIsSubmitting(false);
     }
-
-    // Submit form to backend
-    contactMutation.mutate({ 
-      ...formData, 
-      recaptchaToken: recaptchaToken || '' 
-    });
   };
 
-  const handleRecaptchaChange = (token: string | null) => {
-    setRecaptchaToken(token);
-  };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -260,34 +284,25 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* reCAPTCHA */}
+              {/* reCAPTCHA Enterprise - Invisible */}
               <div className="mb-6 flex justify-center">
-                {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                    onChange={handleRecaptchaChange}
-                    theme="dark"
-                  />
-                ) : (
-                  <div className="text-[#f89422] text-center text-sm">
-                    reCAPTCHA temporairement désactivé
-                    <br />
-                    Le formulaire fonctionne sans protection supplémentaire
-                  </div>
-                )}
+                <div className="text-[#f89422] text-center text-sm">
+                  🛡️ Protégé par reCAPTCHA Enterprise
+                  <br />
+                  <span className="text-xs opacity-75">Vérification automatique lors de l'envoi</span>
+                </div>
               </div>
 
               <button
                 type="submit"
-                disabled={contactMutation.isPending}
+                disabled={isSubmitting || contactMutation.isPending}
                 className={`w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed ${
-                  contactMutation.isPending 
+                  isSubmitting || contactMutation.isPending 
                     ? 'bg-gray-500' 
                     : 'bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6]'
                 }`}
               >
-                {contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
+                {isSubmitting || contactMutation.isPending ? 'Envoi en cours...' : t.contact.form.submit}
               </button>
             </form>
           </div>

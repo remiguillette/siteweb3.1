@@ -3,30 +3,56 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
+import { RecaptchaEnterpriseServiceClient } from '@google-cloud/recaptcha-enterprise';
 
-// reCAPTCHA verification function
-async function verifyRecaptcha(token: string): Promise<boolean> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+// reCAPTCHA Enterprise verification function
+async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTACT_FORM'): Promise<{ valid: boolean, score?: number }> {
+  const projectID = "rapid-gadget-387721";
+  const recaptchaKey = "6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE";
   
-  if (!secretKey) {
-    console.warn("reCAPTCHA secret key not configured");
-    return false;
+  if (!token) {
+    console.warn("reCAPTCHA token is empty");
+    return { valid: false };
   }
 
   try {
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `secret=${secretKey}&response=${token}`
-    });
+    // Create the reCAPTCHA client
+    const client = new RecaptchaEnterpriseServiceClient();
+    const projectPath = client.projectPath(projectID);
 
-    const data = await response.json();
-    return data.success === true;
+    // Create the assessment request
+    const request = {
+      assessment: {
+        event: {
+          token: token,
+          siteKey: recaptchaKey,
+        },
+      },
+      parent: projectPath,
+    };
+
+    const [response] = await client.createAssessment(request);
+
+    // Check if the token is valid
+    if (!response.tokenProperties?.valid) {
+      console.log(`reCAPTCHA assessment failed: ${response.tokenProperties?.invalidReason}`);
+      return { valid: false };
+    }
+
+    // Check if the expected action was executed
+    if (response.tokenProperties?.action === action) {
+      const score = response.riskAnalysis?.score || 0;
+      console.log(`reCAPTCHA score: ${score}`);
+      
+      // Accept scores above 0.5 (you can adjust this threshold)
+      return { valid: score >= 0.5, score };
+    } else {
+      console.log("reCAPTCHA action mismatch");
+      return { valid: false };
+    }
   } catch (error) {
-    console.error('reCAPTCHA verification failed:', error);
-    return false;
+    console.error('reCAPTCHA Enterprise verification failed:', error);
+    return { valid: false };
   }
 }
 
@@ -208,15 +234,18 @@ Sitemap: ${baseUrl}/sitemap.xml`;
       // Extract reCAPTCHA token from request body
       const { recaptchaToken, ...formData } = req.body;
       
-      // Verify reCAPTCHA token if provided and configured
-      if (process.env.RECAPTCHA_SECRET_KEY && recaptchaToken) {
-        const recaptchaValid = await verifyRecaptcha(recaptchaToken);
-        if (!recaptchaValid) {
+      // Verify reCAPTCHA Enterprise token if provided
+      if (recaptchaToken) {
+        const recaptchaResult = await verifyRecaptchaEnterprise(recaptchaToken, 'CONTACT_FORM');
+        if (!recaptchaResult.valid) {
           return res.status(400).json({ 
             success: false, 
             error: "reCAPTCHA verification failed" 
           });
         }
+        console.log(`Contact form submitted with reCAPTCHA score: ${recaptchaResult.score}`);
+      } else {
+        console.log("Contact form submitted without reCAPTCHA token");
       }
 
       // Validate form data (excluding reCAPTCHA token)
