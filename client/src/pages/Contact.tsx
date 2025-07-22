@@ -3,6 +3,7 @@ import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
+import { Shield } from 'lucide-react';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -262,9 +263,11 @@ export default function Contact() {
 
               {/* Anti-spam protection notice */}
               <div className="mb-6 flex justify-center">
-                <div className="text-[#f89422] text-center text-sm">
-                  🛡️ Formulaire protégé contre les abus
-                  <br />
+                <div className="text-[#f89422] text-center text-sm flex flex-col items-center">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Shield size={16} />
+                    <span>Formulaire protégé contre les abus</span>
+                  </div>
                   <span className="text-xs opacity-75">Protection automatique activée</span>
                 </div>
               </div>
