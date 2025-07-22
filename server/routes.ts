@@ -6,13 +6,14 @@ import { insertContactMessageSchema, type InsertContactMessage } from "@shared/s
 import { RecaptchaEnterpriseServiceClient } from '@google-cloud/recaptcha-enterprise';
 
 // reCAPTCHA Enterprise verification function
-async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTACT_FORM'): Promise<{ valid: boolean, score?: number }> {
+async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTACT_FORM'): Promise<{ valid: boolean, score?: number, isDevelopment?: boolean }> {
   const projectID = "rapid-gadget-387721";
   const recaptchaKey = "6LcG7oYrAAAAADWQVo2UdPWVuPVWpIeSc0BmNduE";
   
   if (!token) {
-    console.warn("reCAPTCHA token is empty");
-    return { valid: false };
+    console.warn("reCAPTCHA token is empty, allowing in development");
+    // In development, allow empty tokens
+    return { valid: process.env.NODE_ENV === 'development', isDevelopment: true };
   }
 
   try {
@@ -36,6 +37,11 @@ async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTAC
     // Check if the token is valid
     if (!response.tokenProperties?.valid) {
       console.log(`reCAPTCHA assessment failed: ${response.tokenProperties?.invalidReason}`);
+      // In development, be more lenient
+      if (process.env.NODE_ENV === 'development') {
+        console.warn("reCAPTCHA failed in development, allowing submission");
+        return { valid: true, isDevelopment: true };
+      }
       return { valid: false };
     }
 
@@ -48,10 +54,23 @@ async function verifyRecaptchaEnterprise(token: string, action: string = 'CONTAC
       return { valid: score >= 0.5, score };
     } else {
       console.log("reCAPTCHA action mismatch");
+      // In development, be more lenient
+      if (process.env.NODE_ENV === 'development') {
+        console.warn("reCAPTCHA action mismatch in development, allowing submission");
+        return { valid: true, isDevelopment: true };
+      }
       return { valid: false };
     }
   } catch (error) {
     console.error('reCAPTCHA Enterprise verification failed:', error);
+    
+    // In development environment, allow form submission even if reCAPTCHA fails
+    // This prevents development workflow interruption due to Google Cloud auth issues
+    if (process.env.NODE_ENV === 'development') {
+      console.warn("reCAPTCHA Enterprise error in development environment, allowing form submission");
+      return { valid: true, isDevelopment: true };
+    }
+    
     return { valid: false };
   }
 }
@@ -243,7 +262,11 @@ Sitemap: ${baseUrl}/sitemap.xml`;
             error: "reCAPTCHA verification failed" 
           });
         }
-        console.log(`Contact form submitted with reCAPTCHA score: ${recaptchaResult.score}`);
+        if (recaptchaResult.isDevelopment) {
+          console.log(`Contact form submitted in development mode with reCAPTCHA bypass`);
+        } else {
+          console.log(`Contact form submitted with reCAPTCHA score: ${recaptchaResult.score}`);
+        }
       } else {
         console.log("Contact form submitted without reCAPTCHA token");
       }
