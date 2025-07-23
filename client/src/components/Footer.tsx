@@ -76,11 +76,14 @@ export const Footer = () => {
                   {t.footer.phone}
                 </a>
               </p>
-              <p className="flex items-center">
+              <Link 
+                to="/contact"
+                className="flex items-center bg-gradient-to-r from-[#0d6efd] to-[#f89422] text-white px-4 py-2 rounded-md hover:opacity-80 transition-opacity font-medium text-sm mt-2"
+                aria-label={language === 'fr' ? 'Aller à la page de contact' : 'Go to contact page'}
+              >
                 <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
-                <span className="sr-only">{language === 'fr' ? 'Courriel: ' : 'Email: '}</span>
-                {t.footer.email}
-              </p>
+                {language === 'fr' ? 'Nous contacter' : 'Contact Us'}
+              </Link>
             </address>
             
             {/* Social Media Links */}
