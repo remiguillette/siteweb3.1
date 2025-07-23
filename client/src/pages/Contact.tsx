@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../contexts/TranslationContext';
 import { useToast } from '../hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
 import { Shield } from 'lucide-react';
 import { useScrollToTop } from '../hooks/useScrollToTop';
-import { Button } from '@/components/ui/button';
 
 export default function Contact() {
   const { t } = useTranslation();
   const { toast } = useToast();
   useScrollToTop(); // Automatically scroll to top when navigating to this page
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,6 +22,30 @@ export default function Contact() {
   // Anti-spam protection
   const [formStartTime] = useState(Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Animated gradient effect for submit button
+  useEffect(() => {
+    if (!submitButtonRef.current) return;
+
+    let angle = 0;
+    let animationFrameId: number;
+
+    const rotateGradient = () => {
+      angle = (angle + 1) % 360;
+      if (submitButtonRef.current) {
+        submitButtonRef.current.style.setProperty("--gradient-angle", `${angle}deg`);
+      }
+      animationFrameId = requestAnimationFrame(rotateGradient);
+    };
+
+    rotateGradient();
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
 
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
@@ -373,11 +397,11 @@ export default function Contact() {
                 </div>
               </div>
 
-              <Button
+              <button
+                ref={submitButtonRef}
                 type="submit"
                 disabled={isSubmitting || contactMutation.isPending}
-                size="lg"
-                className="w-full bg-[#f89422] hover:bg-[#f89422]/90 text-white font-semibold py-4"
+                className="border-gradient-button w-full py-4 px-8 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting || contactMutation.isPending ? (
                   <span className="flex items-center justify-center gap-2">
@@ -390,7 +414,7 @@ export default function Contact() {
                 ) : (
                   t.contact.form.submit
                 )}
-              </Button>
+              </button>
             </form>
           </div>
         </div>
