@@ -3,9 +3,34 @@ import { Link } from 'wouter';
 import { useTranslation } from '../contexts/TranslationContext';
 import beaverLogo from '../assets/beaver.png';
 import { SiX, SiInstagram, SiDiscord } from 'react-icons/si';
+import { useEffect, useRef } from 'react';
 
 export const Footer = () => {
   const { t, language } = useTranslation();
+  const contactButtonRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (!contactButtonRef.current) return;
+
+    let angle = 0;
+    let animationFrameId: number;
+
+    const rotateGradient = () => {
+      angle = (angle + 1) % 360;
+      if (contactButtonRef.current) {
+        contactButtonRef.current.style.setProperty("--gradient-angle", `${angle}deg`);
+      }
+      animationFrameId = requestAnimationFrame(rotateGradient);
+    };
+
+    rotateGradient();
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
 
   return (
     <footer className="bg-black py-12 w-full" role="contentinfo">
@@ -71,8 +96,9 @@ export const Footer = () => {
                 </a>
               </p>
               <Link 
+                ref={contactButtonRef}
                 to="/contact"
-                className="flex items-center bg-gradient-to-r from-[#0d6efd] to-[#f89422] text-white px-4 py-2 rounded-md hover:opacity-80 transition-opacity font-medium text-sm mt-2"
+                className="border-gradient-button flex items-center justify-center text-white px-4 py-3 font-medium text-sm mt-2"
                 aria-label={language === 'fr' ? 'Aller à la page de contact' : 'Go to contact page'}
               >
                 <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
