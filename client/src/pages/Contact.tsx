@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '../lib/queryClient';
 import { Shield } from 'lucide-react';
 import { useScrollToTop } from '../hooks/useScrollToTop';
+import { Button } from '@/components/ui/button';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -372,14 +373,10 @@ export default function Contact() {
                 </div>
               </div>
 
-              <button
+              <Button
                 type="submit"
                 disabled={isSubmitting || contactMutation.isPending}
-                className={`w-full text-white font-semibold py-4 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed ${
-                  isSubmitting || contactMutation.isPending 
-                    ? 'bg-gray-500' 
-                    : 'bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6]'
-                }`}
+                className="w-full text-white font-semibold py-4 px-8 bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6] transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed disabled:bg-gray-500"
               >
                 {isSubmitting || contactMutation.isPending ? (
                   <span className="flex items-center justify-center gap-2">
@@ -392,7 +389,7 @@ export default function Contact() {
                 ) : (
                   t.contact.form.submit
                 )}
-              </button>
+              </Button>
             </form>
           </div>
         </div>
