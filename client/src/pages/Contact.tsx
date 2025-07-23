@@ -376,7 +376,8 @@ export default function Contact() {
               <Button
                 type="submit"
                 disabled={isSubmitting || contactMutation.isPending}
-                className="w-full text-white font-semibold py-4 px-8 bg-gradient-to-r from-[#f89422] to-[#0d6efd] hover:from-[#fb923c] hover:to-[#3b82f6] transition-all duration-200 transform hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed disabled:bg-gray-500"
+                size="lg"
+                className="w-full bg-[#f89422] hover:bg-[#f89422]/90 text-white font-semibold py-4"
               >
                 {isSubmitting || contactMutation.isPending ? (
                   <span className="flex items-center justify-center gap-2">
