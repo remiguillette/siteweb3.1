@@ -42,12 +42,6 @@ export const Footer = () => {
             </h3>
             <nav className="flex flex-col items-center gap-2 mt-6" aria-label={language === 'fr' ? 'Menu pied de page' : 'Footer menu'}>
               <Link 
-                to="/contact"
-                className="text-[#f89422] text-sm hover:text-white transition-colors"
-              >
-                {t.footer.contact}
-              </Link>
-              <Link 
                 to={language === 'fr' ? '/politique-confidentialite' : '/privacy-policy'}
                 className="text-[#f89422] text-sm hover:text-white transition-colors"
               >
