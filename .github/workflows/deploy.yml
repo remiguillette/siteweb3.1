@@ -1,0 +1,49 @@
+# Nom du workflow
+name: Deploy Node.js Lambda Function
+
+# Déclencheur : s'exécute à chaque push sur la branche 'main'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_lambda:
+    # Utilise la dernière version d'Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupère le code de votre dépôt
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # 2. Configure l'environnement Node.js version 20
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Installe les dépendances du projet (via npm)
+      # 'npm ci' est recommandé pour les CI/CD car il utilise package-lock.json
+      # pour des installations plus rapides et déterministes.
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Crée le paquet de déploiement (inclut le code et node_modules)
+      - name: Zip deployment package
+        run: zip -r deploy.zip . -x ".git/*" ".github/*"
+
+      # 5. Configure les identifiants AWS en utilisant les secrets
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1 # Mettez votre région AWS ici
+
+      # 6. Déploie le code sur AWS Lambda
+      - name: Deploy to AWS Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name Test \
+            --zip-file fileb://deploy.zip
