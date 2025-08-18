@@ -34,12 +34,12 @@ jobs:
         run: zip -r deploy.zip . -x ".git/*" ".github/*"
 
       # 5. Configure les identifiants AWS en utilisant les secrets
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ca-central-1 # Mettez votre région AWS ici
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: arn:aws:iam::603195189317:role/Github # Remplacez par l'ARN de votre rôle
+            aws-region: ca-central-1
+          
 
       # 6. Déploie le code sur AWS Lambda
       - name: Deploy to AWS Lambda
