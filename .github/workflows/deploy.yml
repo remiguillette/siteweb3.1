@@ -21,10 +21,13 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::603195189317:role/Github2
           aws-region: ca-central-1   # ou la région où est ta Lambda
-
+     
+      - name: Test AWS CLI
+        run: aws sts get-caller-identity
+      
       - name: Deploy to Lambda
         run: |
           zip -r function.zip .
           aws lambda update-function-code \
             --function-name MonLambda \
-            --zip-file fileb://function.zip
+            --zip-file fileb://function.zip --debug
