@@ -1,51 +1,30 @@
-# Nom du workflow
-name: Deploy Node.js Lambda Function
+name: Deploy Lambda
 
-# Déclencheur : s'exécute à chaque push sur la branche 'main'
 on:
   push:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  deploy_lambda:
-    # Utilise la dernière version d'Ubuntu
+  deploy:
     runs-on: ubuntu-latest
-
-    # Définit les permissions nécessaires pour l'authentification OIDC
-    permissions:
-      id-token: write
-      contents: read
-
     steps:
-      # 1. Récupère le code de votre dépôt
-      - name: Checkout repository code
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Configure l'environnement Node.js version 20
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # 3. Installe les dépendances du projet
-      - name: Install dependencies
-        run: npm ci
-
-      # 4. Crée le paquet de déploiement
-      - name: Zip deployment package
-        run: zip -r deploy.zip . -x ".git/*" ".github/*"
-
-      # 5. Configure les identifiants AWS en utilisant un rôle IAM (OIDC)
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::603195189317:role/Github
-          aws-region: ca-central-1
+          role-to-assume: arn:aws:iam::603195189317:role/Github2
+          aws-region: ca-central-1   # ou la région où est ta Lambda
 
-      # 6. Déploie le code sur AWS Lambda
-      - name: Deploy to AWS Lambda
+      - name: Deploy to Lambda
         run: |
+          zip -r function.zip .
           aws lambda update-function-code \
-            --function-name Test \
-            --zip-file fileb://deploy.zip
+            --function-name MonLambda \
+            --zip-file fileb://function.zip
