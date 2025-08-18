@@ -25,10 +25,10 @@ jobs:
       - name: Test AWS CLI
         run: aws sts get-caller-identity
       
-      - name: Deploy to Lambda
-        run: |
-          zip -r function.zip .
-          aws lambda update-function-code \
-            --function-name 
-          Test \
-            --zip-file fileb://function.zip --debug
+          - name: Deploy to Lambda
+            run: |
+              zip -r function.zip .
+              aws lambda update-function-code \
+                --function-name arn:aws:lambda:ca-central-1:603195189317:function:Test \
+                --zip-file fileb://function.zip
+
