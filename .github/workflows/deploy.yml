@@ -26,7 +26,7 @@ jobs:
         run: aws sts get-caller-identity
       
       - name: Deploy to Lambda
-            run: |
+        run: |
               zip -r function.zip .
               aws lambda update-function-code \
                 --function-name arn:aws:lambda:ca-central-1:603195189317:function:Test \
