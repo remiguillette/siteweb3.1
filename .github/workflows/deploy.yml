@@ -12,6 +12,11 @@ jobs:
     # Utilise la dernière version d'Ubuntu
     runs-on: ubuntu-latest
 
+    # Définit les permissions nécessaires pour l'authentification OIDC
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       # 1. Récupère le code de votre dépôt
       - name: Checkout repository code
@@ -23,22 +28,20 @@ jobs:
         with:
           node-version: '20'
 
-      # 3. Installe les dépendances du projet (via npm)
-      # 'npm ci' est recommandé pour les CI/CD car il utilise package-lock.json
-      # pour des installations plus rapides et déterministes.
+      # 3. Installe les dépendances du projet
       - name: Install dependencies
         run: npm ci
 
+      # 4. Crée le paquet de déploiement
       - name: Zip deployment package
         run: zip -r deploy.zip . -x ".git/*" ".github/*"
 
-      # 5. Configure les identifiants AWS en utilisant les secrets
-        - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-            role-to-assume: arn:aws:iam::603195189317:role/Github # Remplacez par l'ARN de votre rôle
-            aws-region: ca-central-1
-          
+      # 5. Configure les identifiants AWS en utilisant un rôle IAM (OIDC)
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::603195189317:role/Github
+          aws-region: ca-central-1
 
       # 6. Déploie le code sur AWS Lambda
       - name: Deploy to AWS Lambda
