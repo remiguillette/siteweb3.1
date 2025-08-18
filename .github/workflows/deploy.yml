@@ -29,5 +29,6 @@ jobs:
         run: |
           zip -r function.zip .
           aws lambda update-function-code \
-            --function-name MonLambda \
+            --function-name 
+          Test \
             --zip-file fileb://function.zip --debug
