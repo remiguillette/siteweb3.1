@@ -287,7 +287,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder="Votre prénom"
+                    placeholder={t.contact.form.placeholders.firstName}
                   />
                 </div>
                 <div>
@@ -302,7 +302,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder="Votre nom"
+                    placeholder={t.contact.form.placeholders.lastName}
                   />
                 </div>
               </div>
@@ -319,7 +319,7 @@ export default function Contact() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                  placeholder="votre@email.com"
+                  placeholder={t.contact.form.placeholders.email}
                 />
               </div>
 
@@ -336,10 +336,10 @@ export default function Contact() {
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                 >
                   <option value="">{t.contact.form.selectService}</option>
-                  <option value="public-safety">Consultation en Sécurité Publique</option>
-                  <option value="francophone">Services Communautaires Francophones</option>
-                  <option value="health-safety">Santé et Sécurité au Travail</option>
-                  <option value="animal-aid">Premiers Soins Animaliers</option>
+                  <option value="public-safety">{t.contact.services.publicSafety}</option>
+                  <option value="francophone">{t.contact.services.francophone}</option>
+                  <option value="health-safety">{t.contact.services.healthSafety}</option>
+                  <option value="animal-aid">{t.contact.services.animalAid}</option>
                 </select>
               </div>
 
