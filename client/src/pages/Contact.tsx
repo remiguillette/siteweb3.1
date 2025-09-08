@@ -65,8 +65,8 @@ export default function Contact() {
     onSuccess: () => {
       setIsSubmitting(false);
       toast({
-        title: "Message envoyé",
-        description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successMessage
       });
       // Reset form
       setFormData({
@@ -80,9 +80,9 @@ export default function Contact() {
     onError: (error: any) => {
       setIsSubmitting(false);
       console.error('Contact form error:', error);
-      const errorMessage = error?.message || "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
+      const errorMessage = error?.message || t.contact.form.errors.generic;
       toast({
-        title: "Erreur",
+        title: t.contact.form.errorTitle,
         description: errorMessage,
         variant: "destructive"
       });
@@ -101,8 +101,8 @@ export default function Contact() {
     const timeSinceLoad = Date.now() - formStartTime;
     if (timeSinceLoad < 3000) {
       toast({
-        title: "Erreur",
-        description: "Veuillez prendre le temps de bien remplir le formulaire.",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errors.tooFast,
         variant: "destructive"
       });
       return;
@@ -111,8 +111,8 @@ export default function Contact() {
     // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
       toast({
-        title: "Erreur",
-        description: "Veuillez remplir tous les champs obligatoires.",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errors.fillRequired,
         variant: "destructive"
       });
       return;
@@ -122,8 +122,8 @@ export default function Contact() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
-        title: "Erreur",
-        description: "Veuillez entrer une adresse email valide.",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errors.invalidEmail,
         variant: "destructive"
       });
       return;
@@ -132,8 +132,8 @@ export default function Contact() {
     // Simple frontend validation
     if (formData.message.length < 10) {
       toast({
-        title: "Erreur",
-        description: "Le message doit contenir au moins 10 caractères.",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errors.messageLength,
         variant: "destructive"
       });
       return;
@@ -141,8 +141,8 @@ export default function Contact() {
 
     if (formData.message.length > 2000) {
       toast({
-        title: "Erreur",
-        description: "Le message ne peut pas dépasser 2000 caractères.",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errors.messageTooLong,
         variant: "destructive"
       });
       return;
@@ -197,7 +197,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Adresse</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.address}</h3>
                   <p style={{ color: '#f89422 ' }}>{t.contact.address}</p>
                 </div>
               </div>
@@ -219,7 +219,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.phone}</h3>
                   <a 
                     href={`tel:${t.contact.phone}`} 
                     className="hover:underline transition-all duration-200"
@@ -247,7 +247,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Courriel</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.email}</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.email}</p>
                 </div>
               </div>
@@ -255,16 +255,16 @@ export default function Contact() {
 
             {/* Business Hours */}
             <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
-              <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.hours}</h2>
+              <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.businessHours.title}</h2>
               <div className="space-y-3" style={{ color: '#f89422' }}>
                 <div className="text-center">
-                  <span className="font-semibold text-lg">24/7 - Toute l'année</span>
+                  <span className="font-semibold text-lg">{t.contact.businessHours.available247}</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>Services disponibles en tout temps</span>
+                  <span>{t.contact.businessHours.servicesAvailable}</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>Jours fériés canadiens : Sur appel</span>
+                  <span>{t.contact.businessHours.holidays}</span>
                 </div>
               </div>
             </div>
@@ -389,7 +389,7 @@ export default function Contact() {
                 <div className="text-[#f89422] text-center text-sm flex flex-col items-center">
                   <div className="flex items-center gap-2 mb-1">
                     <Shield size={16} aria-hidden="true" />
-                    <span>Protection renforcée contre les abus</span>
+                    <span>{t.contact.antiSpam}</span>
                   </div>
                   <span className="text-xs opacity-75">
                   </span>
@@ -408,7 +408,7 @@ export default function Contact() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Envoi en cours...
+                    {t.contact.form.submitting}
                   </span>
                 ) : (
                   t.contact.form.submit
