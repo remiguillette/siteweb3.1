@@ -53,7 +53,7 @@ export default function Services() {
                 className="bg-rg-card-bg rounded-2xl p-8 text-center hover:bg-rg-gray transition-all duration-300 border border-rg-gray"
               >
                 <div className={`w-24 h-24 bg-gradient-to-br ${service.gradientFrom} ${service.gradientTo} rounded-2xl flex items-center justify-center mx-auto mb-6`}>
-                  <Icon className="w-12 h-12 text-white" style={{ width: '48px', height: '48px', minWidth: '48px', minHeight: '48px', maxWidth: '48px', maxHeight: '48px' }} />
+                  <Icon className="w-12 h-12 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-4">{service.data.title}</h2>
                 <p className="text-gray-300 mb-6 leading-relaxed">

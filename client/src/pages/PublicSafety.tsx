@@ -116,7 +116,7 @@ export default function PublicSafety() {
               >
                 <div className="flex items-center mb-6">
                   <div className="mr-4">
-                    <Icon className="w-12 h-12 text-[#f89422]" style={{ width: '48px', height: '48px', minWidth: '48px', minHeight: '48px', maxWidth: '48px', maxHeight: '48px' }} aria-hidden="true" />
+                    <Icon className="w-12 h-12 text-[#f89422]" aria-hidden="true" />
                   </div>
                   <h3 className="text-2xl font-bold">
                     {(() => {

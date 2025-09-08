@@ -1,46 +1,48 @@
 # Rémi Guillette Groupe - Professional Consulting Website
 
 ## Overview
-
-This project is a modern, bilingual (French/English) professional consulting website for Rémi Guillette Groupe, a Canadian firm specializing in public safety, francophone community services, occupational health & safety, and animal first aid services. The site is designed with a dark theme using a black/orange/blue color palette, emphasizing full mobile responsiveness and AODA compliance. Its purpose is to showcase the firm's services, provide contact information, and establish a professional online presence.
+This project is a modern, bilingual (French/English) professional consulting website for Rémi Guillette Groupe, a Canadian firm specializing in public safety, francophone community services, occupational health & safety, and animal first aid. The application aims to provide a robust online presence, showcasing services, and enabling client interaction. It is designed with a dark theme and full mobile responsiveness, focusing on accessibility and Canadian legal compliance (PIPEDA, AODA). The business vision is to expand reach and provide accessible information on their diverse consulting services.
 
 ## User Preferences
-
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
 ### Frontend
-- **Framework**: React 18 with TypeScript and Vite.
-- **Routing**: Wouter for lightweight client-side navigation.
-- **Styling**: TailwindCSS with a custom design system, utilizing Shadcn/ui and Radix UI.
+- **Framework**: React 18 with TypeScript.
+- **Build Tool**: Vite.
+- **Routing**: Wouter.
+- **Styling**: TailwindCSS with custom design system, Shadcn/ui component library, and Radix UI primitives.
 - **State Management**: TanStack Query for server state.
-- **Internationalization**: Custom i18n hook with JSON files, persistent language preference via React Context.
-- **Design**: Dark-first theme with `black (#1a1625)`, `orange (#f89422)`, and `blue (#3b82f6)` palette. Inter font family. Mobile-first responsive design.
-- **Accessibility**: WCAG 2.1 AA compliant, with specific attention to icon accessibility and ARIA attributes.
-- **UI/UX**: Main page in French, with specific color rules for text (first word blue, rest orange) for titles and division cards. Division cards have a black background, orange outline, and orange icons without background.
+- **Internationalization**: Custom i18n hook with JSON translation files; React Context-based global state for language.
+- **UI/UX**: Dark-first theme (black, orange, blue palette), Inter font, mobile-first responsive design.
+- **Accessibility**: AODA compliance (WCAG 2.1 AA), comprehensive screen reader optimization for icons.
+- **Design Elements**: Main page in French with first word of sentences/titles in blue, rest in orange. Division cards are black with orange outline and orange icons. Service card titles on division pages have the first word in blue, rest in orange.
 
 ### Backend
-- **Runtime**: Node.js with Express.js (TypeScript, ES modules).
-- **Database**: PostgreSQL with Drizzle ORM; connect-pg-simple for session management.
-- **API**: RESTful API under `/api` prefix.
+- **Runtime**: Node.js with Express.js.
+- **Language**: TypeScript with ES modules.
+- **Database**: PostgreSQL with Drizzle ORM.
+- **Session Management**: Connect-pg-simple.
+- **API**: RESTful structure with `/api` prefix.
 - **Storage**: Abstracted storage interface.
-- **Security**: IP-based rate limiting and content validation for contact forms.
-- **SEO**: Dynamic sitemap and robots.txt generation, comprehensive Schema.org JSON-LD structured data (Organization, ProfessionalService, Local Business schemas).
+- **Security**: IP-based rate limiting and content validation for contact form.
 
-### Key Features
+### Core Features
 - Bilingual content (French primary, English secondary).
-- Four distinct service "Secteurs d'activité" (Activity Sectors) with dedicated pages and interactive hero cards.
-- Contact form with validation and Discord webhook integration for notifications.
+- Four distinct service divisions with dedicated pages and interactive hero cards.
+- Contact form with validation, success feedback, and Discord webhook integration for notifications.
 - Responsive navigation with smooth scrolling.
 - PIPEDA-compliant privacy policy and cookie consent modal.
-- PWA manifest and favicon configuration.
+- Dynamic sitemap and comprehensive SEO optimization with Schema.org JSON-LD structured data (Organization, ProfessionalService, Local Business schemas).
+- Automatic scroll to top on navigation.
+- PWA configuration.
 
 ## External Dependencies
-
 - **React Ecosystem**: React, React DOM, TanStack Query.
 - **UI/Styling**: TailwindCSS, Radix UI, Lucide React icons.
-- **Backend**: Express, Drizzle ORM, PostgreSQL drivers (Neon Database serverless driver).
-- **Development Tools**: Vite, TypeScript, ESBuild, TSX.
-- **Security**: reCAPTCHA (site key and secret key required).
-- **External Integrations**: Discord webhooks for contact form submissions.
+- **Backend**: Express, Drizzle ORM, PostgreSQL drivers.
+- **Development**: Vite, TypeScript, ESBuild, TSX.
+- **Database Connection**: Neon Database serverless driver.
+- **Migrations**: Drizzle Kit.
+- **Communication**: Discord (for contact form notifications).
