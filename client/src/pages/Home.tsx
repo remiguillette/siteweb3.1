@@ -91,7 +91,7 @@ export default function Home() {
                         aria-label={`${language === 'fr' ? 'Voir' : 'View'} ${divisionTitle}`}
                       >
                         <div className="flex items-center justify-center mx-auto mb-4">
-                          <Icon className="w-12 h-12" style={{ color: '#f89422' }} aria-hidden="true" />
+                          <Icon className="w-12 h-12" style={{ color: '#f89422', width: '48px', height: '48px', minWidth: '48px', minHeight: '48px', maxWidth: '48px', maxHeight: '48px' }} aria-hidden="true" />
                         </div>
                         <h3 className="text-lg font-bold leading-tight">
                           <span style={{ color: '#0d6efd' }}>
