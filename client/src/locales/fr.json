@@ -157,8 +157,8 @@
       "title": "Informations sur la Société",
       "legalName": "Rémi Guillette RG Groupe",
       "operatingName": "Rémi Guillette Groupe",
-      "website": "https://remiguillette.replit.app",
-      "email": "remiguillette@rgra.ca"
+      "website": "remiguillette.ca",
+      "email": "info@remiguillette.ca"
     },
     "dataCollection": {
       "title": "Quelles données collectons-nous ?",
@@ -224,7 +224,7 @@
     "internationalTransfers": {
       "title": "Transferts internationaux",
       "description": "Notre site web est hébergé par Replit, une société américaine. Vos données peuvent être transférées et stockées aux États-Unis.",
-      "replitInfo": "Replit applique des mesures de sécurité appropriées pour protéger vos données conformément aux normes internationales de protection des données."
+      "replitInfo": "Replit applique des mesures de sécurité appropriées pour protéger vos données conformément aux normes internationales de protection des données. Notre domaine est enregistré avec AWS en Virginie."
     },
     "dataProtection": {
       "title": "Comment protégeons-nous vos données ?",
@@ -246,7 +246,7 @@
     "contact": {
       "title": "Qui contacter si vous avez des questions ?",
       "description": "Pour toute question concernant cette politique de confidentialité ou vos renseignements personnels, contactez-nous :",
-      "email": "remiguillette@rgra.ca"
+      "email": "info@remiguillette.ca"
     },
     "changes": {
       "title": "Modifications de cette politique",
