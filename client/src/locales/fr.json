@@ -72,7 +72,7 @@
     "info": "Informations de Contact",
     "address": "6388 Hawkins Street, Apt. 307, Niagara Falls, ON L2G 1P3",
     "phone": "613 501-2160",
-    "email": "remiguillette@rgra.ca",
+    "email": "info@remiguillette.ca",
     "hours": "Heures d'ouverture",
     "availability": "24/7 - Toute l'année",
     "serviceAvailable": "Services disponibles en tout temps",
@@ -122,7 +122,7 @@
       "postal": "L2G 1P3"
     },
     "phone": "613 501-2160",
-    "email": "remiguillette@rgra.ca",
+    "email": "info@remiguillette.ca",
     "registration": {
       "ontario": "Enregistrement Ontario",
       "canada": "Enregistrement Canada",
@@ -139,8 +139,8 @@
       "title": "Informations sur la Société",
       "legalName": "Rémi Guillette RG Groupe",
       "operatingName": "Rémi Guillette Groupe",
-      "website": "https://remiguillette.replit.app",
-      "email": "remiguillette@rgra.ca"
+      "website": "remiguillette.ca",
+      "email": "info@remiguillette.ca"
     },
     "dataCollection": {
       "title": "Quelles données collectons-nous ?",
@@ -205,7 +205,7 @@
     },
     "internationalTransfers": {
       "title": "Transferts internationaux",
-      "description": "Notre site web est hébergé par Replit, une société américaine. Vos données peuvent être transférées et stockées aux États-Unis.",
+    "description": "Notre site web est hébergé par Replit et nos services de domaine sont gérés par Amazon Web Services (AWS) dans la région us-east-1. Vos données peuvent être transférées et stockées aux États-Unis.",
       "replitInfo": "Replit applique des mesures de sécurité appropriées pour protéger vos données conformément aux normes internationales de protection des données."
     },
     "dataProtection": {
@@ -228,7 +228,7 @@
     "contact": {
       "title": "Qui contacter si vous avez des questions ?",
       "description": "Pour toute question concernant cette politique de confidentialité ou vos renseignements personnels, contactez-nous :",
-      "email": "remiguillette@rgra.ca"
+      "email": "info@remiguillette.ca"
     },
     "changes": {
       "title": "Modifications de cette politique",
