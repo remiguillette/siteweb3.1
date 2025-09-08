@@ -79,9 +79,10 @@ export interface TranslationData {
     phone: string;
     email: string;
     hours: string;
-    availability: string;
-    serviceAvailable: string;
-    holidays: string;
+    weekdays: string;
+    saturday: string;
+    sunday: string;
+    closed: string;
     form: {
       title: string;
       firstName: string;
@@ -92,42 +93,8 @@ export interface TranslationData {
       message: string;
       messagePlaceholder: string;
       submit: string;
-      submitting: string;
       successMessage: string;
-      successTitle: string;
-      errorTitle: string;
-      errors: {
-        fillRequired: string;
-        invalidEmail: string;
-        messageLength: string;
-        messageTooLong: string;
-        tooFast: string;
-        generic: string;
-      };
-      placeholders: {
-        firstName: string;
-        lastName: string;
-        email: string;
-      };
     };
-    services: {
-      publicSafety: string;
-      francophone: string;
-      healthSafety: string;
-      animalAid: string;
-    };
-    businessHours: {
-      title: string;
-      available247: string;
-      servicesAvailable: string;
-      holidays: string;
-    };
-    labels: {
-      address: string;
-      phone: string;
-      email: string;
-    };
-    antiSpam: string;
   };
   footer: {
     tagline: string;

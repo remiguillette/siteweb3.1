@@ -65,8 +65,8 @@ export default function Contact() {
     onSuccess: () => {
       setIsSubmitting(false);
       toast({
-        title: t.contact.form.successTitle,
-        description: t.contact.form.successMessage
+        title: "Message envoyé",
+        description: t.contact.form.successMessage || "Votre message a été envoyé avec succès!"
       });
       // Reset form
       setFormData({
@@ -80,9 +80,9 @@ export default function Contact() {
     onError: (error: any) => {
       setIsSubmitting(false);
       console.error('Contact form error:', error);
-      const errorMessage = error?.message || t.contact.form.errors.generic;
+      const errorMessage = error?.message || "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
       toast({
-        title: t.contact.form.errorTitle,
+        title: "Erreur",
         description: errorMessage,
         variant: "destructive"
       });
@@ -101,8 +101,8 @@ export default function Contact() {
     const timeSinceLoad = Date.now() - formStartTime;
     if (timeSinceLoad < 3000) {
       toast({
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errors.tooFast,
+        title: "Erreur",
+        description: "Veuillez prendre le temps de bien remplir le formulaire.",
         variant: "destructive"
       });
       return;
@@ -111,8 +111,8 @@ export default function Contact() {
     // Basic validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
       toast({
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errors.fillRequired,
+        title: "Erreur",
+        description: "Veuillez remplir tous les champs obligatoires.",
         variant: "destructive"
       });
       return;
@@ -122,8 +122,8 @@ export default function Contact() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errors.invalidEmail,
+        title: "Erreur",
+        description: "Veuillez entrer une adresse email valide.",
         variant: "destructive"
       });
       return;
@@ -132,8 +132,8 @@ export default function Contact() {
     // Simple frontend validation
     if (formData.message.length < 10) {
       toast({
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errors.messageLength,
+        title: "Erreur",
+        description: "Le message doit contenir au moins 10 caractères.",
         variant: "destructive"
       });
       return;
@@ -141,8 +141,8 @@ export default function Contact() {
 
     if (formData.message.length > 2000) {
       toast({
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errors.messageTooLong,
+        title: "Erreur",
+        description: "Le message ne peut pas dépasser 2000 caractères.",
         variant: "destructive"
       });
       return;
@@ -184,7 +184,7 @@ export default function Contact() {
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                   <svg 
                     className="w-6 h-6" 
-                    style={{ color: '#0d6efd' }} 
+                    style={{ color: '#f89422' }} 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -197,8 +197,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.address}</h3>
-                  <p style={{ color: '#f89422 ' }}>{t.contact.address}</p>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Adresse</h3>
+                  <p style={{ color: '#f89422' }}>{t.contact.address}</p>
                 </div>
               </div>
 
@@ -219,7 +219,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.phone}</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>Téléphone</h3>
                   <a 
                     href={`tel:${t.contact.phone}`} 
                     className="hover:underline transition-all duration-200"
@@ -235,7 +235,7 @@ export default function Contact() {
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
                   <svg 
                     className="w-6 h-6" 
-                    style={{ color: '#0d6efd' }} 
+                    style={{ color: '#f89422' }} 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -247,7 +247,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#0d6efd' }}>{t.contact.labels.email}</h3>
+                  <h3 className="font-semibold mb-1" style={{ color: '#f89422' }}>Courriel</h3>
                   <p style={{ color: '#f89422' }}>{t.contact.email}</p>
                 </div>
               </div>
@@ -255,16 +255,16 @@ export default function Contact() {
 
             {/* Business Hours */}
             <div className="bg-black rounded-2xl p-8 border-2" style={{ borderColor: '#f89422' }}>
-              <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.businessHours.title}</h2>
+              <h2 className="text-xl font-bold mb-4" style={{ color: '#f89422' }}>{t.contact.hours}</h2>
               <div className="space-y-3" style={{ color: '#f89422' }}>
                 <div className="text-center">
-                  <span className="font-semibold text-lg">{t.contact.businessHours.available247}</span>
+                  <span className="font-semibold text-lg">24/7 - Toute l'année</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>{t.contact.businessHours.servicesAvailable}</span>
+                  <span>Services disponibles en tout temps</span>
                 </div>
                 <div className="text-center text-sm">
-                  <span>{t.contact.businessHours.holidays}</span>
+                  <span>Jours fériés canadiens : Sur appel</span>
                 </div>
               </div>
             </div>
@@ -287,7 +287,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder={t.contact.form.placeholders.firstName}
+                    placeholder="Votre prénom"
                   />
                 </div>
                 <div>
@@ -302,7 +302,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                     style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                    placeholder={t.contact.form.placeholders.lastName}
+                    placeholder="Votre nom"
                   />
                 </div>
               </div>
@@ -319,7 +319,7 @@ export default function Contact() {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-black border-2 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent"
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
-                  placeholder={t.contact.form.placeholders.email}
+                  placeholder="votre@email.com"
                 />
               </div>
 
@@ -336,10 +336,10 @@ export default function Contact() {
                   style={{ borderColor: '#f89422', '--tw-ring-color': '#f89422' } as React.CSSProperties}
                 >
                   <option value="">{t.contact.form.selectService}</option>
-                  <option value="public-safety">{t.contact.services.publicSafety}</option>
-                  <option value="francophone">{t.contact.services.francophone}</option>
-                  <option value="health-safety">{t.contact.services.healthSafety}</option>
-                  <option value="animal-aid">{t.contact.services.animalAid}</option>
+                  <option value="public-safety">Consultation en Sécurité Publique</option>
+                  <option value="francophone">Services Communautaires Francophones</option>
+                  <option value="health-safety">Santé et Sécurité au Travail</option>
+                  <option value="animal-aid">Premiers Soins Animaliers</option>
                 </select>
               </div>
 
@@ -389,9 +389,10 @@ export default function Contact() {
                 <div className="text-[#f89422] text-center text-sm flex flex-col items-center">
                   <div className="flex items-center gap-2 mb-1">
                     <Shield size={16} aria-hidden="true" />
-                    <span>{t.contact.antiSpam}</span>
+                    <span>Protection renforcée contre les abus</span>
                   </div>
                   <span className="text-xs opacity-75">
+                    Limite: 2 messages/heure • Protection contre les bots
                   </span>
                 </div>
               </div>
@@ -408,7 +409,7 @@ export default function Contact() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    {t.contact.form.submitting}
+                    Envoi en cours...
                   </span>
                 ) : (
                   t.contact.form.submit

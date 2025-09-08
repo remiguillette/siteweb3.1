@@ -77,7 +77,6 @@
     "availability": "24/7 - Year Round",
     "serviceAvailable": "Services available at all times",
     "holidays": "Canadian Federal Holidays: On Call",
-    "antiSpam": "Enhanced protection against abuse",
     "form": {
       "title": "Information Request",
       "firstName": "First Name",
@@ -88,18 +87,7 @@
       "message": "Message",
       "messagePlaceholder": "Describe your needs...",
       "submit": "Send request",
-      "submitting": "Sending...",
       "successMessage": "Thank you for your message. We will contact you soon!",
-      "successTitle": "Message sent",
-      "errorTitle": "Error",
-      "errors": {
-        "fillRequired": "Please fill in all required fields.",
-        "invalidEmail": "Please enter a valid email address.",
-        "messageLength": "Message must contain at least 10 characters.",
-        "messageTooLong": "Message cannot exceed 2000 characters.",
-        "tooFast": "Please take time to properly fill out the form.",
-        "generic": "An error occurred while sending the message. Please try again."
-      },
       "placeholders": {
         "firstName": "Your first name",
         "lastName": "Your last name",
@@ -116,12 +104,6 @@
       "francophone": "Francophone Community Services", 
       "healthSafety": "Occupational Health & Safety",
       "animalAid": "Animal First Aid Services"
-    },
-    "businessHours": {
-      "title": "Business Hours",
-      "available247": "24/7 - Year Round",
-      "servicesAvailable": "Services available at all times",
-      "holidays": "Canadian Federal Holidays: On Call"
     }
   },
   "footer": {
@@ -157,8 +139,8 @@
       "title": "Company Information",
       "legalName": "Rémi Guillette RG Groupe",
       "operatingName": "Rémi Guillette Group",
-      "website": "remiguillette.ca",
-      "email": "info@remiguillette.ca"
+      "website": "https://remiguillette.replit.app",
+      "email": "remiguillette@rgra.ca"
     },
     "dataCollection": {
       "title": "What data do we collect?",
@@ -224,7 +206,7 @@
     "internationalTransfers": {
       "title": "International transfers",
       "description": "Our website is hosted by Replit, a U.S. company. Your data may be transferred to and stored in the United States.",
-      "replitInfo": "Replit implements appropriate security measures to protect your data in accordance with international data protection standards. Our domain is registered with AWS in Virginia."
+      "replitInfo": "Replit implements appropriate security measures to protect your data in accordance with international data protection standards."
     },
     "dataProtection": {
       "title": "How do we protect data?",
@@ -246,7 +228,7 @@
     "contact": {
       "title": "Who should I contact if I have questions?",
       "description": "For any questions about this privacy policy or your personal information, contact us:",
-      "email": "info@remiguillette.ca"
+      "email": "remiguillette@rgra.ca"
     },
     "changes": {
       "title": "Changes to this policy",
