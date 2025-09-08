@@ -77,6 +77,7 @@
     "availability": "24/7 - Year Round",
     "serviceAvailable": "Services available at all times",
     "holidays": "Canadian Federal Holidays: On Call",
+    "antiSpam": "Enhanced protection against abuse",
     "form": {
       "title": "Information Request",
       "firstName": "First Name",
@@ -87,7 +88,18 @@
       "message": "Message",
       "messagePlaceholder": "Describe your needs...",
       "submit": "Send request",
+      "submitting": "Sending...",
       "successMessage": "Thank you for your message. We will contact you soon!",
+      "successTitle": "Message sent",
+      "errorTitle": "Error",
+      "errors": {
+        "fillRequired": "Please fill in all required fields.",
+        "invalidEmail": "Please enter a valid email address.",
+        "messageLength": "Message must contain at least 10 characters.",
+        "messageTooLong": "Message cannot exceed 2000 characters.",
+        "tooFast": "Please take time to properly fill out the form.",
+        "generic": "An error occurred while sending the message. Please try again."
+      },
       "placeholders": {
         "firstName": "Your first name",
         "lastName": "Your last name",
@@ -104,6 +116,12 @@
       "francophone": "Francophone Community Services", 
       "healthSafety": "Occupational Health & Safety",
       "animalAid": "Animal First Aid Services"
+    },
+    "businessHours": {
+      "title": "Business Hours",
+      "available247": "24/7 - Year Round",
+      "servicesAvailable": "Services available at all times",
+      "holidays": "Canadian Federal Holidays: On Call"
     }
   },
   "footer": {
