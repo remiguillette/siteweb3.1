@@ -1,8 +1,4 @@
-
 import { pgTable, text, serial, boolean, timestamp, integer } from "drizzle-orm/pg-core";
-
-import { pgTable, text, serial, boolean, timestamp } from "drizzle-orm/pg-core";
-
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -22,7 +18,6 @@ export const contactMessages = pgTable("contact_messages", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-
 export const trainingApplications = pgTable("training_applications", {
   id: serial("id").primaryKey(),
   firstName: text("first_name").notNull(),
@@ -38,7 +33,6 @@ export const trainingApplications = pgTable("training_applications", {
   declarationAccepted: boolean("declaration_accepted").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-
 
 export const studentAccounts = pgTable("student_accounts", {
   id: serial("id").primaryKey(),
@@ -83,9 +77,6 @@ export const studentCourseRequests = pgTable("student_course_requests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-
-
-
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -100,7 +91,6 @@ export const insertTrainingApplicationSchema = createInsertSchema(trainingApplic
   id: true,
   createdAt: true,
 });
-
 
 export const insertStudentAccountSchema = createInsertSchema(studentAccounts).omit({
   id: true,
@@ -122,7 +112,6 @@ export const insertStudentCourseRequestSchema = createInsertSchema(studentCourse
   id: true,
   createdAt: true,
 });
-
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;

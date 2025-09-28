@@ -8,12 +8,8 @@
     "divisions": "Secteurs d'activité",
     "services": "Services",
     "learn": "Formations",
-
-    "contact": "Contact",
-    "studentPortal": "Portail étudiant"
-
+    "studentPortal": "Portail étudiant",
     "contact": "Contact"
-
   },
   "hero": {
     "title": "Excellence en",
@@ -29,25 +25,37 @@
       "title": "Consultation en Sécurité Publique",
       "subtitle": "Services spécialisés",
       "description": "Expertise en évaluation des risques, planification d'urgence et mise en œuvre de protocoles de sécurité pour les organismes publics et privés.",
-      "tags": ["Évaluation des risques", "Planification d'urgence"]
+      "tags": [
+        "Évaluation des risques",
+        "Planification d'urgence"
+      ]
     },
     "francophone": {
       "title": "Services Communautaires Francophones",
       "subtitle": "Engagement communautaire",
       "description": "Développement de programmes et services adaptés aux besoins spécifiques des communautés francophones du Canada.",
-      "tags": ["Programmes communautaires", "Services linguistiques"]
+      "tags": [
+        "Programmes communautaires",
+        "Services linguistiques"
+      ]
     },
     "healthSafety": {
       "title": "Santé et Sécurité au Travail",
       "subtitle": "Conformité LSST",
       "description": "Formation, audit et mise en conformité pour assurer un environnement de travail sécuritaire selon les normes CNESST et canadiennes.",
-      "tags": ["Formation SST", "Conformité réglementaire"]
+      "tags": [
+        "Formation SST",
+        "Conformité réglementaire"
+      ]
     },
     "animalAid": {
       "title": "Services de Premiers Soins Animaliers",
       "subtitle": "Soins d'urgence",
       "description": "Formation spécialisée et services d'urgence pour les soins aux animaux, destinés aux professionnels et propriétaires.",
-      "tags": ["Formation premiers soins", "Services d'urgence"]
+      "tags": [
+        "Formation premiers soins",
+        "Services d'urgence"
+      ]
     }
   },
   "services": {
@@ -56,17 +64,29 @@
     "strategic": {
       "title": "Consultation Stratégique",
       "description": "Développement de stratégies personnalisées pour optimiser les performances organisationnelles et atteindre les objectifs à long terme.",
-      "features": ["Analyse organisationnelle", "Planification stratégique", "Optimisation des processus"]
+      "features": [
+        "Analyse organisationnelle",
+        "Planification stratégique",
+        "Optimisation des processus"
+      ]
     },
     "projectManagement": {
       "title": "Gestion de Projets",
       "description": "Direction et supervision de projets complexes avec méthodologies éprouvées pour garantir la livraison dans les délais et budgets.",
-      "features": ["Planification de projets", "Gestion des risques", "Contrôle qualité"]
+      "features": [
+        "Planification de projets",
+        "Gestion des risques",
+        "Contrôle qualité"
+      ]
     },
     "security": {
       "title": "Sécurité et Conformité",
       "description": "Audit, évaluation et mise en conformité avec les réglementations canadiennes pour assurer la sécurité et la conformité légale.",
-      "features": ["Audit de sécurité", "Mise en conformité", "Formation réglementaire"]
+      "features": [
+        "Audit de sécurité",
+        "Mise en conformité",
+        "Formation réglementaire"
+      ]
     },
     "ctaTitle": "Prêt à commencer votre projet?",
     "ctaDescription": "Discutons de vos besoins et découvrons comment nos services peuvent transformer votre organisation.",
@@ -158,7 +178,6 @@
       }
     }
   },
-
   "studentPortal": {
     "navLabel": "Portail étudiant",
     "login": {
@@ -243,7 +262,6 @@
       }
     }
   },
-
   "contact": {
     "title": "Contactez-Nous",
     "subtitle": "Nous sommes là pour vous accompagner. Contactez-nous pour discuter de vos besoins en consultation.",
@@ -383,7 +401,7 @@
     },
     "internationalTransfers": {
       "title": "Transferts internationaux",
-    "description": "Notre site web est hébergé par Replit et nos services de domaine sont gérés par Amazon Web Services (AWS) dans la région us-east-1. Vos données peuvent être transférées et stockées aux États-Unis.",
+      "description": "Notre site web est hébergé par Replit et nos services de domaine sont gérés par Amazon Web Services (AWS) dans la région us-east-1. Vos données peuvent être transférées et stockées aux États-Unis.",
       "replitInfo": "Replit applique des mesures de sécurité appropriées pour protéger vos données conformément aux normes internationales de protection des données."
     },
     "dataProtection": {

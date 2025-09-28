@@ -1,7 +1,7 @@
-import fr from '../locales/fr.json';
-import en from '../locales/en.json';
+import fr from "../locales/fr.json";
+import en from "../locales/en.json";
 
-export type Language = 'fr' | 'en';
+export type Language = "fr" | "en";
 
 export interface TranslationData {
   brand: {
@@ -13,8 +13,8 @@ export interface TranslationData {
     divisions: string;
     services: string;
     learn: string;
-    contact: string;
     studentPortal: string;
+    contact: string;
   };
   hero: {
     title: string;
@@ -145,7 +145,6 @@ export interface TranslationData {
       };
     };
   };
-  codex/add-application-submission-feature-kxekbe
   studentPortal: {
     navLabel: string;
     login: {
@@ -225,7 +224,6 @@ export interface TranslationData {
       };
     };
   };
- main
   contact: {
     title: string;
     subtitle: string;
@@ -234,10 +232,9 @@ export interface TranslationData {
     phone: string;
     email: string;
     hours: string;
-    weekdays: string;
-    saturday: string;
-    sunday: string;
-    closed: string;
+    availability: string;
+    serviceAvailable: string;
+    holidays: string;
     form: {
       title: string;
       firstName: string;
@@ -249,6 +246,22 @@ export interface TranslationData {
       messagePlaceholder: string;
       submit: string;
       successMessage: string;
+      placeholders: {
+        firstName: string;
+        lastName: string;
+        email: string;
+      };
+    };
+    labels: {
+      address: string;
+      phone: string;
+      email: string;
+    };
+    services: {
+      publicSafety: string;
+      francophone: string;
+      healthSafety: string;
+      animalAid: string;
     };
   };
   footer: {
@@ -371,11 +384,11 @@ export const translations: Record<Language, TranslationData> = {
 
 export const getTranslation = (language: Language): TranslationData => {
   const translationData = translations[language];
-  console.log('📚 Translation data requested:', {
+  console.log("📚 Translation data requested:", {
     language,
     hasData: !!translationData,
     availableLanguages: Object.keys(translations),
-    sampleTranslation: translationData?.brand?.company || 'undefined'
+    sampleTranslation: translationData?.brand?.company ?? "undefined",
   });
   return translationData;
 };
