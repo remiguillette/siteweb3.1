@@ -2,7 +2,12 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
-import { insertContactMessageSchema, type InsertContactMessage } from "@shared/schema";
+import {
+  insertContactMessageSchema,
+  insertTrainingApplicationSchema,
+  type InsertContactMessage,
+  type InsertTrainingApplication
+} from "@shared/schema";
 
 // Enhanced anti-spam and flood protection
 const submissionTracker = new Map<string, number[]>();
@@ -64,30 +69,51 @@ function validateFormContent(data: any): boolean {
   // Basic spam content detection
   const spamKeywords = ['viagra', 'casino', 'lottery', 'winner', 'urgent', 'click here', 'free money'];
   const text = `${data.firstName} ${data.lastName} ${data.email} ${data.message}`.toLowerCase();
-  
+
   // Check for spam keywords
   if (spamKeywords.some(keyword => text.includes(keyword))) {
     return false;
   }
-  
+
   // Check for excessive links
   const linkCount = (data.message.match(/https?:\/\//g) || []).length;
   if (linkCount > 2) {
     return false;
   }
-  
+
   // Check message length (too short or too long)
   if (data.message.length < 10 || data.message.length > 2000) {
     return false;
   }
-  
+
+  return true;
+}
+
+function validateApplicationContent(data: InsertTrainingApplication): boolean {
+  const spamKeywords = ['viagra', 'casino', 'lottery', 'winner', 'urgent', 'click here', 'free money'];
+  const text = `${data.firstName} ${data.lastName} ${data.email} ${data.motivations} ${data.careerGoals}`.toLowerCase();
+
+  if (spamKeywords.some(keyword => text.includes(keyword))) {
+    return false;
+  }
+
+  const linkCount = ((data.motivations.match(/https?:\/\//g) || []).length) +
+    ((data.careerGoals.match(/https?:\/\//g) || []).length);
+  if (linkCount > 2) {
+    return false;
+  }
+
+  if (data.motivations.length < 20 || data.careerGoals.length < 20) {
+    return false;
+  }
+
   return true;
 }
 
 // Discord webhook function
 async function sendToDiscordWebhook(contactData: InsertContactMessage) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-  
+
   if (!webhookUrl) {
     console.warn("Discord webhook URL not configured, skipping Discord notification");
     return;
@@ -158,6 +184,97 @@ async function sendToDiscordWebhook(contactData: InsertContactMessage) {
   }
 }
 
+async function sendTrainingApplicationToDiscord(applicationData: InsertTrainingApplication) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+  if (!webhookUrl) {
+    console.warn("Discord webhook URL not configured, skipping training application notification");
+    return;
+  }
+
+  try {
+    const statusLabel = applicationData.employmentStatus === 'other'
+      ? `Autre: ${applicationData.employmentStatusOther || 'Non précisé'}`
+      : applicationData.employmentStatus;
+
+    const embed = {
+      title: "🎓 Nouvelle demande de formation",
+      color: 0x0d6efd,
+      fields: [
+        {
+          name: "👤 Candidat",
+          value: `${applicationData.firstName} ${applicationData.lastName}`,
+          inline: true
+        },
+        {
+          name: "📧 Email",
+          value: applicationData.email,
+          inline: true
+        },
+        {
+          name: "📞 Téléphone",
+          value: applicationData.phoneNumber,
+          inline: true
+        },
+        {
+          name: "🎂 Date de naissance",
+          value: applicationData.dateOfBirth,
+          inline: true
+        },
+        {
+          name: "🏠 Adresse",
+          value: applicationData.address,
+          inline: false
+        },
+        {
+          name: "💼 Statut actuel",
+          value: statusLabel,
+          inline: true
+        },
+        {
+          name: "🎯 Motivations",
+          value: applicationData.motivations.length > 1024
+            ? `${applicationData.motivations.substring(0, 1021)}...`
+            : applicationData.motivations,
+          inline: false
+        },
+        {
+          name: "🚀 Objectifs professionnels",
+          value: applicationData.careerGoals.length > 1024
+            ? `${applicationData.careerGoals.substring(0, 1021)}...`
+            : applicationData.careerGoals,
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Rémi Guillette Groupe - Demande de formation"
+      }
+    };
+
+    const payload = {
+      content: "📥 **Nouvelle demande de formation reçue**",
+      embeds: [embed]
+    };
+
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Discord webhook failed: ${response.status} ${response.statusText}`);
+    }
+
+    console.log("Successfully sent training application to Discord");
+  } catch (error) {
+    console.error("Failed to send training application to Discord:", error);
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
 
   // Dynamic sitemap generation
@@ -174,6 +291,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { path: '/divisions', priority: '0.8', changefreq: 'monthly' },
       { path: '/services', priority: '0.8', changefreq: 'monthly' },
       { path: '/contact', priority: '0.7', changefreq: 'monthly' },
+      { path: '/learn', priority: '0.7', changefreq: 'monthly' },
+      { path: '/apprendre', priority: '0.7', changefreq: 'monthly' },
       { path: '/public-safety', priority: '0.7', changefreq: 'monthly' },
       { path: '/francophone-services', priority: '0.7', changefreq: 'monthly' },
       { path: '/health-safety', priority: '0.7', changefreq: 'monthly' },
@@ -257,6 +376,153 @@ Sitemap: ${baseUrl}/sitemap.xml`;
   });
 
   // Contact form submission
+  app.post("/api/training-applications", async (req, res) => {
+    try {
+      const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
+
+      if (isSpamSubmission(clientIP)) {
+        console.warn(`Flood protection triggered for training form IP: ${clientIP}`);
+        return res.status(429).json({
+          success: false,
+          error: "Trop de soumissions détectées. Veuillez patienter avant de soumettre à nouveau."
+        });
+      }
+
+      if (req.body.website || req.body.url || req.body.phone_hidden) {
+        console.warn(`Training form bot detected via honeypot from IP: ${clientIP}`);
+        return res.status(400).json({
+          success: false,
+          error: "Soumission invalide détectée."
+        });
+      }
+
+      const submissionStartTime = req.body.formStartTime;
+      if (submissionStartTime) {
+        const submissionTime = Date.now() - parseInt(submissionStartTime);
+        if (submissionTime < 3000) {
+          console.warn(`Training form submitted too quickly from IP: ${clientIP}, time: ${submissionTime}ms`);
+          return res.status(400).json({
+            success: false,
+            error: "Soumission trop rapide. Veuillez prendre le temps de remplir le formulaire."
+          });
+        }
+      }
+
+      const { recaptchaToken, website, url, phone_hidden, formStartTime, ...formData } = req.body;
+
+      const requiredFields = [
+        'firstName',
+        'lastName',
+        'dateOfBirth',
+        'address',
+        'phoneNumber',
+        'email',
+        'employmentStatus',
+        'motivations',
+        'careerGoals'
+      ];
+
+      const missingFields = requiredFields.filter(field => !formData[field] || String(formData[field]).trim() === '');
+      if (missingFields.length > 0) {
+        return res.status(400).json({
+          success: false,
+          error: "Tous les champs obligatoires doivent être remplis.",
+          details: missingFields
+        });
+      }
+
+      if (formData.employmentStatus === 'other' && (!formData.employmentStatusOther || String(formData.employmentStatusOther).trim() === '')) {
+        return res.status(400).json({
+          success: false,
+          error: "Veuillez préciser votre statut actuel."
+        });
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        return res.status(400).json({
+          success: false,
+          error: "Format d'email invalide."
+        });
+      }
+
+      const phoneDigits = String(formData.phoneNumber).replace(/\D/g, '');
+      if (phoneDigits.length < 10) {
+        return res.status(400).json({
+          success: false,
+          error: "Veuillez fournir un numéro de téléphone valide."
+        });
+      }
+
+      const birthDate = new Date(formData.dateOfBirth);
+      if (Number.isNaN(birthDate.getTime()) || birthDate > new Date()) {
+        return res.status(400).json({
+          success: false,
+          error: "La date de naissance est invalide."
+        });
+      }
+
+      const motivations = String(formData.motivations).trim();
+      const careerGoals = String(formData.careerGoals).trim();
+
+      if (motivations.length < 20 || careerGoals.length < 20) {
+        return res.status(400).json({
+          success: false,
+          error: "Merci de détailler vos motivations et objectifs professionnels."
+        });
+      }
+
+      if (!formData.declarationAccepted) {
+        return res.status(400).json({
+          success: false,
+          error: "La déclaration doit être acceptée pour soumettre votre demande."
+        });
+      }
+
+      const sanitizedData: InsertTrainingApplication = {
+        firstName: String(formData.firstName).trim(),
+        lastName: String(formData.lastName).trim(),
+        dateOfBirth: String(formData.dateOfBirth),
+        address: String(formData.address).trim(),
+        phoneNumber: String(formData.phoneNumber).trim(),
+        email: String(formData.email).trim().toLowerCase(),
+        employmentStatus: String(formData.employmentStatus),
+        employmentStatusOther: formData.employmentStatus === 'other'
+          ? String(formData.employmentStatusOther).trim()
+          : undefined,
+        motivations,
+        careerGoals,
+        declarationAccepted: true,
+      };
+
+      const validatedData = insertTrainingApplicationSchema.parse(sanitizedData);
+
+      if (!validateApplicationContent(validatedData)) {
+        console.warn(`Training application content flagged from IP: ${clientIP}`);
+        return res.status(400).json({
+          success: false,
+          error: "Le contenu du formulaire contient des éléments non autorisés."
+        });
+      }
+
+      recordSubmission(clientIP);
+
+      const application = await storage.createTrainingApplication(validatedData);
+
+      await sendTrainingApplicationToDiscord(validatedData);
+
+      console.log(`Training application submitted successfully from IP: ${clientIP}`);
+      res.json({ success: true, message: "Demande envoyée avec succès", id: application.id });
+    } catch (error) {
+      console.error("Error creating training application:", error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ success: false, error: "Données du formulaire invalides", details: error.errors });
+      } else {
+        res.status(500).json({ success: false, error: "Erreur interne du serveur" });
+      }
+    }
+  });
+
   app.post("/api/contact", async (req, res) => {
     try {
       const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
