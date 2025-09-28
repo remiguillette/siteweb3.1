@@ -7,6 +7,7 @@
     "home": "Accueil",
     "divisions": "Secteurs d'activité",
     "services": "Services",
+    "learn": "Formations",
     "contact": "Contact"
   },
   "hero": {
@@ -65,6 +66,92 @@
     "ctaTitle": "Prêt à commencer votre projet?",
     "ctaDescription": "Discutons de vos besoins et découvrons comment nos services peuvent transformer votre organisation.",
     "ctaButton": "Obtenir une consultation gratuite"
+  },
+  "learn": {
+    "title": "Programmes de formation professionnelle",
+    "subtitle": "Faites progresser votre carrière avec des parcours bilingues adaptés aux leaders de la sécurité et des services communautaires.",
+    "intro": "Notre division formation propose des expériences d'apprentissage appliquées qui combinent connaissances réglementaires, mises en situation et accompagnement stratégique pour amplifier votre impact.",
+    "highlights": [
+      {
+        "title": "Scénarios pratiques",
+        "description": "Ateliers basés sur des scénarios reproduisant des situations réelles en sécurité publique, santé et services communautaires."
+      },
+      {
+        "title": "Formateurs certifiés",
+        "description": "Des experts bilingues possédant une expérience terrain à travers le Canada et des accréditations reconnues."
+      },
+      {
+        "title": "Accompagnement de carrière",
+        "description": "Un guidage personnalisé pour aligner la formation sur vos ambitions professionnelles et vos prochaines étapes."
+      }
+    ],
+    "benefits": {
+      "title": "Ce que vous retirerez",
+      "items": [
+        "Des compétences actualisées conformes aux normes canadiennes en sécurité, santé et programmation communautaire.",
+        "Un coaching pour transformer les apprentissages en résultats concrets sur le terrain.",
+        "L'accès au réseau professionnel du Groupe Rémi Guillette pour un mentorat continu."
+      ]
+    },
+    "form": {
+      "title": "Formulaire de demande de formation",
+      "description": "Remplissez la demande ci-dessous afin que notre équipe d'admission puisse vous contacter.",
+      "personal": {
+        "title": "Renseignements personnels",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "dateOfBirth": "Date de naissance",
+        "address": "Adresse complète",
+        "phoneNumber": "Numéro de téléphone",
+        "email": "Adresse courriel",
+        "placeholders": {
+          "firstName": "Votre prénom",
+          "lastName": "Votre nom",
+          "dateOfBirth": "AAAA-MM-JJ",
+          "address": "123 rue Principale, Ville, Province",
+          "phoneNumber": "(123) 456-7890",
+          "email": "votre@email.com"
+        }
+      },
+      "employment": {
+        "title": "Statut professionnel actuel",
+        "description": "Statut actuel *",
+        "options": {
+          "employee": "Employé(e)",
+          "jobSeeker": "Chercheur d'emploi",
+          "student": "Étudiant(e)",
+          "selfEmployed": "Travailleur autonome / Entrepreneur",
+          "other": "Autre (veuillez préciser)"
+        },
+        "otherPlaceholder": "Veuillez préciser votre statut"
+      },
+      "motivations": {
+        "title": "Motivations et plan de carrière",
+        "motivationsLabel": "Pourquoi souhaitez-vous suivre cette formation? Quelles sont vos motivations? *",
+        "careerGoalsLabel": "Quels sont vos objectifs professionnels après la formation? *",
+        "motivationsPlaceholder": "Expliquez ce qui vous motive à intégrer ce programme...",
+        "careerGoalsPlaceholder": "Décrivez le parcours professionnel que vous envisagez après la formation..."
+      },
+      "declaration": {
+        "title": "Déclaration",
+        "text": "Je soussigné(e), {{fullName}}, certifie que les renseignements fournis dans ce formulaire sont exacts et complets.",
+        "checkbox": "Je confirme que les renseignements fournis sont exacts.",
+        "fullNamePlaceholder": "vos prénom et nom"
+      },
+      "submit": "Soumettre la demande",
+      "successTitle": "Demande envoyée",
+      "successMessage": "Merci pour votre intérêt! Notre équipe vous contactera prochainement.",
+      "errors": {
+        "required": "Veuillez remplir tous les champs obligatoires.",
+        "email": "Veuillez saisir une adresse courriel valide.",
+        "phone": "Veuillez saisir un numéro de téléphone d'au moins 10 chiffres.",
+        "declaration": "Vous devez accepter la déclaration pour soumettre votre demande.",
+        "otherRequired": "Veuillez préciser votre statut actuel.",
+        "motivationsLength": "Veuillez fournir au moins 20 caractères pour vos motivations.",
+        "careerLength": "Veuillez fournir au moins 20 caractères pour vos objectifs professionnels.",
+        "tooFast": "Prenez quelques instants pour compléter le formulaire avant de l'envoyer."
+      }
+    }
   },
   "contact": {
     "title": "Contactez-Nous",

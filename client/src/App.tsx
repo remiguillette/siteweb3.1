@@ -21,6 +21,7 @@ import NotFound from "@/pages/not-found";
 import ServerError from "./pages/ServerError";
 import ErrorTest from "./pages/ErrorTest";
 import { useState } from "react";
+import Learn from "./pages/Learn";
 
 function Router() {
   return (
@@ -29,6 +30,8 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/secteurs-activite" component={ActivitySectors} />
         <Route path="/services" component={Services} />
+        <Route path="/learn" component={Learn} />
+        <Route path="/apprendre" component={Learn} />
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />
         <Route path="/francophone-services" component={FrancophoneServices} />

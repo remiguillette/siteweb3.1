@@ -12,6 +12,7 @@ export interface TranslationData {
     home: string;
     divisions: string;
     services: string;
+    learn: string;
     contact: string;
   };
   hero: {
@@ -70,6 +71,78 @@ export interface TranslationData {
     ctaTitle: string;
     ctaDescription: string;
     ctaButton: string;
+  };
+  learn: {
+    title: string;
+    subtitle: string;
+    intro: string;
+    highlights: {
+      title: string;
+      description: string;
+    }[];
+    benefits: {
+      title: string;
+      items: string[];
+    };
+    form: {
+      title: string;
+      description: string;
+      personal: {
+        title: string;
+        firstName: string;
+        lastName: string;
+        dateOfBirth: string;
+        address: string;
+        phoneNumber: string;
+        email: string;
+        placeholders: {
+          firstName: string;
+          lastName: string;
+          dateOfBirth: string;
+          address: string;
+          phoneNumber: string;
+          email: string;
+        };
+      };
+      employment: {
+        title: string;
+        description: string;
+        options: {
+          employee: string;
+          jobSeeker: string;
+          student: string;
+          selfEmployed: string;
+          other: string;
+        };
+        otherPlaceholder: string;
+      };
+      motivations: {
+        title: string;
+        motivationsLabel: string;
+        careerGoalsLabel: string;
+        motivationsPlaceholder: string;
+        careerGoalsPlaceholder: string;
+      };
+      declaration: {
+        title: string;
+        text: string;
+        checkbox: string;
+        fullNamePlaceholder: string;
+      };
+      submit: string;
+      successTitle: string;
+      successMessage: string;
+      errors: {
+        required: string;
+        email: string;
+        phone: string;
+        declaration: string;
+        otherRequired: string;
+        motivationsLength: string;
+        careerLength: string;
+        tooFast: string;
+      };
+    };
   };
   contact: {
     title: string;

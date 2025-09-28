@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, boolean, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -19,6 +19,23 @@ export const contactMessages = pgTable("contact_messages", {
 });
 
 
+export const trainingApplications = pgTable("training_applications", {
+  id: serial("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  dateOfBirth: text("date_of_birth").notNull(),
+  address: text("address").notNull(),
+  phoneNumber: text("phone_number").notNull(),
+  email: text("email").notNull(),
+  employmentStatus: text("employment_status").notNull(),
+  employmentStatusOther: text("employment_status_other"),
+  motivations: text("motivations").notNull(),
+  careerGoals: text("career_goals").notNull(),
+  declarationAccepted: boolean("declaration_accepted").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+
 
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
@@ -30,7 +47,14 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
   createdAt: true,
 });
 
+export const insertTrainingApplicationSchema = createInsertSchema(trainingApplications).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+export type InsertTrainingApplication = z.infer<typeof insertTrainingApplicationSchema>;
+export type TrainingApplication = typeof trainingApplications.$inferSelect;
