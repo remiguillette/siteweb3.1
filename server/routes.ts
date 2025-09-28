@@ -1,7 +1,11 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage, hashPassword } from "./storage";
+import { randomBytes } from "crypto";
 import { z } from "zod";
+
+import { ensureStudentPortalTables } from "./neondb";
+
 import {
   insertContactMessageSchema,
   insertTrainingApplicationSchema,
@@ -12,6 +16,63 @@ import {
 // Enhanced anti-spam and flood protection
 const submissionTracker = new Map<string, number[]>();
 const shortTermTracker = new Map<string, number[]>(); // For short-term flood protection
+const studentSessions = new Map<string, { studentId: number; createdAt: number }>();
+
+const STUDENT_SESSION_DURATION_MS = 1000 * 60 * 60 * 8; // 8 hours
+
+function createStudentSessionToken(studentId: number): string {
+  // Remove any existing sessions for this student to keep only the newest token active
+  for (const [token, session] of studentSessions.entries()) {
+    if (session.studentId === studentId) {
+      studentSessions.delete(token);
+    }
+  }
+
+  const token = randomBytes(32).toString("hex");
+  studentSessions.set(token, { studentId, createdAt: Date.now() });
+  return token;
+}
+
+function getStudentIdFromRequest(req: Request): number | null {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return null;
+  }
+
+  const [scheme, token] = authHeader.split(" ");
+  if (!token || scheme.toLowerCase() !== "bearer") {
+    return null;
+  }
+
+  const session = studentSessions.get(token);
+  if (!session) {
+    return null;
+  }
+
+  const age = Date.now() - session.createdAt;
+  if (age > STUDENT_SESSION_DURATION_MS) {
+    studentSessions.delete(token);
+    return null;
+  }
+
+  // Refresh session timestamp on use
+  session.createdAt = Date.now();
+  studentSessions.set(token, session);
+  return session.studentId;
+}
+
+function scheduleSessionCleanup() {
+  setInterval(() => {
+    const now = Date.now();
+    for (const [token, session] of studentSessions.entries()) {
+      if (now - session.createdAt > STUDENT_SESSION_DURATION_MS) {
+        studentSessions.delete(token);
+      }
+    }
+  }, STUDENT_SESSION_DURATION_MS).unref?.();
+}
+
+scheduleSessionCleanup();
 
 function isSpamSubmission(ip: string): boolean {
   const now = Date.now();
@@ -277,6 +338,10 @@ async function sendTrainingApplicationToDiscord(applicationData: InsertTrainingA
 
 export async function registerRoutes(app: Express): Promise<Server> {
 
+  ensureStudentPortalTables().catch((error) => {
+    console.warn("Unable to verify Neon student tables:", error);
+  });
+
   // Dynamic sitemap generation
   app.get("/sitemap.xml", (req, res) => {
     // Use the production domain or fallback to request host for local development
@@ -297,6 +362,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { path: '/francophone-services', priority: '0.7', changefreq: 'monthly' },
       { path: '/health-safety', priority: '0.7', changefreq: 'monthly' },
       { path: '/animal-first-aid', priority: '0.7', changefreq: 'monthly' },
+      { path: '/student/login', priority: '0.6', changefreq: 'monthly' },
+      { path: '/etudiant/connexion', priority: '0.6', changefreq: 'monthly' },
+      { path: '/student/change-password', priority: '0.5', changefreq: 'monthly' },
+      { path: '/etudiant/mot-de-passe', priority: '0.5', changefreq: 'monthly' },
+      { path: '/student/portal', priority: '0.6', changefreq: 'weekly' },
+      { path: '/etudiant/portail', priority: '0.6', changefreq: 'weekly' },
       { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
       { path: '/politique-confidentialite', priority: '0.3', changefreq: 'yearly' }
     ];
@@ -373,6 +444,257 @@ Sitemap: ${baseUrl}/sitemap.xml`;
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "healthy", timestamp: new Date().toISOString() });
+  });
+
+  app.post("/api/student/login", async (req, res) => {
+    try {
+      const { cardNumber, password } = req.body ?? {};
+
+      if (!cardNumber || !password) {
+        return res.status(400).json({
+          success: false,
+          error: "Card number and password are required.",
+          errorCode: "missing_fields",
+        });
+      }
+
+      const student = await storage.getStudentByCardNumber(String(cardNumber));
+      if (!student) {
+        return res.status(401).json({
+          success: false,
+          error: "Unable to find a matching student account.",
+          errorCode: "not_found",
+        });
+      }
+
+      if (!student.isActive) {
+        return res.status(403).json({
+          success: false,
+          error: "This account has not been activated yet.",
+          errorCode: "inactive",
+        });
+      }
+
+      const hashedInput = hashPassword(String(password));
+      const expectedHash =
+        student.requiresPasswordChange || !student.passwordHash
+          ? student.temporaryPasswordHash
+          : student.passwordHash;
+
+      if (expectedHash !== hashedInput) {
+        return res.status(401).json({
+          success: false,
+          error: "The credentials provided are invalid.",
+          errorCode: "invalid_credentials",
+        });
+      }
+
+      const sessionToken = createStudentSessionToken(student.id);
+
+      res.json({
+        success: true,
+        sessionToken,
+        student: {
+          id: student.id,
+          cardNumber: student.cardNumber,
+          firstName: student.firstName,
+          lastName: student.lastName,
+          requiresPasswordChange: student.requiresPasswordChange,
+        },
+      });
+    } catch (error) {
+      console.error("Student login failed:", error);
+      res.status(500).json({
+        success: false,
+        error: "Internal server error.",
+        errorCode: "server_error",
+      });
+    }
+  });
+
+  app.post("/api/student/change-password", async (req, res) => {
+    try {
+      const studentId = getStudentIdFromRequest(req);
+      if (!studentId) {
+        return res.status(401).json({
+          success: false,
+          error: "Authentication required.",
+          errorCode: "unauthorized",
+        });
+      }
+
+      const { currentPassword, newPassword, confirmPassword } = req.body ?? {};
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        return res.status(400).json({
+          success: false,
+          error: "All password fields are required.",
+          errorCode: "missing_fields",
+        });
+      }
+
+      if (String(newPassword) !== String(confirmPassword)) {
+        return res.status(400).json({
+          success: false,
+          error: "The confirmation password does not match.",
+          errorCode: "mismatch",
+        });
+      }
+
+      if (String(newPassword).length < 8) {
+        return res.status(400).json({
+          success: false,
+          error: "The new password must contain at least 8 characters.",
+          errorCode: "weak_password",
+        });
+      }
+
+      const student = await storage.getStudentById(studentId);
+      if (!student) {
+        return res.status(404).json({
+          success: false,
+          error: "Student account not found.",
+          errorCode: "not_found",
+        });
+      }
+
+      const hashedCurrent = hashPassword(String(currentPassword));
+      const currentHash = student.passwordHash ?? student.temporaryPasswordHash;
+      if (hashedCurrent !== currentHash) {
+        return res.status(400).json({
+          success: false,
+          error: "The current password is incorrect.",
+          errorCode: "invalid_current_password",
+        });
+      }
+
+      const newHash = hashPassword(String(newPassword));
+      if (newHash === currentHash) {
+        return res.status(400).json({
+          success: false,
+          error: "Please choose a different password than your current one.",
+          errorCode: "password_reused",
+        });
+      }
+
+      const updatedStudent = await storage.updateStudentPassword(studentId, newHash);
+      if (!updatedStudent) {
+        return res.status(500).json({
+          success: false,
+          error: "Unable to update the password.",
+          errorCode: "update_failed",
+        });
+      }
+
+      const sessionToken = createStudentSessionToken(updatedStudent.id);
+
+      res.json({
+        success: true,
+        message: "Password updated successfully.",
+        sessionToken,
+        student: {
+          id: updatedStudent.id,
+          cardNumber: updatedStudent.cardNumber,
+          firstName: updatedStudent.firstName,
+          lastName: updatedStudent.lastName,
+          requiresPasswordChange: updatedStudent.requiresPasswordChange,
+        },
+      });
+    } catch (error) {
+      console.error("Student password change failed:", error);
+      res.status(500).json({
+        success: false,
+        error: "Internal server error.",
+        errorCode: "server_error",
+      });
+    }
+  });
+
+  app.get("/api/student/dashboard", async (req, res) => {
+    try {
+      const studentId = getStudentIdFromRequest(req);
+      if (!studentId) {
+        return res.status(401).json({
+          success: false,
+          error: "Authentication required.",
+          errorCode: "unauthorized",
+        });
+      }
+
+      const dashboard = await storage.getStudentDashboard(studentId);
+      if (!dashboard) {
+        return res.status(404).json({
+          success: false,
+          error: "Student account not found.",
+          errorCode: "not_found",
+        });
+      }
+
+      res.json({ success: true, data: dashboard });
+    } catch (error) {
+      console.error("Failed to load student dashboard:", error);
+      res.status(500).json({
+        success: false,
+        error: "Internal server error.",
+        errorCode: "server_error",
+      });
+    }
+  });
+
+  app.post("/api/student/store/request", async (req, res) => {
+    try {
+      const studentId = getStudentIdFromRequest(req);
+      if (!studentId) {
+        return res.status(401).json({
+          success: false,
+          error: "Authentication required.",
+          errorCode: "unauthorized",
+        });
+      }
+
+      const { courseId } = req.body ?? {};
+      const numericCourseId = Number(courseId);
+      if (!Number.isInteger(numericCourseId)) {
+        return res.status(400).json({
+          success: false,
+          error: "A valid course identifier is required.",
+          errorCode: "invalid_course",
+        });
+      }
+
+      const request = await storage.createStudentCourseRequest(studentId, numericCourseId);
+      const dashboard = await storage.getStudentDashboard(studentId);
+
+      res.json({
+        success: true,
+        request,
+        dashboard,
+      });
+    } catch (error) {
+      console.error("Failed to create course request:", error);
+      if (error instanceof Error) {
+        if (error.message === "course_not_found") {
+          return res.status(404).json({
+            success: false,
+            error: "The selected course could not be found.",
+            errorCode: "course_not_found",
+          });
+        }
+
+        if (error.message === "course_already_enrolled") {
+          return res.status(400).json({
+            success: false,
+            error: "You are already enrolled in this course.",
+            errorCode: "course_already_enrolled",
+          });
+        }
+      }
+
+      res.status(500).json({
+        success: false,
+        error: "Internal server error.",
+        errorCode: "server_error",
+      });
+    }
   });
 
   // Contact form submission

@@ -14,6 +14,7 @@ export interface TranslationData {
     services: string;
     learn: string;
     contact: string;
+    studentPortal: string;
   };
   hero: {
     title: string;
@@ -144,6 +145,87 @@ export interface TranslationData {
       };
     };
   };
+  codex/add-application-submission-feature-kxekbe
+  studentPortal: {
+    navLabel: string;
+    login: {
+      title: string;
+      subtitle: string;
+      cardNumber: string;
+      password: string;
+      submit: string;
+      success: string;
+      hints: string;
+      errors: {
+        missingFields: string;
+        notFound: string;
+        inactive: string;
+        invalidCredentials: string;
+        server: string;
+      };
+    };
+    changePassword: {
+      title: string;
+      subtitle: string;
+      currentPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+      submit: string;
+      success: string;
+      requirements: string[];
+      errors: {
+        missingFields: string;
+        mismatch: string;
+        weakPassword: string;
+        invalidCurrentPassword: string;
+        reused: string;
+        server: string;
+      };
+    };
+    dashboard: {
+      title: string;
+      welcome: string;
+      sections: {
+        studentInfo: string;
+        activeCourses: string;
+        inProgress: string;
+        completedCourses: string;
+        pendingRequests: string;
+        store: string;
+      };
+      infoLabels: {
+        cardNumber: string;
+        email: string;
+        phone: string;
+        address: string;
+      };
+      statusLabels: {
+        active: string;
+        inProgress: string;
+        completed: string;
+        pending: string;
+      };
+      empty: {
+        active: string;
+        inProgress: string;
+        completed: string;
+        pending: string;
+        store: string;
+      };
+      actions: {
+        requestCourse: string;
+        requested: string;
+        refresh: string;
+        changePassword: string;
+      };
+      messages: {
+        requestSuccess: string;
+        unauthorized: string;
+        alreadyRequested: string;
+      };
+    };
+  };
+ main
   contact: {
     title: string;
     subtitle: string;

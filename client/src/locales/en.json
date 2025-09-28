@@ -8,7 +8,12 @@
     "divisions": "Activity Sectors",
     "services": "Services",
     "learn": "Learn",
+
+    "contact": "Contact",
+    "studentPortal": "Student Portal"
+
     "contact": "Contact"
+
   },
   "hero": {
     "title": "Innovative",
@@ -153,6 +158,92 @@
       }
     }
   },
+
+  "studentPortal": {
+    "navLabel": "Student Portal",
+    "login": {
+      "title": "Student access",
+      "subtitle": "Enter your card number and the temporary password provided by the administration team.",
+      "cardNumber": "Student card number",
+      "password": "Temporary password",
+      "submit": "Sign in",
+      "success": "Login successful. Redirecting to your secure space...",
+      "hints": "Need help? Contact the admissions team to retrieve your credentials.",
+      "errors": {
+        "missingFields": "Please provide both your card number and password.",
+        "notFound": "We were unable to find a student account with that card number.",
+        "inactive": "Your account has not been activated yet. Please contact the administration.",
+        "invalidCredentials": "The credentials provided are invalid. Double-check your temporary password.",
+        "server": "An unexpected error occurred. Please try again later."
+      }
+    },
+    "changePassword": {
+      "title": "Create your permanent password",
+      "subtitle": "For security reasons, you must replace the temporary password with a new one.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Update password",
+      "success": "Password updated. Welcome to your student space!",
+      "requirements": [
+        "At least 8 characters",
+        "Include one uppercase letter",
+        "Include one number",
+        "Avoid reusing your temporary password"
+      ],
+      "errors": {
+        "missingFields": "All password fields are required.",
+        "mismatch": "The confirmation password must match.",
+        "weakPassword": "Please choose a password with at least 8 characters, one uppercase letter, and one number.",
+        "invalidCurrentPassword": "The current password is incorrect.",
+        "reused": "Choose a password that is different from the current one.",
+        "server": "We could not update your password. Try again later."
+      }
+    },
+    "dashboard": {
+      "title": "Student dashboard",
+      "welcome": "Welcome back, {{name}}!",
+      "sections": {
+        "studentInfo": "Student information",
+        "activeCourses": "Active courses",
+        "inProgress": "Work in progress",
+        "completedCourses": "Completed courses",
+        "pendingRequests": "Pending activations",
+        "store": "Available courses"
+      },
+      "infoLabels": {
+        "cardNumber": "Card number",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address"
+      },
+      "statusLabels": {
+        "active": "Active",
+        "inProgress": "In progress",
+        "completed": "Completed",
+        "pending": "Pending"
+      },
+      "empty": {
+        "active": "No active courses at the moment.",
+        "inProgress": "Courses in progress will appear here once activated.",
+        "completed": "Completed courses will be archived here.",
+        "pending": "No course activation requests are pending.",
+        "store": "All available courses are already linked to your profile."
+      },
+      "actions": {
+        "requestCourse": "Add to my account",
+        "requested": "Pending activation",
+        "refresh": "Refresh",
+        "changePassword": "Update password"
+      },
+      "messages": {
+        "requestSuccess": "Course request submitted. A teacher will review it shortly.",
+        "unauthorized": "Your session expired. Please sign in again.",
+        "alreadyRequested": "You have already requested this course. Our team is reviewing it."
+      }
+    }
+  },
+
   "contact": {
     "title": "Contact Us",
     "subtitle": "We are here to support you. Contact us to discuss your consulting needs.",

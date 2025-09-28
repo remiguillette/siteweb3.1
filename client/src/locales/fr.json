@@ -8,7 +8,12 @@
     "divisions": "Secteurs d'activité",
     "services": "Services",
     "learn": "Formations",
+
+    "contact": "Contact",
+    "studentPortal": "Portail étudiant"
+
     "contact": "Contact"
+
   },
   "hero": {
     "title": "Excellence en",
@@ -153,6 +158,92 @@
       }
     }
   },
+
+  "studentPortal": {
+    "navLabel": "Portail étudiant",
+    "login": {
+      "title": "Accès étudiant",
+      "subtitle": "Entrez votre numéro de carte et le mot de passe temporaire remis par l'administration.",
+      "cardNumber": "Numéro de carte étudiante",
+      "password": "Mot de passe temporaire",
+      "submit": "Se connecter",
+      "success": "Connexion réussie. Redirection vers votre espace sécurisé...",
+      "hints": "Besoin d'aide? Communiquez avec l'équipe des admissions pour récupérer vos accès.",
+      "errors": {
+        "missingFields": "Veuillez indiquer votre numéro de carte et votre mot de passe.",
+        "notFound": "Aucun compte étudiant ne correspond à ce numéro de carte.",
+        "inactive": "Votre compte n'est pas encore activé. Contactez l'administration.",
+        "invalidCredentials": "Les informations fournies sont invalides. Vérifiez votre mot de passe temporaire.",
+        "server": "Une erreur est survenue. Veuillez réessayer plus tard."
+      }
+    },
+    "changePassword": {
+      "title": "Créer votre mot de passe permanent",
+      "subtitle": "Pour des raisons de sécurité, vous devez remplacer le mot de passe temporaire.",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "submit": "Mettre à jour",
+      "success": "Mot de passe mis à jour. Bienvenue dans votre espace étudiant!",
+      "requirements": [
+        "Au moins 8 caractères",
+        "Inclure une lettre majuscule",
+        "Inclure un chiffre",
+        "Ne pas réutiliser le mot de passe temporaire"
+      ],
+      "errors": {
+        "missingFields": "Tous les champs sont requis.",
+        "mismatch": "La confirmation doit être identique.",
+        "weakPassword": "Choisissez un mot de passe d'au moins 8 caractères avec une majuscule et un chiffre.",
+        "invalidCurrentPassword": "Le mot de passe actuel est incorrect.",
+        "reused": "Veuillez choisir un mot de passe différent de l'actuel.",
+        "server": "Impossible de mettre à jour le mot de passe pour l'instant."
+      }
+    },
+    "dashboard": {
+      "title": "Tableau de bord étudiant",
+      "welcome": "Bon retour, {{name}}!",
+      "sections": {
+        "studentInfo": "Informations étudiantes",
+        "activeCourses": "Cours actifs",
+        "inProgress": "Travail en cours",
+        "completedCourses": "Cours complétés",
+        "pendingRequests": "Activations en attente",
+        "store": "Cours disponibles"
+      },
+      "infoLabels": {
+        "cardNumber": "Numéro de carte",
+        "email": "Courriel",
+        "phone": "Téléphone",
+        "address": "Adresse"
+      },
+      "statusLabels": {
+        "active": "Actif",
+        "inProgress": "En cours",
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "empty": {
+        "active": "Aucun cours actif pour le moment.",
+        "inProgress": "Les cours en cours apparaîtront ici dès leur activation.",
+        "completed": "Les cours complétés seront répertoriés ici.",
+        "pending": "Aucune demande d'activation en attente.",
+        "store": "Tous les cours disponibles sont déjà liés à votre profil."
+      },
+      "actions": {
+        "requestCourse": "Ajouter à mon compte",
+        "requested": "Activation en attente",
+        "refresh": "Rafraîchir",
+        "changePassword": "Modifier le mot de passe"
+      },
+      "messages": {
+        "requestSuccess": "Demande envoyée. Un formateur l'analysera sous peu.",
+        "unauthorized": "Votre session a expiré. Veuillez vous reconnecter.",
+        "alreadyRequested": "Vous avez déjà demandé ce cours. Notre équipe l'examine."
+      }
+    }
+  },
+
   "contact": {
     "title": "Contactez-Nous",
     "subtitle": "Nous sommes là pour vous accompagner. Contactez-nous pour discuter de vos besoins en consultation.",
