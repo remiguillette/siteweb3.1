@@ -1,4 +1,4 @@
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from "@/contexts/TranslationContext";
 
 export const LanguageSwitcher = () => {
   const { language, changeLanguage } = useTranslation();

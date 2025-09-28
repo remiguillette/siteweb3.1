@@ -8,12 +8,8 @@
     "divisions": "Activity Sectors",
     "services": "Services",
     "learn": "Learn",
-
-    "contact": "Contact",
-    "studentPortal": "Student Portal"
-
+    "studentPortal": "Student Portal",
     "contact": "Contact"
-
   },
   "hero": {
     "title": "Innovative",
@@ -29,25 +25,37 @@
       "title": "Public Safety Consulting",
       "subtitle": "Specialized services",
       "description": "Expertise in risk assessment, emergency planning and implementation of security protocols for public and private organizations.",
-      "tags": ["Risk Assessment", "Emergency Planning"]
+      "tags": [
+        "Risk Assessment",
+        "Emergency Planning"
+      ]
     },
     "francophone": {
       "title": "Francophone Community Services",
       "subtitle": "Community engagement",
       "description": "Development of programs and services tailored to the specific needs of francophone communities in Canada.",
-      "tags": ["Community Programs", "Language Services"]
+      "tags": [
+        "Community Programs",
+        "Language Services"
+      ]
     },
     "healthSafety": {
       "title": "Occupational Health & Safety",
       "subtitle": "OHSA Compliance",
       "description": "Training, auditing and compliance to ensure a safe work environment according to Canadian and provincial standards.",
-      "tags": ["OHS Training", "Regulatory Compliance"]
+      "tags": [
+        "OHS Training",
+        "Regulatory Compliance"
+      ]
     },
     "animalAid": {
       "title": "Animal First Aid Services",
       "subtitle": "Emergency care",
       "description": "Specialized training and emergency services for animal care, for professionals and owners.",
-      "tags": ["First Aid Training", "Emergency Services"]
+      "tags": [
+        "First Aid Training",
+        "Emergency Services"
+      ]
     }
   },
   "services": {
@@ -56,17 +64,29 @@
     "strategic": {
       "title": "Strategic Consulting",
       "description": "Development of customized strategies to optimize organizational performance and achieve long-term objectives.",
-      "features": ["Organizational Analysis", "Strategic Planning", "Process Optimization"]
+      "features": [
+        "Organizational Analysis",
+        "Strategic Planning",
+        "Process Optimization"
+      ]
     },
     "projectManagement": {
       "title": "Project Management",
       "description": "Direction and supervision of complex projects with proven methodologies to ensure delivery on time and within budget.",
-      "features": ["Project Planning", "Risk Management", "Quality Control"]
+      "features": [
+        "Project Planning",
+        "Risk Management",
+        "Quality Control"
+      ]
     },
     "security": {
       "title": "Security & Compliance",
       "description": "Audit, evaluation and compliance with Canadian regulations to ensure security and legal compliance.",
-      "features": ["Security Audit", "Compliance", "Regulatory Training"]
+      "features": [
+        "Security Audit",
+        "Compliance",
+        "Regulatory Training"
+      ]
     },
     "ctaTitle": "Ready to start your project?",
     "ctaDescription": "Let's discuss your needs and discover how our services can transform your organization.",
@@ -158,7 +178,6 @@
       }
     }
   },
-
   "studentPortal": {
     "navLabel": "Student Portal",
     "login": {
@@ -243,7 +262,6 @@
       }
     }
   },
-
   "contact": {
     "title": "Contact Us",
     "subtitle": "We are here to support you. Contact us to discuss your consulting needs.",
@@ -279,7 +297,7 @@
     },
     "services": {
       "publicSafety": "Public Safety Consulting",
-      "francophone": "Francophone Community Services", 
+      "francophone": "Francophone Community Services",
       "healthSafety": "Occupational Health & Safety",
       "animalAid": "Animal First Aid Services"
     }
@@ -383,7 +401,7 @@
     },
     "internationalTransfers": {
       "title": "International transfers",
-    "description": "Our website is hosted by Replit, and our domain services are managed by Amazon Web Services (AWS) in the us-east-1 region. Your data may be transferred to and stored in the United States.",
+      "description": "Our website is hosted by Replit, and our domain services are managed by Amazon Web Services (AWS) in the us-east-1 region. Your data may be transferred to and stored in the United States.",
       "replitInfo": "Replit implements appropriate security measures to protect your data in accordance with international data protection standards."
     },
     "dataProtection": {

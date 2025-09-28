@@ -118,12 +118,13 @@ export default function Learn() {
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = event.target;
+    const target = event.target;
+    const { name, value } = target;
 
-    if (type === 'checkbox') {
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
       setFormData((prev) => ({
         ...prev,
-        [name]: checked,
+        [name]: target.checked,
       }));
       return;
     }

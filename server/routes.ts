@@ -22,7 +22,7 @@ const STUDENT_SESSION_DURATION_MS = 1000 * 60 * 60 * 8; // 8 hours
 
 function createStudentSessionToken(studentId: number): string {
   // Remove any existing sessions for this student to keep only the newest token active
-  for (const [token, session] of studentSessions.entries()) {
+  for (const [token, session] of Array.from(studentSessions.entries())) {
     if (session.studentId === studentId) {
       studentSessions.delete(token);
     }
@@ -64,7 +64,7 @@ function getStudentIdFromRequest(req: Request): number | null {
 function scheduleSessionCleanup() {
   setInterval(() => {
     const now = Date.now();
-    for (const [token, session] of studentSessions.entries()) {
+    for (const [token, session] of Array.from(studentSessions.entries())) {
       if (now - session.createdAt > STUDENT_SESSION_DURATION_MS) {
         studentSessions.delete(token);
       }
