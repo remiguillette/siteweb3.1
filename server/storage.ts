@@ -1,22 +1,30 @@
+
 import { createHash } from "crypto";
+
 import {
   users,
   contactMessages,
   trainingApplications,
+
   studentAccounts,
   studentCourses,
   studentEnrollments,
   studentCourseRequests,
+
   type User,
   type InsertUser,
   type ContactMessage,
   type InsertContactMessage,
   type TrainingApplication,
+
   type InsertTrainingApplication,
   type StudentAccount,
   type StudentCourse,
   type StudentEnrollment,
   type StudentCourseRequest,
+
+  type InsertTrainingApplication
+
 } from "@shared/schema";
 
 export interface StudentCourseSummary {
@@ -73,12 +81,15 @@ export interface IStorage {
 
 export function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");
+
+
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private contactMessages: Map<number, ContactMessage>;
   private trainingApplications: Map<number, TrainingApplication>;
+
   private studentAccounts: Map<number, StudentAccount>;
   private studentCourses: Map<number, StudentCourse>;
   private studentEnrollments: Map<number, StudentEnrollment>;
@@ -91,10 +102,16 @@ export class MemStorage implements IStorage {
   private currentEnrollmentId: number;
   private currentCourseRequestId: number;
 
+  private currentUserId: number;
+  private currentMessageId: number;
+  private currentApplicationId: number;
+
+
   constructor() {
     this.users = new Map();
     this.contactMessages = new Map();
     this.trainingApplications = new Map();
+
     this.studentAccounts = new Map();
     this.studentCourses = new Map();
     this.studentEnrollments = new Map();
@@ -233,6 +250,11 @@ export class MemStorage implements IStorage {
       };
       this.studentCourseRequests.set(request.id, request);
     }
+
+    this.currentUserId = 1;
+    this.currentMessageId = 1;
+    this.currentApplicationId = 1;
+
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -292,6 +314,7 @@ export class MemStorage implements IStorage {
       (student) => student.cardNumber.toUpperCase() === normalized,
     );
   }
+
 
   async getStudentById(studentId: number): Promise<StudentAccount | undefined> {
     return this.studentAccounts.get(studentId);
@@ -443,6 +466,23 @@ export class MemStorage implements IStorage {
       status: request.status,
       createdAt: request.createdAt,
     };
+
+  async createTrainingApplication(insertApplication: InsertTrainingApplication): Promise<TrainingApplication> {
+    const id = this.currentApplicationId++;
+    const application: TrainingApplication = {
+      ...insertApplication,
+      id,
+      createdAt: new Date()
+    };
+    this.trainingApplications.set(id, application);
+    return application;
+  }
+
+  async getTrainingApplications(): Promise<TrainingApplication[]> {
+    return Array.from(this.trainingApplications.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+
   }
 }
 

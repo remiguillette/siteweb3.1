@@ -3,7 +3,9 @@ import { createServer, type Server } from "http";
 import { storage, hashPassword } from "./storage";
 import { randomBytes } from "crypto";
 import { z } from "zod";
+
 import { ensureStudentPortalTables } from "./neondb";
+
 import {
   insertContactMessageSchema,
   insertTrainingApplicationSchema,

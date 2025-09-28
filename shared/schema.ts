@@ -1,4 +1,8 @@
+
 import { pgTable, text, serial, boolean, timestamp, integer } from "drizzle-orm/pg-core";
+
+import { pgTable, text, serial, boolean, timestamp } from "drizzle-orm/pg-core";
+
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -81,6 +85,7 @@ export const studentCourseRequests = pgTable("student_course_requests", {
 
 
 
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -95,6 +100,7 @@ export const insertTrainingApplicationSchema = createInsertSchema(trainingApplic
   id: true,
   createdAt: true,
 });
+
 
 export const insertStudentAccountSchema = createInsertSchema(studentAccounts).omit({
   id: true,
@@ -117,12 +123,14 @@ export const insertStudentCourseRequestSchema = createInsertSchema(studentCourse
   createdAt: true,
 });
 
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertTrainingApplication = z.infer<typeof insertTrainingApplicationSchema>;
 export type TrainingApplication = typeof trainingApplications.$inferSelect;
+
 export type InsertStudentAccount = z.infer<typeof insertStudentAccountSchema>;
 export type StudentAccount = typeof studentAccounts.$inferSelect;
 export type InsertStudentCourse = z.infer<typeof insertStudentCourseSchema>;

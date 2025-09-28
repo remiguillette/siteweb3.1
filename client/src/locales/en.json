@@ -8,8 +8,12 @@
     "divisions": "Activity Sectors",
     "services": "Services",
     "learn": "Learn",
+
     "contact": "Contact",
     "studentPortal": "Student Portal"
+
+    "contact": "Contact"
+
   },
   "hero": {
     "title": "Innovative",
@@ -154,6 +158,7 @@
       }
     }
   },
+
   "studentPortal": {
     "navLabel": "Student Portal",
     "login": {
@@ -238,6 +243,7 @@
       }
     }
   },
+
   "contact": {
     "title": "Contact Us",
     "subtitle": "We are here to support you. Contact us to discuss your consulting needs.",

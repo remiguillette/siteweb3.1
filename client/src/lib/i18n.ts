@@ -145,6 +145,7 @@ export interface TranslationData {
       };
     };
   };
+  codex/add-application-submission-feature-kxekbe
   studentPortal: {
     navLabel: string;
     login: {
@@ -224,6 +225,7 @@ export interface TranslationData {
       };
     };
   };
+ main
   contact: {
     title: string;
     subtitle: string;

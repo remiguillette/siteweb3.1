@@ -26,6 +26,7 @@ import StudentLogin from "./pages/StudentLogin";
 import StudentPasswordReset from "./pages/StudentPasswordReset";
 import StudentPortal from "./pages/StudentPortal";
 
+
 function Router() {
   return (
     <Layout>
@@ -41,6 +42,7 @@ function Router() {
         <Route path="/etudiant/mot-de-passe" component={StudentPasswordReset} />
         <Route path="/student/portal" component={StudentPortal} />
         <Route path="/etudiant/portail" component={StudentPortal} />
+
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />
         <Route path="/francophone-services" component={FrancophoneServices} />

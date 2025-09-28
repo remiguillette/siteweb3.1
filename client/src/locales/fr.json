@@ -8,8 +8,12 @@
     "divisions": "Secteurs d'activité",
     "services": "Services",
     "learn": "Formations",
+
     "contact": "Contact",
     "studentPortal": "Portail étudiant"
+
+    "contact": "Contact"
+
   },
   "hero": {
     "title": "Excellence en",
@@ -154,6 +158,7 @@
       }
     }
   },
+
   "studentPortal": {
     "navLabel": "Portail étudiant",
     "login": {
@@ -238,6 +243,7 @@
       }
     }
   },
+
   "contact": {
     "title": "Contactez-Nous",
     "subtitle": "Nous sommes là pour vous accompagner. Contactez-nous pour discuter de vos besoins en consultation.",
