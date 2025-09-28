@@ -7,7 +7,9 @@
     "home": "Accueil",
     "divisions": "Secteurs d'activité",
     "services": "Services",
-    "contact": "Contact"
+    "learn": "Formations",
+    "contact": "Contact",
+    "studentPortal": "Portail étudiant"
   },
   "hero": {
     "title": "Excellence en",
@@ -65,6 +67,176 @@
     "ctaTitle": "Prêt à commencer votre projet?",
     "ctaDescription": "Discutons de vos besoins et découvrons comment nos services peuvent transformer votre organisation.",
     "ctaButton": "Obtenir une consultation gratuite"
+  },
+  "learn": {
+    "title": "Programmes de formation professionnelle",
+    "subtitle": "Faites progresser votre carrière avec des parcours bilingues adaptés aux leaders de la sécurité et des services communautaires.",
+    "intro": "Notre division formation propose des expériences d'apprentissage appliquées qui combinent connaissances réglementaires, mises en situation et accompagnement stratégique pour amplifier votre impact.",
+    "highlights": [
+      {
+        "title": "Scénarios pratiques",
+        "description": "Ateliers basés sur des scénarios reproduisant des situations réelles en sécurité publique, santé et services communautaires."
+      },
+      {
+        "title": "Formateurs certifiés",
+        "description": "Des experts bilingues possédant une expérience terrain à travers le Canada et des accréditations reconnues."
+      },
+      {
+        "title": "Accompagnement de carrière",
+        "description": "Un guidage personnalisé pour aligner la formation sur vos ambitions professionnelles et vos prochaines étapes."
+      }
+    ],
+    "benefits": {
+      "title": "Ce que vous retirerez",
+      "items": [
+        "Des compétences actualisées conformes aux normes canadiennes en sécurité, santé et programmation communautaire.",
+        "Un coaching pour transformer les apprentissages en résultats concrets sur le terrain.",
+        "L'accès au réseau professionnel du Groupe Rémi Guillette pour un mentorat continu."
+      ]
+    },
+    "form": {
+      "title": "Formulaire de demande de formation",
+      "description": "Remplissez la demande ci-dessous afin que notre équipe d'admission puisse vous contacter.",
+      "personal": {
+        "title": "Renseignements personnels",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "dateOfBirth": "Date de naissance",
+        "address": "Adresse complète",
+        "phoneNumber": "Numéro de téléphone",
+        "email": "Adresse courriel",
+        "placeholders": {
+          "firstName": "Votre prénom",
+          "lastName": "Votre nom",
+          "dateOfBirth": "AAAA-MM-JJ",
+          "address": "123 rue Principale, Ville, Province",
+          "phoneNumber": "(123) 456-7890",
+          "email": "votre@email.com"
+        }
+      },
+      "employment": {
+        "title": "Statut professionnel actuel",
+        "description": "Statut actuel *",
+        "options": {
+          "employee": "Employé(e)",
+          "jobSeeker": "Chercheur d'emploi",
+          "student": "Étudiant(e)",
+          "selfEmployed": "Travailleur autonome / Entrepreneur",
+          "other": "Autre (veuillez préciser)"
+        },
+        "otherPlaceholder": "Veuillez préciser votre statut"
+      },
+      "motivations": {
+        "title": "Motivations et plan de carrière",
+        "motivationsLabel": "Pourquoi souhaitez-vous suivre cette formation? Quelles sont vos motivations? *",
+        "careerGoalsLabel": "Quels sont vos objectifs professionnels après la formation? *",
+        "motivationsPlaceholder": "Expliquez ce qui vous motive à intégrer ce programme...",
+        "careerGoalsPlaceholder": "Décrivez le parcours professionnel que vous envisagez après la formation..."
+      },
+      "declaration": {
+        "title": "Déclaration",
+        "text": "Je soussigné(e), {{fullName}}, certifie que les renseignements fournis dans ce formulaire sont exacts et complets.",
+        "checkbox": "Je confirme que les renseignements fournis sont exacts.",
+        "fullNamePlaceholder": "vos prénom et nom"
+      },
+      "submit": "Soumettre la demande",
+      "successTitle": "Demande envoyée",
+      "successMessage": "Merci pour votre intérêt! Notre équipe vous contactera prochainement.",
+      "errors": {
+        "required": "Veuillez remplir tous les champs obligatoires.",
+        "email": "Veuillez saisir une adresse courriel valide.",
+        "phone": "Veuillez saisir un numéro de téléphone d'au moins 10 chiffres.",
+        "declaration": "Vous devez accepter la déclaration pour soumettre votre demande.",
+        "otherRequired": "Veuillez préciser votre statut actuel.",
+        "motivationsLength": "Veuillez fournir au moins 20 caractères pour vos motivations.",
+        "careerLength": "Veuillez fournir au moins 20 caractères pour vos objectifs professionnels.",
+        "tooFast": "Prenez quelques instants pour compléter le formulaire avant de l'envoyer."
+      }
+    }
+  },
+  "studentPortal": {
+    "navLabel": "Portail étudiant",
+    "login": {
+      "title": "Accès étudiant",
+      "subtitle": "Entrez votre numéro de carte et le mot de passe temporaire remis par l'administration.",
+      "cardNumber": "Numéro de carte étudiante",
+      "password": "Mot de passe temporaire",
+      "submit": "Se connecter",
+      "success": "Connexion réussie. Redirection vers votre espace sécurisé...",
+      "hints": "Besoin d'aide? Communiquez avec l'équipe des admissions pour récupérer vos accès.",
+      "errors": {
+        "missingFields": "Veuillez indiquer votre numéro de carte et votre mot de passe.",
+        "notFound": "Aucun compte étudiant ne correspond à ce numéro de carte.",
+        "inactive": "Votre compte n'est pas encore activé. Contactez l'administration.",
+        "invalidCredentials": "Les informations fournies sont invalides. Vérifiez votre mot de passe temporaire.",
+        "server": "Une erreur est survenue. Veuillez réessayer plus tard."
+      }
+    },
+    "changePassword": {
+      "title": "Créer votre mot de passe permanent",
+      "subtitle": "Pour des raisons de sécurité, vous devez remplacer le mot de passe temporaire.",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "submit": "Mettre à jour",
+      "success": "Mot de passe mis à jour. Bienvenue dans votre espace étudiant!",
+      "requirements": [
+        "Au moins 8 caractères",
+        "Inclure une lettre majuscule",
+        "Inclure un chiffre",
+        "Ne pas réutiliser le mot de passe temporaire"
+      ],
+      "errors": {
+        "missingFields": "Tous les champs sont requis.",
+        "mismatch": "La confirmation doit être identique.",
+        "weakPassword": "Choisissez un mot de passe d'au moins 8 caractères avec une majuscule et un chiffre.",
+        "invalidCurrentPassword": "Le mot de passe actuel est incorrect.",
+        "reused": "Veuillez choisir un mot de passe différent de l'actuel.",
+        "server": "Impossible de mettre à jour le mot de passe pour l'instant."
+      }
+    },
+    "dashboard": {
+      "title": "Tableau de bord étudiant",
+      "welcome": "Bon retour, {{name}}!",
+      "sections": {
+        "studentInfo": "Informations étudiantes",
+        "activeCourses": "Cours actifs",
+        "inProgress": "Travail en cours",
+        "completedCourses": "Cours complétés",
+        "pendingRequests": "Activations en attente",
+        "store": "Cours disponibles"
+      },
+      "infoLabels": {
+        "cardNumber": "Numéro de carte",
+        "email": "Courriel",
+        "phone": "Téléphone",
+        "address": "Adresse"
+      },
+      "statusLabels": {
+        "active": "Actif",
+        "inProgress": "En cours",
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "empty": {
+        "active": "Aucun cours actif pour le moment.",
+        "inProgress": "Les cours en cours apparaîtront ici dès leur activation.",
+        "completed": "Les cours complétés seront répertoriés ici.",
+        "pending": "Aucune demande d'activation en attente.",
+        "store": "Tous les cours disponibles sont déjà liés à votre profil."
+      },
+      "actions": {
+        "requestCourse": "Ajouter à mon compte",
+        "requested": "Activation en attente",
+        "refresh": "Rafraîchir",
+        "changePassword": "Modifier le mot de passe"
+      },
+      "messages": {
+        "requestSuccess": "Demande envoyée. Un formateur l'analysera sous peu.",
+        "unauthorized": "Votre session a expiré. Veuillez vous reconnecter.",
+        "alreadyRequested": "Vous avez déjà demandé ce cours. Notre équipe l'examine."
+      }
+    }
   },
   "contact": {
     "title": "Contactez-Nous",

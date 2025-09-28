@@ -7,7 +7,9 @@
     "home": "Home",
     "divisions": "Activity Sectors",
     "services": "Services",
-    "contact": "Contact"
+    "learn": "Learn",
+    "contact": "Contact",
+    "studentPortal": "Student Portal"
   },
   "hero": {
     "title": "Innovative",
@@ -65,6 +67,176 @@
     "ctaTitle": "Ready to start your project?",
     "ctaDescription": "Let's discuss your needs and discover how our services can transform your organization.",
     "ctaButton": "Get a free consultation"
+  },
+  "learn": {
+    "title": "Professional Training Programs",
+    "subtitle": "Advance your career with bilingual courses tailored for safety and community leaders.",
+    "intro": "Our training division delivers applied learning experiences that combine regulatory knowledge, scenario-based practice, and strategic coaching for individuals ready to elevate their impact.",
+    "highlights": [
+      {
+        "title": "Hands-on scenarios",
+        "description": "Scenario-based workshops that replicate real incidents in public safety, occupational health, and community services."
+      },
+      {
+        "title": "Certified instructors",
+        "description": "Courses delivered by bilingual experts with frontline experience across Canada and recognized accreditations."
+      },
+      {
+        "title": "Career support",
+        "description": "Personalized guidance to align the training path with your professional ambitions and next career steps."
+      }
+    ],
+    "benefits": {
+      "title": "What you will gain",
+      "items": [
+        "Up-to-date competencies that reflect Canadian standards for safety, health, and community programming.",
+        "Coaching to translate classroom learning into immediate workplace impact.",
+        "Access to the Rémi Guillette Group professional network for continued mentorship."
+      ]
+    },
+    "form": {
+      "title": "Training Application Form",
+      "description": "Complete the application below so our admissions team can follow up with you.",
+      "personal": {
+        "title": "Personal Information",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "dateOfBirth": "Date of Birth",
+        "address": "Full Address",
+        "phoneNumber": "Phone Number",
+        "email": "Email Address",
+        "placeholders": {
+          "firstName": "Your first name",
+          "lastName": "Your last name",
+          "dateOfBirth": "YYYY-MM-DD",
+          "address": "123 Main Street, City, Province",
+          "phoneNumber": "(123) 456-7890",
+          "email": "your@email.com"
+        }
+      },
+      "employment": {
+        "title": "Current Employment Status",
+        "description": "Current Status *",
+        "options": {
+          "employee": "Employee",
+          "jobSeeker": "Job Seeker",
+          "student": "Student",
+          "selfEmployed": "Self-Employed / Entrepreneur",
+          "other": "Other (please specify)"
+        },
+        "otherPlaceholder": "Please specify your status"
+      },
+      "motivations": {
+        "title": "Motivations and Career Plan",
+        "motivationsLabel": "Why do you want to take this training? What are your motivations? *",
+        "careerGoalsLabel": "What are your professional goals after completing this training? *",
+        "motivationsPlaceholder": "Share what drives you to enrol in this program...",
+        "careerGoalsPlaceholder": "Describe the career path you plan to pursue after the training..."
+      },
+      "declaration": {
+        "title": "Declaration",
+        "text": "I, the undersigned, {{fullName}}, certify that the information provided in this form is accurate and complete.",
+        "checkbox": "I confirm that the information provided is accurate.",
+        "fullNamePlaceholder": "your full name"
+      },
+      "submit": "Submit Application",
+      "successTitle": "Application submitted",
+      "successMessage": "Thank you for applying! Our team will contact you soon.",
+      "errors": {
+        "required": "Please fill in all required fields.",
+        "email": "Please enter a valid email address.",
+        "phone": "Please enter a phone number with at least 10 digits.",
+        "declaration": "You must accept the declaration to submit your application.",
+        "otherRequired": "Please specify your current status.",
+        "motivationsLength": "Please provide at least 20 characters for your motivations.",
+        "careerLength": "Please provide at least 20 characters for your career goals.",
+        "tooFast": "Please take a few moments to complete the form before submitting."
+      }
+    }
+  },
+  "studentPortal": {
+    "navLabel": "Student Portal",
+    "login": {
+      "title": "Student access",
+      "subtitle": "Enter your card number and the temporary password provided by the administration team.",
+      "cardNumber": "Student card number",
+      "password": "Temporary password",
+      "submit": "Sign in",
+      "success": "Login successful. Redirecting to your secure space...",
+      "hints": "Need help? Contact the admissions team to retrieve your credentials.",
+      "errors": {
+        "missingFields": "Please provide both your card number and password.",
+        "notFound": "We were unable to find a student account with that card number.",
+        "inactive": "Your account has not been activated yet. Please contact the administration.",
+        "invalidCredentials": "The credentials provided are invalid. Double-check your temporary password.",
+        "server": "An unexpected error occurred. Please try again later."
+      }
+    },
+    "changePassword": {
+      "title": "Create your permanent password",
+      "subtitle": "For security reasons, you must replace the temporary password with a new one.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "submit": "Update password",
+      "success": "Password updated. Welcome to your student space!",
+      "requirements": [
+        "At least 8 characters",
+        "Include one uppercase letter",
+        "Include one number",
+        "Avoid reusing your temporary password"
+      ],
+      "errors": {
+        "missingFields": "All password fields are required.",
+        "mismatch": "The confirmation password must match.",
+        "weakPassword": "Please choose a password with at least 8 characters, one uppercase letter, and one number.",
+        "invalidCurrentPassword": "The current password is incorrect.",
+        "reused": "Choose a password that is different from the current one.",
+        "server": "We could not update your password. Try again later."
+      }
+    },
+    "dashboard": {
+      "title": "Student dashboard",
+      "welcome": "Welcome back, {{name}}!",
+      "sections": {
+        "studentInfo": "Student information",
+        "activeCourses": "Active courses",
+        "inProgress": "Work in progress",
+        "completedCourses": "Completed courses",
+        "pendingRequests": "Pending activations",
+        "store": "Available courses"
+      },
+      "infoLabels": {
+        "cardNumber": "Card number",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address"
+      },
+      "statusLabels": {
+        "active": "Active",
+        "inProgress": "In progress",
+        "completed": "Completed",
+        "pending": "Pending"
+      },
+      "empty": {
+        "active": "No active courses at the moment.",
+        "inProgress": "Courses in progress will appear here once activated.",
+        "completed": "Completed courses will be archived here.",
+        "pending": "No course activation requests are pending.",
+        "store": "All available courses are already linked to your profile."
+      },
+      "actions": {
+        "requestCourse": "Add to my account",
+        "requested": "Pending activation",
+        "refresh": "Refresh",
+        "changePassword": "Update password"
+      },
+      "messages": {
+        "requestSuccess": "Course request submitted. A teacher will review it shortly.",
+        "unauthorized": "Your session expired. Please sign in again.",
+        "alreadyRequested": "You have already requested this course. Our team is reviewing it."
+      }
+    }
   },
   "contact": {
     "title": "Contact Us",

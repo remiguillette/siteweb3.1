@@ -21,6 +21,10 @@ import NotFound from "@/pages/not-found";
 import ServerError from "./pages/ServerError";
 import ErrorTest from "./pages/ErrorTest";
 import { useState } from "react";
+import Learn from "./pages/Learn";
+import StudentLogin from "./pages/StudentLogin";
+import StudentPasswordReset from "./pages/StudentPasswordReset";
+import StudentPortal from "./pages/StudentPortal";
 
 function Router() {
   return (
@@ -29,6 +33,14 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/secteurs-activite" component={ActivitySectors} />
         <Route path="/services" component={Services} />
+        <Route path="/learn" component={Learn} />
+        <Route path="/apprendre" component={Learn} />
+        <Route path="/student/login" component={StudentLogin} />
+        <Route path="/etudiant/connexion" component={StudentLogin} />
+        <Route path="/student/change-password" component={StudentPasswordReset} />
+        <Route path="/etudiant/mot-de-passe" component={StudentPasswordReset} />
+        <Route path="/student/portal" component={StudentPortal} />
+        <Route path="/etudiant/portail" component={StudentPortal} />
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />
         <Route path="/francophone-services" component={FrancophoneServices} />

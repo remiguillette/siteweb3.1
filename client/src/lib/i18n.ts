@@ -12,7 +12,9 @@ export interface TranslationData {
     home: string;
     divisions: string;
     services: string;
+    learn: string;
     contact: string;
+    studentPortal: string;
   };
   hero: {
     title: string;
@@ -70,6 +72,157 @@ export interface TranslationData {
     ctaTitle: string;
     ctaDescription: string;
     ctaButton: string;
+  };
+  learn: {
+    title: string;
+    subtitle: string;
+    intro: string;
+    highlights: {
+      title: string;
+      description: string;
+    }[];
+    benefits: {
+      title: string;
+      items: string[];
+    };
+    form: {
+      title: string;
+      description: string;
+      personal: {
+        title: string;
+        firstName: string;
+        lastName: string;
+        dateOfBirth: string;
+        address: string;
+        phoneNumber: string;
+        email: string;
+        placeholders: {
+          firstName: string;
+          lastName: string;
+          dateOfBirth: string;
+          address: string;
+          phoneNumber: string;
+          email: string;
+        };
+      };
+      employment: {
+        title: string;
+        description: string;
+        options: {
+          employee: string;
+          jobSeeker: string;
+          student: string;
+          selfEmployed: string;
+          other: string;
+        };
+        otherPlaceholder: string;
+      };
+      motivations: {
+        title: string;
+        motivationsLabel: string;
+        careerGoalsLabel: string;
+        motivationsPlaceholder: string;
+        careerGoalsPlaceholder: string;
+      };
+      declaration: {
+        title: string;
+        text: string;
+        checkbox: string;
+        fullNamePlaceholder: string;
+      };
+      submit: string;
+      successTitle: string;
+      successMessage: string;
+      errors: {
+        required: string;
+        email: string;
+        phone: string;
+        declaration: string;
+        otherRequired: string;
+        motivationsLength: string;
+        careerLength: string;
+        tooFast: string;
+      };
+    };
+  };
+  studentPortal: {
+    navLabel: string;
+    login: {
+      title: string;
+      subtitle: string;
+      cardNumber: string;
+      password: string;
+      submit: string;
+      success: string;
+      hints: string;
+      errors: {
+        missingFields: string;
+        notFound: string;
+        inactive: string;
+        invalidCredentials: string;
+        server: string;
+      };
+    };
+    changePassword: {
+      title: string;
+      subtitle: string;
+      currentPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+      submit: string;
+      success: string;
+      requirements: string[];
+      errors: {
+        missingFields: string;
+        mismatch: string;
+        weakPassword: string;
+        invalidCurrentPassword: string;
+        reused: string;
+        server: string;
+      };
+    };
+    dashboard: {
+      title: string;
+      welcome: string;
+      sections: {
+        studentInfo: string;
+        activeCourses: string;
+        inProgress: string;
+        completedCourses: string;
+        pendingRequests: string;
+        store: string;
+      };
+      infoLabels: {
+        cardNumber: string;
+        email: string;
+        phone: string;
+        address: string;
+      };
+      statusLabels: {
+        active: string;
+        inProgress: string;
+        completed: string;
+        pending: string;
+      };
+      empty: {
+        active: string;
+        inProgress: string;
+        completed: string;
+        pending: string;
+        store: string;
+      };
+      actions: {
+        requestCourse: string;
+        requested: string;
+        refresh: string;
+        changePassword: string;
+      };
+      messages: {
+        requestSuccess: string;
+        unauthorized: string;
+        alreadyRequested: string;
+      };
+    };
   };
   contact: {
     title: string;
