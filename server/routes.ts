@@ -4,7 +4,7 @@ import { storage, hashPassword } from "./storage";
 import { randomBytes } from "crypto";
 import { z } from "zod";
 
-import { ensureStudentPortalTables } from "./sqlite";
+import { ensureStudentPortalTables, verifyProtectedRoutePin } from "./sqlite";
 
 import {
   insertContactMessageSchema,
@@ -17,6 +17,55 @@ import {
 const submissionTracker = new Map<string, number[]>();
 const shortTermTracker = new Map<string, number[]>(); // For short-term flood protection
 const studentSessions = new Map<string, { studentId: number; createdAt: number }>();
+
+const CARD_ROUTE_PATH = "/card";
+
+const cardProfile = {
+  name: "Rémi Guillette",
+  headline: "Fondateur & Consultant Principal · Rémi Guillette Groupe",
+  mission:
+    "Je renforce la préparation, la résilience et l'inclusion des organisations canadiennes grâce à des plans d'urgence, des formations bilingues et des audits de conformité adaptés à leur réalité.",
+  highlights: [
+    {
+      label: "Expérience",
+      value:
+        "15+ années de leadership en sécurité publique, gestion des urgences, coordination inter-agences et développement communautaire bilingue.",
+    },
+    {
+      label: "Clients",
+      value:
+        "Municipalités, organismes francophones, établissements de santé, ONG, entreprises privées et réseaux communautaires pancanadiens.",
+    },
+    {
+      label: "Valeur ajoutée",
+      value:
+        "Approche stratégique, humaine et bilingue pour transformer les plans de préparation en actions concrètes et mesurables.",
+    },
+  ],
+  specialties: [
+    "Gestion des urgences et continuité des opérations",
+    "Planification de la sécurité publique et coordination multi-acteurs",
+    "Santé et sécurité au travail conforme aux normes canadiennes",
+    "Renforcement des capacités des organismes francophones",
+    "Formations immersives en premiers soins animaliers",
+  ],
+  engagements: [
+    "Mandats conseil pour moderniser les plans d'urgence municipaux et corporatifs",
+    "Programmes de formation clé en main pour équipes bilingues (FR/EN)",
+    "Audits de conformité SST et plans d'amélioration continue",
+    "Animation d'ateliers communautaires pour renforcer la résilience locale",
+  ],
+  contact: {
+    phone: "613 501-2160",
+    email: "remiguillette@rgra.ca",
+    website: "https://rgra.ca",
+    location: "Basé à Niagara Falls, Ontario · Mandats partout au Canada",
+  },
+  languages: ["Français (langue maternelle)", "English (professional fluency)"],
+  availability:
+    "Disponible pour collaborations bilingues, formations spécialisées et interventions planifiées en 2025.",
+  signature: "Construire des organisations prêtes, résilientes et inclusives.",
+} as const;
 
 const STUDENT_SESSION_DURATION_MS = 1000 * 60 * 60 * 8; // 8 hours
 
@@ -369,7 +418,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { path: '/student/portal', priority: '0.6', changefreq: 'weekly' },
       { path: '/etudiant/portail', priority: '0.6', changefreq: 'weekly' },
       { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
-      { path: '/politique-confidentialite', priority: '0.3', changefreq: 'yearly' }
+      { path: '/politique-confidentialite', priority: '0.3', changefreq: 'yearly' },
+      { path: '/card', priority: '0.4', changefreq: 'monthly' }
     ];
     
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -444,6 +494,52 @@ Sitemap: ${baseUrl}/sitemap.xml`;
 
   app.get("/api/health", (req, res) => {
     res.json({ status: "healthy", timestamp: new Date().toISOString() });
+  });
+
+  app.post("/api/card/access", (req, res) => {
+    try {
+      const parsed = z
+        .object({ pin: z.string().trim() })
+        .transform(({ pin }) => pin)
+        .parse(req.body ?? {});
+
+      if (!/^\d{4}$/.test(parsed)) {
+        return res.status(400).json({
+          success: false,
+          error: "A valid 4-digit PIN is required to unlock this page.",
+          errorCode: "invalid_format",
+        });
+      }
+
+      const isValid = verifyProtectedRoutePin(CARD_ROUTE_PATH, parsed);
+      if (!isValid) {
+        return res.status(401).json({
+          success: false,
+          error: "The PIN you entered is incorrect.",
+          errorCode: "unauthorized",
+        });
+      }
+
+      res.json({
+        success: true,
+        profile: cardProfile,
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          error: "A valid 4-digit PIN is required to unlock this page.",
+          errorCode: "invalid_format",
+        });
+      }
+
+      console.error("Failed to unlock /card:", error);
+      res.status(500).json({
+        success: false,
+        error: "Unable to verify the PIN right now. Please try again shortly.",
+        errorCode: "server_error",
+      });
+    }
   });
 
   app.post("/api/student/login", async (req, res) => {

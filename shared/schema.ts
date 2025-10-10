@@ -80,6 +80,14 @@ export const studentCourseRequests = sqliteTable("student_course_requests", {
   createdAt: integer("created_at", { mode: "timestamp" }).default(timestampDefault).notNull(),
 });
 
+export const protectedRoutes = sqliteTable("protected_routes", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  route: text("route").notNull().unique(),
+  pinHash: text("pin_hash").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).default(timestampDefault).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).default(timestampDefault).notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -116,6 +124,12 @@ export const insertStudentCourseRequestSchema = createInsertSchema(studentCourse
   createdAt: true,
 });
 
+export const insertProtectedRouteSchema = createInsertSchema(protectedRoutes).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
@@ -131,3 +145,4 @@ export type InsertStudentEnrollment = z.infer<typeof insertStudentEnrollmentSche
 export type StudentEnrollment = typeof studentEnrollments.$inferSelect;
 export type InsertStudentCourseRequest = z.infer<typeof insertStudentCourseRequestSchema>;
 export type StudentCourseRequest = typeof studentCourseRequests.$inferSelect;
+export type ProtectedRoute = typeof protectedRoutes.$inferSelect;

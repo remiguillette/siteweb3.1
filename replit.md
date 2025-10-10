@@ -37,6 +37,14 @@ Preferred communication style: Simple, everyday language.
 - Dynamic sitemap and comprehensive SEO optimization with Schema.org JSON-LD structured data (Organization, ProfessionalService, Local Business schemas).
 - Automatic scroll to top on navigation.
 - PWA configuration.
+- Secure professional card route protected by a 4-digit PIN backed by SQLite storage.
+
+## Secure Professional Card Access
+- Route: `/card` (SPA page) guarded by a 4-digit PIN challenge.
+- Default PIN: `4281`. Override by setting the `CARD_ROUTE_PIN` environment variable before starting the server.
+- Verification Endpoint: `POST /api/card/access` with JSON body `{ "pin": "1234" }`.
+- PINs are hashed with SHA-256 and stored in the `protected_routes` SQLite table. The hash updates automatically when the env var changes.
+- Successful verification returns the bilingual digital business card for Rémi Guillette, including mission, expertise, contact information, and availability.
 
 ## External Dependencies
 - **React Ecosystem**: React, React DOM, TanStack Query.
