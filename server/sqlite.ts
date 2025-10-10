@@ -1,16 +1,22 @@
 import Database from "better-sqlite3";
+import type { Database as DatabaseInstance } from "better-sqlite3";
 import { drizzle, type BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
+import { createHash, timingSafeEqual } from "node:crypto";
 
 export interface SqliteStatus {
   connected: boolean;
   message: string;
 }
 
-let sqliteClient: Database | null = null;
+let sqliteClient: DatabaseInstance | null = null;
 let drizzleDb: BetterSQLite3Database | null = null;
 let sqlitePath: string | null = null;
+
+function hashPin(pin: string): string {
+  return createHash("sha256").update(pin).digest("hex");
+}
 
 function resolveDatabasePath(): string {
   const configured = process.env.DATABASE_URL;
@@ -21,7 +27,7 @@ function resolveDatabasePath(): string {
   return path.resolve(process.cwd(), "sqlite.db");
 }
 
-function getSqliteClient(): Database {
+export function getSqliteClient(): DatabaseInstance {
   if (sqliteClient) {
     return sqliteClient;
   }
@@ -42,6 +48,62 @@ export function getSqliteDb(): BetterSQLite3Database {
   }
 
   return drizzleDb;
+}
+
+function initializeProtectedRoutes(): void {
+  const client = getSqliteClient();
+
+  const pinFromEnv = process.env.CARD_ROUTE_PIN?.trim();
+  const defaultPin = pinFromEnv && /^\d{4}$/.test(pinFromEnv) ? pinFromEnv : "4281";
+
+  if (pinFromEnv && !/^\d{4}$/.test(pinFromEnv)) {
+    console.warn(
+      "CARD_ROUTE_PIN must be a 4-digit numeric code. Falling back to the default PIN for /card.",
+    );
+  }
+
+  const hashedPin = hashPin(defaultPin);
+
+  client
+    .prepare(
+      `INSERT INTO protected_routes (route, pin_hash)
+       VALUES (?, ?)
+       ON CONFLICT(route) DO UPDATE SET
+         pin_hash = excluded.pin_hash,
+         updated_at = CURRENT_TIMESTAMP`,
+    )
+    .run("/card", hashedPin);
+}
+
+export function verifyProtectedRoutePin(route: string, pin: string): boolean {
+  if (!/^\d{4}$/.test(pin)) {
+    return false;
+  }
+
+  try {
+    const client = getSqliteClient();
+    const row = client
+      .prepare<[string], { pin_hash: string }>(
+        "SELECT pin_hash FROM protected_routes WHERE route = ? LIMIT 1",
+      )
+      .get(route);
+
+    if (!row?.pin_hash) {
+      return false;
+    }
+
+    const storedBuffer = Buffer.from(row.pin_hash, "hex");
+    const inputBuffer = Buffer.from(hashPin(pin), "hex");
+
+    if (storedBuffer.length !== inputBuffer.length) {
+      return false;
+    }
+
+    return timingSafeEqual(storedBuffer, inputBuffer);
+  } catch (error) {
+    console.error("Failed to verify protected route PIN:", error);
+    return false;
+  }
 }
 
 export async function getSqliteStatus(): Promise<SqliteStatus> {
@@ -144,7 +206,16 @@ export async function ensureStudentPortalTables(): Promise<void> {
     CREATE INDEX IF NOT EXISTS idx_student_enrollments_course_id ON student_enrollments(course_id);
     CREATE INDEX IF NOT EXISTS idx_student_course_requests_student_id ON student_course_requests(student_id);
     CREATE INDEX IF NOT EXISTS idx_student_course_requests_course_id ON student_course_requests(course_id);
+
+    CREATE TABLE IF NOT EXISTS protected_routes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      route TEXT NOT NULL UNIQUE,
+      pin_hash TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
   `;
 
   client.exec(createStatements);
+  initializeProtectedRoutes();
 }

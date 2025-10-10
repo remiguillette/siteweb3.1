@@ -25,6 +25,7 @@ import Learn from "./pages/Learn";
 import StudentLogin from "./pages/StudentLogin";
 import StudentPasswordReset from "./pages/StudentPasswordReset";
 import StudentPortal from "./pages/StudentPortal";
+import SecureCard from "./pages/Card";
 
 
 function Router() {
@@ -42,6 +43,7 @@ function Router() {
         <Route path="/etudiant/mot-de-passe" component={StudentPasswordReset} />
         <Route path="/student/portal" component={StudentPortal} />
         <Route path="/etudiant/portail" component={StudentPortal} />
+        <Route path="/card" component={SecureCard} />
 
         <Route path="/contact" component={Contact} />
         <Route path="/public-safety" component={PublicSafety} />
