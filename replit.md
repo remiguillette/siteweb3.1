@@ -22,7 +22,7 @@ Preferred communication style: Simple, everyday language.
 ### Backend
 - **Runtime**: Node.js with Express.js.
 - **Language**: TypeScript with ES modules.
-- **Database**: PostgreSQL with Drizzle ORM.
+- **Database**: SQLite with Drizzle ORM.
 - **Session Management**: Connect-pg-simple.
 - **API**: RESTful structure with `/api` prefix.
 - **Storage**: Abstracted storage interface.
@@ -41,8 +41,8 @@ Preferred communication style: Simple, everyday language.
 ## External Dependencies
 - **React Ecosystem**: React, React DOM, TanStack Query.
 - **UI/Styling**: TailwindCSS, Radix UI, Lucide React icons.
-- **Backend**: Express, Drizzle ORM, PostgreSQL drivers.
+- **Backend**: Express, Drizzle ORM, SQLite drivers.
 - **Development**: Vite, TypeScript, ESBuild, TSX.
-- **Database Connection**: Neon Database serverless driver.
+- **Database Connection**: Better SQLite3 native driver.
 - **Migrations**: Drizzle Kit.
 - **Communication**: Discord (for contact form notifications).
