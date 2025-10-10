@@ -77,12 +77,6 @@ export const Header = () => {
           <span className="ontario-pride-text hidden md:block whitespace-nowrap">
             {language === 'fr' ? 'Fier de l\'Ontario' : 'Proud of Ontario'}
           </span>
-          <Link
-            href={language === 'fr' ? '/etudiant/connexion' : '/student/login'}
-            className="text-[#f89422] text-xs md:text-sm font-semibold hover:text-white transition-colors"
-          >
-            {t.studentPortal.navLabel}
-          </Link>
           <button
             ref={buttonRef}
             onClick={toggleLanguage}
