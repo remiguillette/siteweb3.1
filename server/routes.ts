@@ -4,7 +4,7 @@ import { storage, hashPassword } from "./storage";
 import { randomBytes } from "crypto";
 import { z } from "zod";
 
-import { ensureStudentPortalTables } from "./neondb";
+import { ensureStudentPortalTables } from "./sqlite";
 
 import {
   insertContactMessageSchema,
@@ -339,7 +339,7 @@ async function sendTrainingApplicationToDiscord(applicationData: InsertTrainingA
 export async function registerRoutes(app: Express): Promise<Server> {
 
   ensureStudentPortalTables().catch((error) => {
-    console.warn("Unable to verify Neon student tables:", error);
+    console.warn("Unable to verify SQLite student tables:", error);
   });
 
   // Dynamic sitemap generation
