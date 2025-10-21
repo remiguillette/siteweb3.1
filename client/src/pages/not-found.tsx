@@ -35,11 +35,11 @@ export default function NotFound() {
         {/* Action Buttons */}
         <div className="space-y-4">
           <Link href="/">
-            <Button 
+            <Button
               className="w-full bg-[#f89422] hover:bg-[#f89422]/90 text-black font-semibold py-3"
+              aria-label={t.errors[404].backHome}
             >
-              <Home className="h-4 w-4 mr-2" />
-              {t.errors[404].backHome}
+              <Home className="h-4 w-4" />
             </Button>
           </Link>
           
