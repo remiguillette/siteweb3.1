@@ -47,12 +47,12 @@ export default function ServerError() {
           </Button>
           
           <Link href="/">
-            <Button
-              variant="outline"
+            <Button 
+              variant="outline" 
               className="w-full border-[#3b82f6] text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white"
-              aria-label={t.errors[500].backHome}
             >
-              <Home className="h-4 w-4" />
+              <Home className="h-4 w-4 mr-2" />
+              {t.errors[500].backHome}
             </Button>
           </Link>
           
